@@ -123,7 +123,7 @@ let kioskHint = true;
 
 function viewKiosk(){
   view.innerHTML = `
-    <div class="kiosk" id="kiosk">
+    <div class="kiosk" id="kioskWrap">
       <div class="ktop">
         <div class="kwho"><i class="klogo">${logoMark()}</i>
           <div><b>${CFG.appName}</b><span id="kScreen">—</span></div></div>
@@ -153,15 +153,20 @@ function viewKiosk(){
 }
 
 function kioskFull(){
-  const el = $('#kiosk'); if (!el) return;
+  const el = $('#kioskWrap'); if (!el) return;
   if (document.fullscreenElement) document.exitFullscreen();
   else if (el.requestFullscreen) el.requestFullscreen();
 }
 /* ຂະຫຍາຍໂທລະສັບໃຫ້ໃຫຍ່ສຸດເທົ່າທີ່ຈໍຮັບໄດ້ */
 function kioskFit(){
   const st = $('.kstage'); if (!st) return;
-  const h = st.clientHeight || (window.innerHeight - 220);
-  const s = Math.max(.72, Math.min(2.1, (h - 18) / 800));
+  const ph = $('#demoPhone .phone');
+  const h  = st.clientHeight || (window.innerHeight - 220);
+  const w  = st.clientWidth  || document.documentElement.clientWidth;
+  /* offsetWidth ບໍ່ນັບ transform ແຕ່ນັບ zoom → ໄດ້ຂະໜາດຈິງຂອງກອບ */
+  const pw = (ph && ph.offsetWidth)  || 360;
+  const pH = (ph && ph.offsetHeight) || 800;
+  const s = Math.max(.42, Math.min(2.1, Math.min((h - 14) / pH, (w - 12) / pw)));
   st.style.setProperty('--ks', s.toFixed(3));
 }
 function paintKiosk(){
@@ -231,7 +236,7 @@ const presList = () => SCREENS.filter(s => presGroup === 'ທັງໝົດ' ||
 function viewPresent(){
   const groups = ['ທັງໝົດ', ...STEP_GROUPS.map(g => g.g)];
   view.innerHTML = `
-    <div class="present" id="present">
+    <div class="present" id="presWrap">
       <div class="pbar">
         <div class="pgroups">${groups.map(g =>
           `<button class="pg ${g === presGroup ? 'on' : ''}" data-pg="${g}">${g}</button>`).join('')}</div>
@@ -249,7 +254,7 @@ function viewPresent(){
       <div class="pstrip" id="pStrip"></div>
     </div>`;
   presIdx = Math.min(presIdx, presList().length - 1);
-  $$('#present .pg').forEach(b => b.onclick = () => { presGroup = b.dataset.pg; presIdx = 0; viewPresent(); });
+  $$('#presWrap .pg').forEach(b => b.onclick = () => { presGroup = b.dataset.pg; presIdx = 0; viewPresent(); });
   $('#pPrev').onclick = () => presGo(-1);
   $('#pNext').onclick = () => presGo(1);
   $('#pPlay').onclick = presToggle;
@@ -268,7 +273,7 @@ function presToggle(){
   else { presTimer = setInterval(() => presGo(1), 4200); b.textContent = '❚❚'; b.classList.add('on'); }
 }
 function presFull(){
-  const el = $('#present'); if (!el) return;
+  const el = $('#presWrap'); if (!el) return;
   if (document.fullscreenElement) document.exitFullscreen();
   else el.requestFullscreen && el.requestFullscreen();
 }
@@ -324,14 +329,24 @@ function viewScreens(){
 }
 function applyZoom(){
   const g = $('.gallery'); if (!g) return;
-  const [ts, tw, th] = ZOOMS[galZoom] || ZOOMS['ກາງ'];
+  let [ts, tw, th] = ZOOMS[galZoom] || ZOOMS['ກາງ'];
+  /* ຈໍແຄບ → ຫຍໍ້ລົງ ໃຫ້ໄດ້ 2 ຖັນ ແທນ 1 ຖັນໃຫຍ່ */
+  const vw = document.documentElement.clientWidth;
+  const k = vw <= 400 ? .50 : vw <= 520 ? .58 : vw <= 820 ? .78 : 1;
+  if (k < 1){
+    ts = (parseFloat(ts) * k).toFixed(3);
+    tw = Math.round(parseInt(tw, 10) * k) + 'px';
+    th = Math.round(parseInt(th, 10) * k) + 'px';
+  }
   g.style.setProperty('--ts', ts); g.style.setProperty('--tw', tw); g.style.setProperty('--th', th);
 }
+window.addEventListener('resize', () => { if ($('.gallery')) applyZoom(); });
 
 function openModal(key){
   const s = screenByKey(key);
   if (!s || typeof RENDER[key] !== 'function'){ toast('ບໍ່ພົບໜ້າຈໍ — ໂຫຼດໜ້າເວັບຄືນ (Cmd+Shift+R)'); return; }
   const m = $('#modal');
+  wrapTables(m);
   m.hidden = false;
   m.innerHTML = `
     <button class="mclose">✕</button>
@@ -1233,19 +1248,31 @@ function viewSpec(){
 
 /* ---------------- router ---------------- */
 const VIEWS = { kiosk:viewKiosk, usage:viewUsage, present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
+/* ຕາຕະລາງກວ້າງ → ໃສ່ກ່ອງເລື່ອນຂ້າງ ເພື່ອບໍ່ໃຫ້ດັນໜ້າເວັບ (ມືຖື) */
+function wrapTables(root){
+  (root || document).querySelectorAll('.tbl').forEach(t => {
+    const p = t.parentElement;
+    if (p && p.classList.contains('tblwrap')) return;
+    const w = document.createElement('div');
+    w.className = 'tblwrap';
+    p.insertBefore(w, t); w.appendChild(t);
+  });
+}
+
 function switchTab(name){
   if (!VIEWS[name]) name = 'screens';
   if (presTimer && name !== 'present'){ clearInterval(presTimer); presTimer = null; }
   if (name !== 'present' && name !== 'demo') navStop();
   $$('.tab').forEach(t => t.classList.toggle('on', t.dataset.view === name));
   VIEWS[name]();
+  wrapTables(view);
   window.scrollTo({ top:0, behavior:'smooth' });
   if (location.hash.slice(1) !== name) location.hash = name;
 }
 $$('.tab').forEach(t => t.onclick = () => switchTab(t.dataset.view));
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target && e.target.id === 'chatInput'){ ACTIONS.sendMsg(); paintDemo(); return; }
-  if ($('#present') && $('#modal').hidden){
+  if ($('#presWrap') && $('#modal').hidden){
     if (e.key === 'ArrowRight'){ presGo(1); return; }
     if (e.key === 'ArrowLeft'){ presGo(-1); return; }
     if (e.key === ' '){ e.preventDefault(); presToggle(); return; }
