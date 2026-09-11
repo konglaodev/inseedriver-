@@ -280,3 +280,4 @@ idle → offered → bidding → waiting → assigned → arrived → onTrip →
 - Push: FCM ພ້ອມ **high-priority channel + ສຽງດັງແມ່ນເປີດໂໝດງຽບ** ສຳລັບງານໃໝ່
 - Offline: ຕ້ອງ queue event ໄວ້ສົ່ງພາຍຫຼັງ ແລະ reconcile ຄ່າທຳນຽມຕອນເປີດແອັບໃໝ່
 # inseedriver-
+# inseedriver-
