@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+._*
+
+# ໄຟລ໌ຊົ່ວຄາວຕອນທົດສອບ
+_*.html
+*.bak
+*.zip
+*.log
