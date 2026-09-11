@@ -281,3 +281,4 @@ idle → offered → bidding → waiting → assigned → arrived → onTrip →
 - Offline: ຕ້ອງ queue event ໄວ້ສົ່ງພາຍຫຼັງ ແລະ reconcile ຄ່າທຳນຽມຕອນເປີດແອັບໃໝ່
 # inseedriver-
 # inseedriver-
+# inseedriver-
