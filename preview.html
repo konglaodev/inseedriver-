@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Insee Drive ຄົນຂັບ — ເບິ່ງໜ້າຈໍດ່ຽວ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Lao:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+<link rel="stylesheet" href="css/style.css?v=1789094915">
+<style>
+  body{background:#0a0e13;display:flex;flex-direction:column;align-items:center;gap:12px;min-height:100vh;margin:0;padding:12px}
+  .bar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:min(880px,100%)}
+  .bar a{font-size:10.5px;color:#8ea1b4;text-decoration:none;border:1px solid #233242;border-radius:6px;
+    padding:3px 7px;font-family:ui-monospace,monospace}
+  .bar a.on{background:#7a1216;border-color:#e1252b;color:#ffd7d8}
+  .cap{color:#8ea1b4;font-family:'Noto Sans Lao',sans-serif;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="cap" id="cap"></div>
+<div id="host"></div>
+<script src="js/data.js?v=1789094915"></script><script src="js/state.js?v=1789094915"></script><script src="js/ui.js?v=1789094915"></script>
+<script src="js/screens.js?v=1789094915"></script><script src="js/screens2.js?v=1789094915"></script>
+<script>
+  const key = new URLSearchParams(location.search).get('screen') || 'offline';
+  const meta = screenByKey(key) || {};
+  document.getElementById('bar').innerHTML = SCREENS.map(s =>
+    `<a class="${s.key === key ? 'on' : ''}" href="?screen=${s.key}" title="${s.lo}">${s.id}</a>`).join('');
+  document.getElementById('cap').textContent = `${meta.id || ''} · ${meta.lo || key} · ${meta.route || ''}`;
+  document.getElementById('host').innerHTML =
+    `<div class="phone"><div class="scr">${RENDER[key]({ ...sampleState(key), live:true })}</div></div>`;
+  if (window.mountMaps) mountMaps();
+  if (window.mountQR) mountQR();
+</script>
+</body></html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="27" fill="%231a1f26"/><path d="M18 66c16 2 30-3 40-14 6-6 10-14 12-24" stroke="%23e1252b" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M63 20l13 2-3 13z" fill="%23e1252b"/><circle cx="30" cy="47" r="7" fill="white"/></svg>'>
+<title>ຕົ້ນແບບແອັບຄົນຂັບ Insee Drive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Lao:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+
+<link rel="stylesheet" href="css/style.css?v=1789094915">
+</head>
+<body>
+<header class="top drv">
+  <div class="brand">
+    <div class="logo">i</div>
+    <div class="brand-txt">
+      <b>ຕົ້ນແບບແອັບຄົນຂັບ Insee Drive</b>
+      <span>ຄົນຂັບທົ່ວໄປ · ຮຸ່ນ 0.1 · 39 ໜ້າຈໍ · ຄູ່ກັບແອັບລູກຄ້າ</span>
+    </div>
+    <span class="drvchip">DRIVER</span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab" data-view="overview">ພາບລວມ</button>
+    <button class="tab" data-view="screens">ໜ້າຈໍທັງໝົດ</button>
+    <button class="tab" data-view="demo">ເດໂມແອັບ</button>
+    <button class="tab" data-view="flow">ຂັ້ນຕອນການໄຫຼ</button>
+    <button class="tab" data-view="spec">ສະເປັກນັກພັດທະນາ</button>
+  </nav>
+</header>
+<main id="view">
+  <div id="boot" style="padding:60px 20px;text-align:center;color:#6a7686;font-family:'Noto Sans Lao',sans-serif">
+    <div style="width:26px;height:26px;border-radius:50%;border:3px solid #f3c4c4;border-top-color:#e1252b;
+      margin:0 auto 14px;animation:spin .9s linear infinite"></div>ກຳລັງໂຫຼດຕົ້ນແບບ...</div>
+</main>
+<div id="modal" class="modal" hidden></div>
+<div id="toast" class="toast" hidden></div>
+<script>
+window.onerror = function(msg, src, line){
+  var v = document.getElementById('view');
+  if (v) v.innerHTML = '<div style="max-width:760px;margin:40px auto;padding:20px;border:1px solid #f6c9c9;'
+    + 'background:#fdecec;border-radius:14px;font-family:Noto Sans Lao,sans-serif;color:#8a1219;line-height:1.7">'
+    + '<b style="font-size:16px">ໂຫຼດບໍ່ສຳເລັດ</b><br>' + msg + '<br><code style="font-size:11px;color:#666">'
+    + (src||'').split('/').pop() + ':' + line + '</code><br><br>'
+    + 'ລອງກົດ <b>Cmd+Shift+R</b> ເພື່ອລ້າງ cache ແລ້ວໂຫຼດໃໝ່</div>';
+};
+</script>
+<script src="js/data.js?v=1789094915"></script>
+<script src="js/state.js?v=1789094915"></script>
+<script src="js/ui.js?v=1789094915"></script>
+<script src="js/screens.js?v=1789094915"></script>
+<script src="js/screens2.js?v=1789094915"></script>
+<script src="js/app.js?v=1789094915"></script>
+</body>
+</html>
