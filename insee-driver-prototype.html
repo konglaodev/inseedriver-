@@ -1793,59 +1793,58 @@ main{padding:26px 22px 70px;max-width:1560px;margin:0 auto}
 .mactions.dark b.emerg::before{display:none}
 
 /* ============================================================
-   ☾ ຊຸດ UI ມືດ · Insee Drive ຄົນຂັບ
-   ເຫດຜົນ: ຄົນຂັບໃຊ້ກາງຄືນຫຼາຍ · ບໍ່ແສບຕາ · ແຜນທີ່ນຳທາງອ່ານງ່າຍຂຶ້ນ
-   ບລັອກນີ້ຢູ່ທ້າຍສຸດ ຈຶ່ງທັບຄ່າເດີມທັງໝົດ (ບໍ່ຕ້ອງແກ້ 1,700 ແຖວຂ້າງເທິງ)
+   ☀ ຊຸດ UI ແດງ & ຂາວ · Insee Drive ຄົນຂັບ
+   ພື້ນຂາວສະອາດ · ແດງ #e1252b ເປັນສີນຳ · ເງົາອ່ອນແທນເສັ້ນໜາ
+   ບລັອກນີ້ຢູ່ທ້າຍສຸດ ຈຶ່ງທັບຄ່າເດີມທັງໝົດ
    ============================================================ */
 :root{
-  --bg:#0b0f14; --panel:#141b24; --panel2:#1b2430; --line:#253040; --line2:#2f3c4d;
-  --txt:#e9eff6; --muted:#93a4b8; --dim:#6d7f95;
-  --brand:#ff4d52; --brand2:#ff7b7f; --brand-lt:rgba(255,77,82,.12); --brand-bd:rgba(255,77,82,.34);
-  --green:#2fbf71; --red:#ff4d52; --amber:#f5a33c; --ink:#e9eff6;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --bg:#fbf7f7; --panel:#ffffff; --panel2:#f5f6f8; --line:#e7eaee; --line2:#d6dbe2;
+  --txt:#141a22; --muted:#6a7686; --dim:#98a3b1;
+  --brand:#e1252b; --brand2:#b3121a; --brand-lt:#fdeded; --brand-bd:#f6cccd;
+  --green:#12a150; --red:#e1252b; --amber:#e08a12; --ink:#0f151d;
+  --shadow:0 1px 2px rgba(16,23,32,.05),0 10px 28px rgba(16,23,32,.07);
 }
 body{background:var(--bg);color:var(--txt);
-  background-image:radial-gradient(900px 460px at 8% -10%,rgba(255,77,82,.10),transparent 62%),
-                   radial-gradient(760px 400px at 96% -6%,rgba(59,130,246,.09),transparent 58%)}
-::-webkit-scrollbar-thumb{background:#2b3746;border:2px solid var(--bg)}
-.top{background:rgba(13,18,25,.92);border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(0,0,0,.4)}
-.top.drv{background:linear-gradient(90deg,#10161e,#1a232e)}
+  background-image:radial-gradient(900px 460px at 8% -10%,rgba(225,37,43,.10),transparent 62%),
+                   radial-gradient(760px 400px at 96% -6%,rgba(225,37,43,.06),transparent 58%)}
+::-webkit-scrollbar-thumb{background:#dfe3e9;border:2px solid var(--bg)}
+.top{background:rgba(255,255,255,.93);border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(16,23,32,.04)}
+.top.drv{background:linear-gradient(90deg,#ffffff,#fdf1f1)}
 .tbl thead th{background:var(--panel2);color:var(--muted)}
 .tbl td,.tbl th{border-color:var(--line)}
-.jsonbox,.evlog{background:#0a0e13;border-color:var(--line)}
+.jsonbox,.evlog{background:#fbfcfd;border-color:var(--line);color:#2b3542}
 .refimg{border-color:var(--line)}
-.modal{background:rgba(6,9,13,.86)}
-
+.modal{background:rgba(16,23,32,.52)}
 /* ============================================================
    ໜ້າຈໍແອັບ (.scr) — token ແລະ ການທັບຄ່າ
    ============================================================ */
 .scr{
-  --d-bg:#0b0f14;            /* ພື້ນຫຼັງໜ້າຈໍ */
-  --d-surface:#151d27;       /* ບັດ / ແຖວ */
-  --d-surface2:#1e2833;      /* ປຸ່ມ / ຊ່ອງຂໍ້ມູນ */
-  --d-line:#26313f;          /* ເສັ້ນຂອບ */
-  --d-ink:#eaf1f8;           /* ຕົວໜັງສືຫຼັກ */
-  --d-ink2:#aebecf;          /* ຕົວໜັງສືຮອງ */
-  --d-dim:#78899d;           /* ຕົວໜັງສືຈາງ */
-  --d-brand:#ff4d52; --d-bad:#ff6b70; --d-ok:#2fbf71; --d-warn:#f5a33c;
-  --d-info:#5a9bf0; --d-nav:#3b82f6; --d-purple:#a98bff; --d-teal:#2dd4bf;
-  --d-okbg:rgba(47,191,113,.14); --d-warnbg:rgba(245,163,60,.14);
-  --d-infobg:rgba(90,155,240,.14); --d-brandbg:rgba(255,77,82,.14);
+  --d-bg:#f7f8fa;            /* ພື້ນຫຼັງໜ້າຈໍ */
+  --d-surface:#ffffff;       /* ບັດ / ແຖວ */
+  --d-surface2:#f3f5f7;      /* ປຸ່ມ / ຊ່ອງຂໍ້ມູນ */
+  --d-line:#e8ebef;          /* ເສັ້ນຂອບ */
+  --d-ink:#0f151d;           /* ຕົວໜັງສືຫຼັກ */
+  --d-ink2:#57636f;          /* ຕົວໜັງສືຮອງ */
+  --d-dim:#8a95a4;           /* ຕົວໜັງສືຈາງ */
+  --d-brand:#e1252b; --d-bad:#cf1f25; --d-ok:#12a150; --d-warn:#e08a12;
+  --d-info:#2563eb; --d-nav:#2563eb; --d-purple:#7c3aed; --d-teal:#0d9488;
+  --d-okbg:rgba(18,161,80,.14); --d-warnbg:rgba(224,138,18,.14);
+  --d-infobg:rgba(37,99,235,.14); --d-brandbg:rgba(225,37,43,.14);
   background:var(--d-bg); color:var(--d-ink);
 }
 /* ---- ໂຄງ ---- */
-.scr .sb{background:#0e141b}
+.scr .sb{background:#c81e24;color:#fff}
 .scr .sbody{background:var(--d-bg)}
-.scr .napp{background:#10171f;border-bottom-color:var(--d-line)}
+.scr .napp{background:#ffffff;border-bottom-color:var(--d-line)}
 .scr .napp h2{color:var(--d-ink)}
 .scr .napp .bk,.scr .napp .rt{color:var(--d-ink2)}
-.scr .nav{background:#10171f;border-top-color:var(--d-line)}
+.scr .nav{background:#ffffff;border-top-color:var(--d-line)}
 .scr .nav a{color:var(--d-dim)}
 .scr .nav a.on{color:var(--d-brand)}
 .scr .gbar{background:transparent}
-.scr .gbar i{background:#3a4757}
+.scr .gbar i{background:#dfe3e9}
 .scr .grp{color:var(--d-dim)}
-.scr .btm{background:#10171f;border-top-color:var(--d-line);box-shadow:0 -4px 16px rgba(0,0,0,.45)}
+.scr .btm{background:#ffffff;border-top-color:var(--d-line);box-shadow:0 -4px 16px rgba(16,23,32,.08)}
 .scr .legal{color:var(--d-dim)}
 /* ---- ບັດ ແລະ ແຖວ ---- */
 .scr .card2{background:var(--d-surface);border:1px solid var(--d-line);border-radius:16px;box-shadow:none}
@@ -1854,8 +1853,8 @@ body{background:var(--bg);color:var(--txt);
 .scr .rowitem .tx b{color:var(--d-ink)}
 .scr .rowitem .tx span{color:var(--d-dim)}
 .scr .rowitem .rt{color:var(--d-dim)}
-.scr .rowitem .rt svg{color:#46556a}
-.scr .rowitem.un{background:rgba(255,77,82,.06)}
+.scr .rowitem .rt svg{color:#a7b2bf}
+.scr .rowitem.un{background:rgba(225,37,43,.06)}
 .scr .fline{color:var(--d-ink2);border-bottom-color:var(--d-line)}
 .scr .fline.total{color:var(--d-ink)}
 .scr .kv,.scr .dp-row{border-color:var(--d-line);color:var(--d-ink2)}
@@ -1865,21 +1864,21 @@ body{background:var(--bg);color:var(--txt);
 .scr .fld .inp.ph{color:var(--d-dim)}
 .scr .fld .inp svg{color:var(--d-dim)}
 .scr .btn.plain{background:var(--d-surface2);color:var(--d-ink2)}
-.scr .btn.plain:active{background:#26313f}
-.scr .btn.dis{background:#1a222c;color:#4e5c6e;box-shadow:none}
+.scr .btn.plain:active{background:#e8ebef}
+.scr .btn.dis{background:#eef0f3;color:#a3aebb;box-shadow:none}
 .scr .btn.ored{background:transparent;border-color:var(--d-brand);color:var(--d-brand)}
 .scr .btn.pri{background:#e1252b;box-shadow:0 4px 14px rgba(225,37,43,.32)}
-.scr .linkred{background:#10171f;color:var(--d-brand)}
-.scr .linkred.dim{color:#4e5c6e}
-.scr .sw{background:#31404f}
+.scr .linkred{background:#ffffff;color:var(--d-brand)}
+.scr .linkred.dim{color:#a3aebb}
+.scr .sw{background:#ccd3db}
 .scr .sw.on{background:var(--d-ok)}
-.scr .rad{border-color:#3c4a5c}
+.scr .rad{border-color:#c2cbd5}
 .scr .rad.on{border-color:var(--d-brand)}
 .scr .empty{color:var(--d-dim)}
 .scr .empty b{color:var(--d-ink2)}
-.scr .empty svg{color:#33404f}
+.scr .empty svg{color:#ccd4dd}
 /* ---- ແຖບເລືອກ ---- */
-.scr .segs{background:#10171f;border-bottom-color:var(--d-line)}
+.scr .segs{background:#ffffff;border-bottom-color:var(--d-line)}
 .scr .segs b{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .segs b.on{background:#e1252b;color:#fff}
 .scr .pill-list b,.scr .timegrid b,.scr .transrow b,.scr .quickbid b,.scr .tagchips b,
@@ -1887,10 +1886,10 @@ body{background:var(--bg);color:var(--txt);
   background:var(--d-surface2);border-color:var(--d-line);color:var(--d-ink2)}
 .scr .pill-list b.on,.scr .timegrid b.on,.scr .tagchips b.on,.scr .quickbid b.on{
   background:#e1252b;border-color:#e1252b;color:#fff}
-.scr .sortrow{background:#10171f;border-bottom-color:var(--d-line);color:var(--d-dim)}
-.scr .sortrow b.on{background:#e9eff6;color:#0b0f14}
-.scr .zonerow{background:#10171f;border-bottom-color:var(--d-line)}
-.scr .zonerow b.hot{background:rgba(255,77,82,.16);color:var(--d-bad)}
+.scr .sortrow{background:#ffffff;border-bottom-color:var(--d-line);color:var(--d-dim)}
+.scr .sortrow b.on{background:#0f151d;color:#f7f8fa}
+.scr .zonerow{background:#ffffff;border-bottom-color:var(--d-line)}
+.scr .zonerow b.hot{background:rgba(225,37,43,.16);color:var(--d-bad)}
 .scr .transrow b.on,.scr .licrow b.on,.scr .paygrid3 b.on{
   background:var(--d-brandbg);border-color:var(--d-brand);color:var(--d-bad)}
 .scr .paygrid3 b svg{color:var(--d-dim)}
@@ -1900,31 +1899,31 @@ body{background:var(--bg);color:var(--txt);
 .scr .pickgrid .opt2.on{background:var(--d-brandbg);border-color:var(--d-brand);box-shadow:none}
 .scr .pickgrid .opt2 span{color:var(--d-dim)}
 /* ---- ກ່ອງແຈ້ງເຕືອນ ---- */
-.scr .safenote{background:rgba(47,191,113,.10);border-color:rgba(47,191,113,.28);color:#7fe0ab}
-.scr .staffnote{background:rgba(90,155,240,.10);border-color:rgba(90,155,240,.28);color:#a7c9f7}
-.scr .warnrow{background:rgba(245,163,60,.10);border-color:rgba(245,163,60,.28);color:#f7c07a}
-.scr .warnrow.bad{background:rgba(255,77,82,.10);border-color:rgba(255,77,82,.3);color:#ff9b9e}
-.scr .paxnote{background:rgba(245,163,60,.09);border-color:rgba(245,163,60,.24);color:#e9bc84}
-.scr .paxnote.inner{background:rgba(245,163,60,.07);border-top-color:var(--d-line)}
+.scr .safenote{background:rgba(18,161,80,.10);border-color:rgba(18,161,80,.28);color:#0f8c47}
+.scr .staffnote{background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.28);color:#1d4ed8}
+.scr .warnrow{background:rgba(224,138,18,.10);border-color:rgba(224,138,18,.28);color:#9c5f09}
+.scr .warnrow.bad{background:rgba(225,37,43,.10);border-color:rgba(225,37,43,.3);color:#b3121a}
+.scr .paxnote{background:rgba(224,138,18,.09);border-color:rgba(224,138,18,.24);color:#9c5f09}
+.scr .paxnote.inner{background:rgba(224,138,18,.07);border-top-color:var(--d-line)}
 .scr .chnote,.scr .ranknote,.scr .note2{color:var(--d-dim)}
-.scr .warnhead{background:rgba(255,77,82,.1);border-color:rgba(255,77,82,.28)}
-.scr .warnhead b{color:#ff9b9e}.scr .warnhead span{color:#d3a0a2}
+.scr .warnhead{background:rgba(225,37,43,.1);border-color:rgba(225,37,43,.28)}
+.scr .warnhead b{color:#b3121a}.scr .warnhead span{color:#9a5f63}
 /* ---- ບັດງານ / ປະຫວັດ ---- */
 .scr .jobc,.scr .tripc{background:var(--d-surface);border:1px solid var(--d-line);border-radius:16px;box-shadow:none}
-.scr .jobc.hot{border-color:rgba(255,77,82,.45)}
+.scr .jobc.hot{border-color:rgba(225,37,43,.45)}
 .scr .jobc .ft,.scr .tripc .ft{border-top-color:var(--d-line)}
 .scr .jobc .ft b,.scr .tripc .ft b{color:var(--d-ink)}
 .scr .jobc .hd .rt,.scr .jobc .ft .km,.scr .tripc .hd{color:var(--d-dim)}
 .scr .jobc .fee{color:var(--d-dim)}
 .scr .rt2 .ad b,.scr .tripc .ad{color:var(--d-ink)}
 .scr .rt2 .ad span{color:var(--d-dim)}
-.scr .rt2 .line s,.scr .tripc .line s{background:#33404f}
-.scr .st.ok{background:rgba(47,191,113,.16);color:#66d99b}
-.scr .st.no{background:rgba(255,77,82,.16);color:#ff9b9e}
-.scr .st.warn{background:rgba(245,163,60,.16);color:#f7c07a}
-.scr .sumrow{background:#10171f;border-bottom-color:var(--d-line);color:var(--d-dim)}
+.scr .rt2 .line s,.scr .tripc .line s{background:#ccd4dd}
+.scr .st.ok{background:rgba(18,161,80,.16);color:#0d8043}
+.scr .st.no{background:rgba(225,37,43,.16);color:#b3121a}
+.scr .st.warn{background:rgba(224,138,18,.16);color:#9c5f09}
+.scr .sumrow{background:#ffffff;border-bottom-color:var(--d-line);color:var(--d-dim)}
 /* ---- ໜ້າຫຼັກ ---- */
-.scr .drvtop{background:#10171f;border-bottom-color:var(--d-line)}
+.scr .drvtop{background:#ffffff;border-bottom-color:var(--d-line)}
 .scr .drvtop .tx b{color:var(--d-ink)}
 .scr .drvtop .tx span,.scr .drvtop i{color:var(--d-dim)}
 .scr .drvtop i{background:var(--d-surface2);color:var(--d-ink2)}
@@ -1932,18 +1931,18 @@ body{background:var(--bg);color:var(--txt);
 .scr .statrow div{border-right-color:var(--d-line)}
 .scr .statrow b{color:var(--d-ink)}
 .scr .statrow span{color:var(--d-dim)}
-.scr .goalbar{background:#26313f}
+.scr .goalbar{background:#e8ebef}
 .scr .goaltx{color:var(--d-dim)}
 .scr .cashcard .hd b{color:var(--d-ink)}
-.scr .cashcard .bar{background:#26313f}
+.scr .cashcard .bar{background:#e8ebef}
 .scr .cashcard .ft{color:var(--d-dim)}
-.scr .cashcard.over{background:rgba(255,77,82,.08);border-color:rgba(255,77,82,.4)}
-.scr .gostate{color:#cfdae6}
+.scr .cashcard.over{background:rgba(225,37,43,.08);border-color:rgba(225,37,43,.4)}
+.scr .gostate{color:#3e4854}
 .scr .grpmore{color:var(--d-brand)}
 /* ---- ຮັບງານ / ປະມູນ ---- */
 .scr .offerhead{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .offerhead .tx b{color:var(--d-ink)}
-.scr .ring{background:conic-gradient(#ff4d52 calc(var(--p)*360deg),#26313f 0)}
+.scr .ring{background:conic-gradient(#e1252b calc(var(--p)*360deg),#e8ebef 0)}
 .scr .ring::after{background:var(--d-surface)}
 .scr .ring b{color:var(--d-bad)}
 .scr .ring span{color:var(--d-dim)}
@@ -1952,18 +1951,18 @@ body{background:var(--bg);color:var(--txt);
 .scr .offerprice>div{background:var(--d-surface);border:1px solid var(--d-line);box-shadow:none}
 .scr .offerprice b{color:var(--d-ink)}
 .scr .offerprice span{color:var(--d-dim)}
-.scr .offerprice .mine{background:rgba(47,191,113,.12);border-color:rgba(47,191,113,.3)}
-.scr .offerprice .mine b{color:#66d99b}
-.scr .pricebox{background:var(--d-surface);border-color:rgba(255,77,82,.35)}
+.scr .offerprice .mine{background:rgba(18,161,80,.12);border-color:rgba(18,161,80,.3)}
+.scr .offerprice .mine b{color:#0d8043}
+.scr .pricebox{background:var(--d-surface);border-color:rgba(225,37,43,.35)}
 .scr .pricebox>i{background:var(--d-surface2);border-color:var(--d-line);color:var(--d-ink)}
-.scr .pricebox>i.dis{color:#3c4a5c;border-color:#202a36}
+.scr .pricebox>i.dis{color:#c2cbd5;border-color:#e9edf2}
 .scr .pricebox .v b{color:var(--d-ink)}
 .scr .pricebox .v span{color:var(--d-dim)}
-.scr .cmpbar .track{background:linear-gradient(90deg,rgba(47,191,113,.35),rgba(245,163,60,.35),rgba(255,77,82,.4))}
-.scr .cmpbar .track i{background:#e9eff6;border-color:#0b0f14}
+.scr .cmpbar .track{background:linear-gradient(90deg,rgba(18,161,80,.35),rgba(224,138,18,.35),rgba(225,37,43,.4))}
+.scr .cmpbar .track i{background:#0f151d;border-color:#f7f8fa}
 .scr .cmpbar .lg{color:var(--d-dim)}
 .scr .waitbig{background:var(--d-surface)}
-.scr .waitbig .pulsering{background:rgba(255,77,82,.1);border-color:rgba(255,77,82,.35)}
+.scr .waitbig .pulsering{background:rgba(225,37,43,.1);border-color:rgba(225,37,43,.35)}
 .scr .waitbig .pulsering b{color:var(--d-bad)}
 .scr .waitbig>b{color:var(--d-ink)}
 .scr .waitbig>span{color:var(--d-dim)}
@@ -1981,30 +1980,30 @@ body{background:var(--bg);color:var(--txt);
 .scr .waitbox{background:var(--d-surface)}
 .scr .waitbox b{color:var(--d-ink)}
 .scr .waitbox span{color:var(--d-dim)}
-.scr .waitbox .tm{color:#66d99b}
+.scr .waitbox .tm{color:#0d8043}
 .scr .waitbox.fee .tm{color:var(--d-bad)}
-.scr .prog{background:#26313f}
+.scr .prog{background:#e8ebef}
 .scr .donehead{background:var(--d-surface)}
 .scr .donehead i{background:var(--d-surface2)}
 .scr .donehead i svg{color:var(--d-ink2)}
-.scr .donehead.ok i{background:rgba(47,191,113,.16)}
+.scr .donehead.ok i{background:rgba(18,161,80,.16)}
 .scr .donehead b{color:var(--d-ink)}
 .scr .donehead span{color:var(--d-dim)}
 .scr .qrmini .tx b{color:var(--d-ink)}
 .scr .qrmini .tx span{color:var(--d-dim)}
 .scr .qrframe,.scr .qrimg{background:#fff;border-radius:10px}
-.scr .earnrow b{color:#66d99b}
+.scr .earnrow b{color:#0d8043}
 .scr .earnrow>span{color:var(--d-dim)}
 .scr .ratebox{background:var(--d-surface)}
 .scr .ratebox>b{color:var(--d-ink)}
 .scr .ratebox>span,.scr .ratelabel{color:var(--d-dim)}
 .scr .reason{border-bottom-color:var(--d-line);color:var(--d-ink)}
-.scr .reason.on{background:rgba(255,77,82,.08)}
-.scr .impact.ok{border-color:rgba(47,191,113,.3);background:rgba(47,191,113,.07)}
-.scr .impact.bad{border-color:rgba(245,163,60,.3);background:rgba(245,163,60,.07)}
-.scr .freetag{background:rgba(47,191,113,.16);color:#66d99b}
+.scr .reason.on{background:rgba(225,37,43,.08)}
+.scr .impact.ok{border-color:rgba(18,161,80,.3);background:rgba(18,161,80,.07)}
+.scr .impact.bad{border-color:rgba(224,138,18,.3);background:rgba(224,138,18,.07)}
+.scr .freetag{background:rgba(18,161,80,.16);color:#0d8043}
 /* ---- ແຊັດ ---- */
-.scr .chead{background:#10171f;border-bottom-color:var(--d-line)}
+.scr .chead{background:#ffffff;border-bottom-color:var(--d-line)}
 .scr .chead .tx b{color:var(--d-ink)}
 .scr .chead .tx span{color:var(--d-dim)}
 .scr .chead i,.scr .chead .bk{color:var(--d-ink2)}
@@ -2014,21 +2013,21 @@ body{background:var(--bg);color:var(--txt);
 .scr .msg.me{background:#e1252b;color:#fff}
 .scr .msg i{color:var(--d-dim)}
 .scr .msg.me i{color:rgba(255,255,255,.7)}
-.scr .cinput{background:#10171f;border-top-color:var(--d-line)}
+.scr .cinput{background:#ffffff;border-top-color:var(--d-line)}
 .scr .cinput .box{background:var(--d-surface2);color:var(--d-dim)}
 .scr .cinput i{color:var(--d-ink2)}
 .scr .locrow{background:var(--d-surface2);color:var(--d-ink)}
 /* ---- ລາຍໄດ້ / ຄ່າທຳນຽມ ---- */
 .scr .earnbig{background:var(--d-surface);border-bottom-color:var(--d-line)}
-.scr .earnbig>b{color:#66d99b}
+.scr .earnbig>b{color:#0d8043}
 .scr .earnbig>span,.scr .earnbig .sub{color:var(--d-dim)}
 .scr .coline b{color:var(--d-ink2)}
 .scr .coline>span{color:var(--d-dim)}
 .scr .coline svg{color:var(--d-dim)}
-.scr .bars .bar i{background:#2c3949}
+.scr .bars .bar i{background:#e3e7ec}
 .scr .bars .bar b{color:var(--d-ink2)}
 .scr .bars .bar span{color:var(--d-dim)}
-.scr .bars .bar.on i{background:linear-gradient(180deg,#ff7b7f,#e1252b)}
+.scr .bars .bar.on i{background:linear-gradient(180deg,#b3121a,#e1252b)}
 .scr .bars .bar.on b{color:var(--d-bad)}
 .scr .pyhd b{color:var(--d-ink)}
 .scr .pyft{border-top-color:var(--d-line);color:var(--d-brand)}
@@ -2036,27 +2035,27 @@ body{background:var(--bg);color:var(--txt);
 .scr .formula .fr b{color:var(--d-ink)}
 .scr .formula .fr.tot{border-top-color:var(--d-line)}
 .scr .formula .fr.tot span{color:var(--d-ink)}
-.scr .formula .fr.tot b{color:#66d99b}
+.scr .formula .fr.tot b{color:#0d8043}
 .scr .formula .note2{border-top-color:var(--d-line)}
 /* ---- ຄະແນນ / ຜົນງານ ---- */
 .scr .ratehero{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .ratehero>b{color:var(--d-ink)}
 .scr .ratehero>span{color:var(--d-dim)}
-.scr .ratehero .tier{background:rgba(245,163,60,.16);color:#f7c07a}
+.scr .ratehero .tier{background:rgba(224,138,18,.16);color:#9c5f09}
 .scr .ratehero .nxt{border-top-color:var(--d-line)}
-.scr .ratehero .nxt .tr{background:#26313f}
+.scr .ratehero .nxt .tr{background:#e8ebef}
 .scr .ratehero .nxt span{color:var(--d-dim)}
-.scr .ratehero .nxt b{color:#f7c07a}
+.scr .ratehero .nxt b{color:#9c5f09}
 .scr .kpicard .hd b{color:var(--d-ink)}
-.scr .kpicard .track{background:#26313f}
-.scr .kpicard .track s{background:#e9eff6}
+.scr .kpicard .track{background:#e8ebef}
+.scr .kpicard .track s{background:#0f151d}
 .scr .kpicard .ft{color:var(--d-dim)}
-.scr .kpicard .hd .v{color:#66d99b}
+.scr .kpicard .hd .v{color:#0d8043}
 .scr .kpicard.bad .hd .v{color:var(--d-bad)}
 .scr .revhero{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .revhero .big b{color:var(--d-ink)}
 .scr .revhero .big span,.scr .revhero .rw{color:var(--d-dim)}
-.scr .revhero .rw i{background:#26313f}
+.scr .revhero .rw i{background:#e8ebef}
 .scr .revhero .rw b{color:var(--d-ink2)}
 .scr .review .hd b{color:var(--d-ink)}
 .scr .review p{color:var(--d-ink2)}
@@ -2070,28 +2069,28 @@ body{background:var(--bg);color:var(--txt);
 .scr .carhero .cls{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .battrow .tx b{color:var(--d-ink)}
 .scr .battrow .tx span{color:var(--d-dim)}
-.scr .batt{background:#26313f}
+.scr .batt{background:#e8ebef}
 .scr .docrow{background:var(--d-surface);border:1px solid var(--d-line);box-shadow:none}
 .scr .docrow .ic{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .docrow .tx b{color:var(--d-ink)}
 .scr .docrow .tx span,.scr .docrow .rt span{color:var(--d-dim)}
-.scr .docrow.warn{border-color:rgba(245,163,60,.4)}
-.scr .docrow.bad{border-color:rgba(255,77,82,.45)}
-.scr .docrow.warn .ic{background:rgba(245,163,60,.16);color:#f7c07a}
-.scr .docrow.bad .ic{background:rgba(255,77,82,.16);color:#ff9b9e}
+.scr .docrow.warn{border-color:rgba(224,138,18,.4)}
+.scr .docrow.bad{border-color:rgba(225,37,43,.45)}
+.scr .docrow.warn .ic{background:rgba(224,138,18,.16);color:#9c5f09}
+.scr .docrow.bad .ic{background:rgba(225,37,43,.16);color:#b3121a}
 /* ---- ຂ່າວ / ໂປຣໄຟລ໌ / FAQ ---- */
 .scr .anncard{background:var(--d-surface);border:1px solid var(--d-line);box-shadow:none}
 .scr .anncard .hd b{color:var(--d-ink)}
 .scr .anncard .dt{color:var(--d-dim)}
 .scr .anncard p{color:var(--d-ink2);border-top-color:var(--d-line)}
-.scr .anncard .tag{background:rgba(90,155,240,.16);color:#a7c9f7}
-.scr .anncard.hot{border-color:rgba(255,77,82,.45)}
-.scr .anncard.hot .tag{background:rgba(255,77,82,.16);color:#ff9b9e}
+.scr .anncard .tag{background:rgba(37,99,235,.16);color:#1d4ed8}
+.scr .anncard.hot{border-color:rgba(225,37,43,.45)}
+.scr .anncard.hot .tag{background:rgba(225,37,43,.16);color:#b3121a}
 .scr .dprof{background:var(--d-surface);border-bottom:1px solid var(--d-line)}
 .scr .dprof>b{color:var(--d-ink)}
 .scr .dprof .sub{color:var(--d-dim)}
 .scr .dprof .statrow{border-color:var(--d-line)}
-.scr .staffbadge{background:rgba(90,155,240,.16);color:#a7c9f7;border-color:transparent}
+.scr .staffbadge{background:rgba(37,99,235,.16);color:#1d4ed8;border-color:transparent}
 .scr .faq{background:transparent;border-bottom-color:var(--d-line)}
 .scr .faq .q{color:var(--d-ink)}
 .scr .faq p,.scr .faq .a{color:var(--d-ink2)}
@@ -2099,54 +2098,54 @@ body{background:var(--bg);color:var(--txt);
 .scr .usercard .tx b{color:var(--d-ink)}
 .scr .usercard .tx span{color:var(--d-dim)}
 .scr .usercard .acts i{background:var(--d-surface2);color:var(--d-ink2)}
-.scr .inclrow.ok{color:#7fe0ab}
-.scr .inclrow.no{color:#5d6d80}
+.scr .inclrow.ok{color:#0f8c47}
+.scr .inclrow.no{color:#8e9aa9}
 .scr .reqrow{border-bottom-color:var(--d-line)}
 .scr .reqrow b{color:var(--d-ink)}
 .scr .reqrow span{color:var(--d-dim)}
 .scr .mini{color:var(--d-ink2)}
-.scr .mini.ok{color:#66d99b}
-.scr .mini.warn{color:#f7c07a}
+.scr .mini.ok{color:#0d8043}
+.scr .mini.warn{color:#9c5f09}
 /* ---- ລົງທະບຽນ / ຢືນຢັນຕົວຕົນ ---- */
 .scr .aphero{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .aphero>b{color:var(--d-ink)}
 .scr .aphero>span{color:var(--d-ink2)}
-.scr .aphero .open{background:rgba(47,191,113,.16);color:#7fe0ab}
-.scr .apbar{background:#10171f;border-bottom-color:var(--d-line)}
-.scr .apbar .st::before{background:#2c3949}
-.scr .apbar .st i{background:#2c3949;color:var(--d-dim)}
+.scr .aphero .open{background:rgba(18,161,80,.16);color:#0f8c47}
+.scr .apbar{background:#ffffff;border-bottom-color:var(--d-line)}
+.scr .apbar .st::before{background:#e3e7ec}
+.scr .apbar .st i{background:#e3e7ec;color:var(--d-dim)}
 .scr .apbar .st span{color:var(--d-dim)}
 .scr .apbar .st.on span{color:var(--d-ink)}
 .scr .apbar .st.done span{color:var(--d-ink2)}
 .scr .otpwrap b{background:var(--d-surface2);border-color:var(--d-line);color:var(--d-ink)}
 .scr .otpwrap b.on{border-color:var(--d-brand)}
 .scr .chkrow{background:transparent;border-bottom-color:var(--d-line)}
-.scr .chkrow .box{border-color:#3c4a5c}
+.scr .chkrow .box{border-color:#c2cbd5}
 .scr .chkrow .tx span{color:var(--d-ink2)}
 .scr .chkrow .tx svg{color:var(--d-dim)}
 .scr .chkrow.on .tx span{color:var(--d-ink)}
-.scr .photorow .ph{background:var(--d-surface2);border-color:#33404f}
+.scr .photorow .ph{background:var(--d-surface2);border-color:#ccd4dd}
 .scr .photorow .ph svg,.scr .photorow .ph span{color:var(--d-dim)}
 .scr .vfhero{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .vfhero b{color:var(--d-ink)}
 .scr .vfhero span{color:var(--d-dim)}
-.scr .vfhero i{background:rgba(90,155,240,.16);color:#a7c9f7}
-.scr .vfhero.ok i{background:rgba(47,191,113,.16);color:#66d99b}
+.scr .vfhero i{background:rgba(37,99,235,.16);color:#1d4ed8}
+.scr .vfhero.ok i{background:rgba(18,161,80,.16);color:#0d8043}
 .scr .vfrow{background:transparent;border-bottom-color:var(--d-line)}
-.scr .vfrow i{background:#2c3949;color:var(--d-dim)}
+.scr .vfrow i{background:#e3e7ec;color:var(--d-dim)}
 .scr .vfrow.on .tx b{color:var(--d-ink)}
 .scr .vfrow.on .tx span{color:var(--d-ink2)}
 .scr .vfrow.done .tx b{color:var(--d-ink2)}
-.scr .vfframe{background:#05080c;border:1px solid var(--d-line)}
+.scr .vfframe{background:#eef1f4;border:1px solid var(--d-line)}
 .scr .apstat{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .apstat>b{color:var(--d-ink)}
 .scr .apstat>span,.scr .apstat .pgtx{color:var(--d-dim)}
-.scr .apstat .pg{background:#26313f}
-.scr .apstat em{background:rgba(90,155,240,.16);color:#a7c9f7}
-.scr .tl::before{background:#2c3949}
-.scr .tl i{background:#2c3949;color:var(--d-dim)}
-.scr .tl .tx b{color:#5d6d80}
-.scr .tl .tx span,.scr .tl em{color:#4e5c6e}
+.scr .apstat .pg{background:#e8ebef}
+.scr .apstat em{background:rgba(37,99,235,.16);color:#1d4ed8}
+.scr .tl::before{background:#e3e7ec}
+.scr .tl i{background:#e3e7ec;color:var(--d-dim)}
+.scr .tl .tx b{color:#8e9aa9}
+.scr .tl .tx span,.scr .tl em{color:#a3aebb}
 .scr .tl.done .tx b{color:var(--d-ink2)}
 .scr .tl.done .tx span{color:var(--d-dim)}
 .scr .tl.on .tx b{color:var(--d-ink)}
@@ -2158,7 +2157,7 @@ body{background:var(--bg);color:var(--txt);
 .scr .apappt .acts b.alt{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .ptag{background:var(--d-surface2);border-color:var(--d-line);color:var(--d-ink2)}
 /* ---- ນຳທາງ (ປັບໃຫ້ເຂົ້າຊຸດ) ---- */
-.scr .navsheet{background:#10171f;box-shadow:0 -8px 22px rgba(0,0,0,.55)}
+.scr .navsheet{background:#ffffff;box-shadow:0 -8px 22px rgba(16,23,32,.10)}
 .scr .navfoot{border-bottom-color:var(--d-line)}
 .scr .navfoot>div{border-right-color:var(--d-line)}
 .scr .navfoot b{color:var(--d-ink)}
@@ -2166,68 +2165,68 @@ body{background:var(--bg);color:var(--txt);
 .scr .navdest{border-bottom-color:var(--d-line)}
 .scr .navdest b{color:var(--d-ink)}
 .scr .navdest span{color:var(--d-dim)}
-.scr .navdest>i{background:rgba(59,130,246,.16);color:#8ab6ff}
+.scr .navdest>i{background:rgba(37,99,235,.16);color:#1d4ed8}
 .scr .navpax .tx b{color:var(--d-ink)}
 .scr .navpax .tx span{color:var(--d-dim)}
 .scr .navpax>i{background:var(--d-surface2);color:var(--d-ink2)}
-.scr .navfare{background:rgba(47,191,113,.08);border-bottom-color:rgba(47,191,113,.2)}
+.scr .navfare{background:rgba(18,161,80,.08);border-bottom-color:rgba(18,161,80,.2)}
 .scr .navfare span{color:var(--d-ink2)}
 .scr .navfare b{color:var(--d-ink)}
-.scr .navfare em{color:#66d99b}
-.scr .navtop{background:#16243c}
+.scr .navfare em{color:#0d8043}
+.scr .navtop{background:#c81e24;color:#fff}
 .scr .mactions.dark b{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .mactions.dark b svg{color:var(--d-ink2)}
-.scr .navbtns i{background:#1b2430;color:#cfdae6;box-shadow:0 3px 12px rgba(0,0,0,.5)}
-.scr .navbtns i.off{background:#2c3949;color:#5d6d80}
+.scr .navbtns i{background:#f5f6f8;color:#3e4854;box-shadow:0 3px 12px rgba(16,23,32,.09)}
+.scr .navbtns i.off{background:#e3e7ec;color:#8e9aa9}
 /* ---- ປຸ່ມເລື່ອນຢືນຢັນ ---- */
-.scr .slideconfirm .track{background:#1e2833}
+.scr .slideconfirm .track{background:#f3f5f7}
 .scr .slideconfirm .lbl{color:var(--d-ink2)}
-.scr .slideconfirm .knob{background:#eaf1f8;box-shadow:0 3px 12px rgba(0,0,0,.5)}
-.scr .slideconfirm .hint{color:#4e5c6e}
+.scr .slideconfirm .knob{background:#0f151d;box-shadow:0 3px 12px rgba(16,23,32,.09)}
+.scr .slideconfirm .hint{color:#a3aebb}
 /* ---- ອື່ນໆ ---- */
-.scr .stars svg{color:#39485a}
-.scr .plan .prow i{background:rgba(45,212,191,.15);color:#5eead4}
+.scr .stars svg{color:#c9d1da}
+.scr .plan .prow i{background:rgba(13,148,136,.15);color:#0f766e}
 .scr .plan .prow b{color:var(--d-ink)}
 .scr .plan .prow span{color:var(--d-ink2)}
 .scr .jobhero{background:var(--d-surface);border-bottom-color:var(--d-line)}
 .scr .jobhero .tx b{color:var(--d-ink)}
 .scr .jobhero .tx span{color:var(--d-dim)}
 .scr .jobhero .pz{color:var(--d-ink)}
-.scr .jobhero.chtr .tx b{color:#5eead4}
-.scr .jobhero.dm .tx b{color:#c4b5fd}
-.scr .shiftnow{background:rgba(90,155,240,.10);border-color:rgba(90,155,240,.28)}
-.scr .shiftnow b{color:#cfe0f7}
-.scr .shiftnow span{color:#8fabcc}
+.scr .jobhero.chtr .tx b{color:#0f766e}
+.scr .jobhero.dm .tx b{color:#6d28d9}
+.scr .shiftnow{background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.28)}
+.scr .shiftnow b{color:#1e3a8a}
+.scr .shiftnow span{color:#5a6f8c}
 .scr .badge2{background:#e1252b}
 .scr .dotr{background:var(--d-brand)}
-.scr .pickme{background:rgba(47,191,113,.16);color:#66d99b}
-.scr .evtag{background:rgba(47,191,113,.16);color:#66d99b}
-.scr .lowbal{background:rgba(255,77,82,.16);color:#ff9b9e}
+.scr .pickme{background:rgba(18,161,80,.16);color:#0d8043}
+.scr .evtag{background:rgba(18,161,80,.16);color:#0d8043}
+.scr .lowbal{background:rgba(225,37,43,.16);color:#b3121a}
 .scr .seatpill{background:var(--d-surface2);color:var(--d-ink2)}
 /* ---- ເກັບຕົກ ---- */
 .scr .btmsum b{color:var(--d-ink)}
 .scr .btmsum span{color:var(--d-dim)}
 .scr .linkred svg{width:16px;height:16px;vertical-align:-3px}
-.scr .nav a{color:#8296ad}
+.scr .nav a{color:#6a7686}
 .scr .nav a em{background:#e1252b}
 .scr .tips b{background:var(--d-surface2);border-color:var(--d-line);color:var(--d-ink2)}
 .scr .tips b.on{background:var(--d-brandbg);border-color:var(--d-brand);color:var(--d-bad)}
-.scr .curchip{background:rgba(47,191,113,.12);color:#7fe0ab}
+.scr .curchip{background:rgba(18,161,80,.12);color:#0f8c47}
 .scr .badgeline{color:var(--d-dim)}
 .scr .brandmark{box-shadow:0 12px 28px rgba(225,37,43,.28)}
-.scr .loader{border-color:#26313f;border-top-color:var(--d-brand)}
-.scr .drvpill{background:rgba(255,77,82,.14);border-color:rgba(255,77,82,.38);color:#ff9b9e}
-.scr .applycta{background:rgba(255,77,82,.09);border-color:rgba(255,77,82,.32)}
-.scr .applycta b{color:#ff9b9e}
-.scr .applycta span{color:#c99a9c}
-.scr .cmptbl .hd b.p{background:rgba(45,212,191,.16);color:#5eead4}
-.scr .cmptbl .hd b.s{background:rgba(255,77,82,.16);color:#ff9b9e}
+.scr .loader{border-color:#e8ebef;border-top-color:var(--d-brand)}
+.scr .drvpill{background:rgba(225,37,43,.14);border-color:rgba(225,37,43,.38);color:#b3121a}
+.scr .applycta{background:rgba(225,37,43,.09);border-color:rgba(225,37,43,.32)}
+.scr .applycta b{color:#b3121a}
+.scr .applycta span{color:#a1585c}
+.scr .cmptbl .hd b.p{background:rgba(13,148,136,.16);color:#0f766e}
+.scr .cmptbl .hd b.s{background:rgba(225,37,43,.16);color:#b3121a}
 .scr .cmptbl .rw{border-top-color:var(--d-line);color:var(--d-dim)}
 .scr .cmptbl .rw>span{color:var(--d-ink2)}
 .scr .cmptbl .rw b{color:var(--d-ink2)}
-.scr .remithero{background:linear-gradient(150deg,#c9761a,#a04f08);box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.scr .remithero{background:linear-gradient(150deg,#a04f08,#a04f08);box-shadow:0 10px 24px rgba(16,23,32,.08)}
 .scr .remithero.over{background:linear-gradient(150deg,#c0242a,#7d0d13)}
-.scr .tiercard{background:linear-gradient(150deg,#202b38,#141b24);border:1px solid var(--d-line)}
+.scr .tiercard{background:linear-gradient(150deg,#fdf3f3,#ffffff);border:1px solid var(--d-line)}
 .scr .apappt .acts b.alt{background:var(--d-surface2);color:var(--d-ink2)}
 .scr .msg.me .locrow{background:rgba(255,255,255,.18);color:#fff}
 .scr .msg.me .locrow svg{color:#fff}
@@ -2236,9 +2235,9 @@ body{background:var(--bg);color:var(--txt);
 /* ---- ປຸ່ມອອກຈາກລະບົບ (ປຸ່ມແທ້ ບໍ່ແມ່ນແຖວລອຍ) ---- */
 .scr .logoutwrap{padding:16px 12px 6px}
 .scr .logoutbtn{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:12px;
-  border:1.5px solid rgba(255,77,82,.4);background:rgba(255,77,82,.08);color:var(--d-brand);
+  border:1.5px solid rgba(225,37,43,.4);background:rgba(225,37,43,.08);color:var(--d-brand);
   font-size:13.5px;font-weight:700;cursor:pointer;user-select:none}
-.scr .logoutbtn:active{background:rgba(255,77,82,.16)}
+.scr .logoutbtn:active{background:rgba(225,37,43,.16)}
 .scr .logoutbtn i{display:flex;flex:0 0 auto}
 .scr .logoutbtn i svg{width:17px;height:17px}
 .scr .logoutbtn b{font-weight:700}
@@ -2246,37 +2245,37 @@ body{background:var(--bg);color:var(--txt);
 .scr .linkred svg,.scr .legal svg,.scr .chnote svg,.scr .grp svg{width:16px;height:16px;vertical-align:-3px}
 /* ---- ຫົວເຕືອນໜ້າຍົກເລີກ (ໂຄງເປັນແຖວ ບໍ່ແມ່ນກາງຈໍແບບເດີມ) ---- */
 .scr .warnhead{display:flex;align-items:flex-start;gap:11px;text-align:left;padding:14px;
-  margin:12px;border-radius:14px;background:rgba(245,163,60,.10);border:1px solid rgba(245,163,60,.28)}
-.scr .warnhead>svg{width:20px;height:20px;flex:0 0 auto;margin-top:1px;color:#f7c07a}
+  margin:12px;border-radius:14px;background:rgba(224,138,18,.10);border:1px solid rgba(224,138,18,.28)}
+.scr .warnhead>svg{width:20px;height:20px;flex:0 0 auto;margin-top:1px;color:#9c5f09}
 .scr .warnhead>div{flex:1;min-width:0}
-.scr .warnhead b{display:block;font-size:13.5px;font-weight:700;color:#f7c07a;line-height:1.45}
-.scr .warnhead span{display:block;font-size:11.5px;color:#c9a77c;margin-top:4px;line-height:1.5}
+.scr .warnhead b{display:block;font-size:13.5px;font-weight:700;color:#9c5f09;line-height:1.45}
+.scr .warnhead span{display:block;font-size:11.5px;color:#8a6a30;margin-top:4px;line-height:1.5}
 .scr .reason{background:var(--d-surface);border-color:var(--d-line)}
 .scr .reason b{color:var(--d-ink)}
-.scr .reason.on{background:rgba(255,77,82,.10);border-color:rgba(255,77,82,.45)}
+.scr .reason.on{background:rgba(225,37,43,.10);border-color:rgba(225,37,43,.45)}
 .scr .reason .emo{background:var(--d-surface2)}
-.scr .warnic{background:var(--d-surface);border-color:rgba(245,163,60,.5);color:#f7c07a}
+.scr .warnic{background:var(--d-surface);border-color:rgba(224,138,18,.5);color:#9c5f09}
 /* ---- ແຖບຈຳລອງຜົນການປະມູນ (ສະເພາະເດໂມ) ---- */
 .scr .simrow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px;padding:10px 12px;
   border:1px dashed var(--d-line);border-radius:12px;font-size:10.5px;color:var(--d-dim)}
 .scr .simrow b{font-size:11.5px;font-weight:700;border-radius:999px;padding:6px 11px;cursor:pointer;
   background:var(--d-surface2);color:var(--d-ink2)}
-.scr .simrow b.ok{background:rgba(47,191,113,.18);color:#7fe0ab}
+.scr .simrow b.ok{background:rgba(18,161,80,.18);color:#0f8c47}
 
 /* ============================================================
    ແຊັດ realtime + ແປອັດຕະໂນມັດ (D20)
    ============================================================ */
 .scr .sbody.chat{padding:12px;gap:7px;background:var(--d-bg);overflow-y:auto}
-.scr .chead .av em{background:#22c07a;border-color:#10171f}
+.scr .chead .av em{background:#12a150;border-color:#ffffff}
 /* ແຖບບອກການແປ */
 .scr .trbar{display:flex;align-items:center;gap:8px;padding:8px 13px;font-size:11px;line-height:1.45;
-  background:rgba(90,155,240,.12);border-bottom:1px solid rgba(90,155,240,.24);color:#a7c9f7;flex:0 0 auto}
+  background:rgba(37,99,235,.12);border-bottom:1px solid rgba(37,99,235,.24);color:#1d4ed8;flex:0 0 auto}
 .scr .trbar svg{width:14px;height:14px;flex:0 0 auto}
-.scr .trbar b{color:#cfe0f7}
+.scr .trbar b{color:#1e3a8a}
 .scr .trbtn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
   background:var(--d-surface2);color:var(--d-dim);flex:0 0 auto}
 .scr .trbtn svg{width:17px;height:17px}
-.scr .trbtn.on{background:rgba(90,155,240,.2);color:#8ab6ff}
+.scr .trbtn.on{background:rgba(37,99,235,.2);color:#1d4ed8}
 /* ບັບເບິ້ນ */
 .scr .msg{max-width:80%;padding:9px 12px;font-size:12.5px;border-radius:15px;line-height:1.5;position:relative}
 .scr .msg.them{align-self:flex-start;background:var(--d-surface);color:var(--d-ink);
@@ -2290,7 +2289,7 @@ body{background:var(--bg);color:var(--txt);
   font-size:9.5px;margin-top:4px;font-family:var(--ui);opacity:.75}
 .scr .msg.them .meta{color:var(--d-dim)}
 .scr .msg .tick{font-size:10px;letter-spacing:-1px}
-.scr .msg .tick.read{color:#8ab6ff;opacity:1}
+.scr .msg .tick.read{color:#1d4ed8;opacity:1}
 /* ກຳລັງພິມ */
 .scr .msg.typing{display:flex;gap:4px;align-items:center;padding:12px 14px;min-height:34px}
 .scr .msg.typing i{width:6px;height:6px;border-radius:50%;background:var(--d-dim);animation:tdot 1.2s infinite}
@@ -2298,7 +2297,7 @@ body{background:var(--bg);color:var(--txt);
 .scr .msg.typing i:nth-child(3){animation-delay:.4s}
 @keyframes tdot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 /* ຊ່ອງພິມ */
-.scr .cinput{display:flex;align-items:center;gap:8px;background:#10171f;padding:9px 10px;
+.scr .cinput{display:flex;align-items:center;gap:8px;background:#ffffff;padding:9px 10px;
   border-top:1px solid var(--d-line);flex:0 0 auto}
 .scr .cinput>i{width:38px;height:38px;border-radius:50%;background:var(--d-surface2);display:grid;
   place-items:center;color:var(--d-ink2);cursor:pointer;flex:0 0 auto}
@@ -2314,13 +2313,13 @@ body{background:var(--bg);color:var(--txt);
 .scr .hasbadge{position:relative}
 .scr .chatbadge{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:999px;
   background:#e1252b;color:#fff;font-size:9.5px;font-weight:700;font-style:normal;
-  display:none;place-items:center;padding:0 4px;border:2px solid #10171f}
+  display:none;place-items:center;padding:0 4px;border:2px solid #ffffff}
 
 /* ============================================================
    ກະເປົາເງິນ (D29–D31)
    ============================================================ */
 .scr .walcard{margin:12px;padding:18px;border-radius:18px;color:#fff;
-  background:linear-gradient(150deg,#137a46,#0b5230);box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  background:linear-gradient(150deg,#e1252b,#a30f15);box-shadow:0 10px 26px rgba(16,23,32,.08)}
 .scr .walcard>span{font-size:11.5px;opacity:.85}
 .scr .walcard>b{display:block;font-size:31px;font-weight:800;letter-spacing:-.8px;margin:5px 0 14px}
 .scr .walcard .wacts{display:flex;gap:9px}
@@ -2328,7 +2327,7 @@ body{background:var(--bg);color:var(--txt);
   background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:12px;
   padding:10px 0;font-size:12.5px;font-weight:700;cursor:pointer;color:#fff}
 .scr .walcard .wacts a svg{width:15px;height:15px}
-.scr .walcard.wd{background:linear-gradient(150deg,#1b4d86,#0e2e54)}
+.scr .walcard.wd{background:linear-gradient(150deg,#495463,#262f3b)}
 .scr .walcard .lg{display:flex;flex-wrap:wrap;gap:10px;font-size:10.5px;opacity:.85}
 /* ແຖບຍອດນ້ອຍ */
 .scr .walmini{display:flex;align-items:center;gap:11px;margin:12px;padding:12px 14px;border-radius:14px;
@@ -2345,20 +2344,20 @@ body{background:var(--bg);color:var(--txt);
 .scr .amtgrid b.on{background:var(--d-brandbg);border-color:var(--d-brand);color:var(--d-bad)}
 /* ຈຳນວນເງິນໃນລາຍການ */
 .scr .amt{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-.scr .amt.up{color:#66d99b}
+.scr .amt.up{color:#0d8043}
 .scr .amt.down{color:var(--d-ink2)}
 /* ---- ສະຖານະຄ່າທຳນຽມ 0% ---- */
-.scr .zerofee{padding:14px;background:linear-gradient(150deg,rgba(47,191,113,.16),rgba(47,191,113,.06));
-  border:1px solid rgba(47,191,113,.35);cursor:pointer}
+.scr .zerofee{padding:14px;background:linear-gradient(150deg,rgba(18,161,80,.16),rgba(18,161,80,.06));
+  border:1px solid rgba(18,161,80,.35);cursor:pointer}
 .scr .zerofee .hd{display:flex;align-items:center;gap:10px}
-.scr .zerofee .hd svg{width:20px;height:20px;color:#2fbf71}
-.scr .zerofee .hd b{font-size:26px;font-weight:800;color:#66d99b;letter-spacing:-1px}
-.scr .zerofee .hd .rt{margin-left:auto;color:#4e6a5b}
+.scr .zerofee .hd svg{width:20px;height:20px;color:#12a150}
+.scr .zerofee .hd b{font-size:26px;font-weight:800;color:#0d8043;letter-spacing:-1px}
+.scr .zerofee .hd .rt{margin-left:auto;color:#c2878a}
 .scr .zerofee .hd .rt svg{width:16px;height:16px}
-.scr .zerofee .ft{font-size:11.5px;color:#8fbfa4;margin-top:7px;line-height:1.5}
-.scr .zerofee .ft b{color:#a8e8c4}
+.scr .zerofee .ft{font-size:11.5px;color:#8a5f61;margin-top:7px;line-height:1.5}
+.scr .zerofee .ft b{color:#0d8043}
 .scr .zerohero{margin:12px;padding:24px 18px;border-radius:18px;text-align:center;
-  background:linear-gradient(150deg,#137a46,#0b5230);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  background:linear-gradient(150deg,#e1252b,#a30f15);color:#fff;box-shadow:0 10px 26px rgba(16,23,32,.08)}
 .scr .zerohero i{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);
   display:grid;place-items:center;margin:0 auto 10px}
 .scr .zerohero i svg{width:25px;height:25px}
@@ -2366,11 +2365,61 @@ body{background:var(--bg);color:var(--txt);
 .scr .zerohero>span{display:block;font-size:12.5px;line-height:1.65;margin-top:8px;opacity:.92}
 .scr .zerohero>span b{font-weight:800}
 .scr .zerohero em{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;font-style:normal;
-  background:rgba(0,0,0,.24);border-radius:999px;padding:5px 13px}
-.scr .ptag.ok{background:rgba(47,191,113,.18);border-color:rgba(47,191,113,.4);color:#66d99b}
-.scr .mini.ok{color:#66d99b}
-.scr .formula .fr.zero{color:#66d99b}
-.scr .formula .fr.zero b{color:#66d99b}
+  background:rgba(16,23,32,.05);border-radius:999px;padding:5px 13px}
+.scr .ptag.ok{background:rgba(18,161,80,.18);border-color:rgba(18,161,80,.4);color:#0d8043}
+.scr .mini.ok{color:#0d8043}
+.scr .formula .fr.zero{color:#0d8043}
+.scr .formula .fr.zero b{color:#0d8043}
+
+/* ============================================================
+   ໂໝດນຳສະເໜີ — ສະແດງແຕ່ໜ້າຈໍແອັບ
+   ============================================================ */
+.present{ display:flex; flex-direction:column; gap:14px; min-height:72vh; padding:4px 0 10px; }
+.present:fullscreen{ background:var(--bg); padding:22px 26px; justify-content:center; }
+
+.pbar{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.pgroups{ display:flex; gap:6px; flex-wrap:wrap; flex:1; }
+.pg{ font:600 12px/1 var(--f); color:var(--muted); background:var(--card); border:1px solid var(--line);
+     padding:7px 12px; border-radius:999px; cursor:pointer; transition:.15s; }
+.pg:hover{ color:var(--ink); border-color:var(--brand); }
+.pg.on{ background:var(--brand); border-color:var(--brand); color:#fff; }
+
+.pctl{ display:flex; gap:6px; }
+.pbtn{ width:34px; height:34px; display:grid; place-items:center; font-size:13px; cursor:pointer;
+       color:var(--muted); background:var(--card); border:1px solid var(--line); border-radius:10px; transition:.15s; }
+.pbtn:hover{ color:var(--ink); border-color:var(--brand); }
+.pbtn.on{ background:var(--brand); border-color:var(--brand); color:#fff; }
+
+.pstage{ display:flex; align-items:center; justify-content:center; gap:clamp(14px,4vw,56px); flex:1; min-height:0; }
+.pphone{ position:relative; }
+.pphone::after{ content:''; position:absolute; inset:-34px -26px; border-radius:60px; z-index:-1;
+  background:radial-gradient(closest-side, rgba(34,197,94,.16), transparent 72%); pointer-events:none; }
+.pphone .phone{ transform:scale(1.12); transform-origin:center; }
+.present:fullscreen .pphone .phone{ transform:scale(1.34); }
+
+.pnav{ width:46px; height:46px; flex:none; display:grid; place-items:center; cursor:pointer;
+       font:400 26px/1 var(--f); color:var(--muted); background:var(--card);
+       border:1px solid var(--line); border-radius:50%; transition:.15s; }
+.pnav:hover{ color:#fff; background:var(--brand); border-color:var(--brand); transform:scale(1.08); }
+
+.pcap{ display:flex; align-items:baseline; justify-content:center; gap:12px; }
+.pcap b{ font:700 16px/1.4 var(--f); color:var(--ink); }
+.pcap span{ font:600 12px/1 var(--f); color:var(--muted); letter-spacing:.4px; }
+
+.pstrip{ display:flex; gap:6px; overflow-x:auto; padding:4px 2px 8px; scrollbar-width:thin; }
+.pstrip::-webkit-scrollbar{ height:5px; }
+.pstrip::-webkit-scrollbar-thumb{ background:var(--line); border-radius:9px; }
+.pt{ flex:none; max-width:132px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+     font:600 11px/1 var(--f); color:var(--muted); background:var(--card);
+     border:1px solid var(--line); padding:7px 11px; border-radius:8px; cursor:pointer; transition:.15s; }
+.pt:hover{ color:var(--ink); }
+.pt.on{ background:var(--brand); border-color:var(--brand); color:#fff; }
+
+@media (max-width:720px){
+  .pphone .phone{ transform:scale(.92); }
+  .pnav{ width:38px; height:38px; font-size:21px; }
+  .pstage{ gap:6px; }
+}
 
 </style>
 </head>
@@ -2385,6 +2434,7 @@ body{background:var(--bg);color:var(--txt);
     <span class="drvchip">DRIVER</span>
   </div>
   <nav class="tabs" id="tabs">
+    <button class="tab" data-view="present">ນຳສະເໜີ</button>
     <button class="tab" data-view="overview">ພາບລວມ</button>
     <button class="tab" data-view="screens">ໜ້າຈໍທັງໝົດ</button>
     <button class="tab" data-view="demo">ເດໂມແອັບ</button>
@@ -4288,15 +4338,15 @@ const paxCard = (j, acts = true) => `
    ============================================================ */
 function scrSplash(s){
   return `<div class="sb">${statusBar('21:40')}</div>
-  <div class="sbody" style="background:linear-gradient(165deg,#1a1f26,#0c1015);color:#fff;align-items:center;text-align:center">
+  <div class="sbody" style="background:linear-gradient(168deg,#ffffff 0%,#fff5f5 55%,#fde8e9 100%);color:#0f151d;align-items:center;text-align:center">
     <div class="grow"></div>
     <div class="brandmark" style="box-shadow:none">${logoMark()}</div>
     <div style="font-size:24px;font-weight:800;letter-spacing:1.4px">INSEE <span style="font-weight:400">Drive</span></div>
     <div class="drvpill">${I('badge')} ແອັບພະນັກງານຂັບ</div>
     <div style="height:26px"></div>
-    <div class="loader" style="border-color:rgba(255,255,255,.28);border-top-color:var(--d-brand)"></div>
+    <div class="loader" style="border-color:rgba(225,37,43,.20);border-top-color:#e1252b"></div>
     <div class="grow"></div>
-    <div style="font-size:11px;opacity:.5;padding-bottom:16px">ຮຸ່ນ 0.1 · ສູນບໍລິການ ${CFG.hotline}</div>
+    <div style="font-size:11px;color:#98a3b1;padding-bottom:16px">ຮຸ່ນ 0.1 · ສູນບໍລິການ ${CFG.hotline}</div>
   </div>${gestureBar}`;
 }
 
@@ -5996,6 +6046,79 @@ function viewOverview(){
 }
 
 /* ============================================================
+   VIEW · ນຳສະເໜີ (present) — ສະແດງແຕ່ໜ້າຈໍແອັບ ບໍ່ມີຂໍ້ມູນນັກພັດທະນາ
+   ໜຶ່ງໜ້າຈໍຕໍ່ໜຶ່ງສະໄລ້ · ລູກສອນ ←/→ · ເຕັມຈໍ · ຫຼິ້ນອັດຕະໂນມັດ
+   ============================================================ */
+let presIdx = 0, presTimer = null, presGroup = 'ທັງໝົດ';
+const presList = () => SCREENS.filter(s => presGroup === 'ທັງໝົດ' || s.group === presGroup);
+
+function viewPresent(){
+  const groups = ['ທັງໝົດ', ...STEP_GROUPS.map(g => g.g)];
+  view.innerHTML = `
+    <div class="present" id="present">
+      <div class="pbar">
+        <div class="pgroups">${groups.map(g =>
+          `<button class="pg ${g === presGroup ? 'on' : ''}" data-pg="${g}">${g}</button>`).join('')}</div>
+        <div class="pctl">
+          <button class="pbtn" id="pPlay" title="ຫຼິ້ນອັດຕະໂນມັດ">▶</button>
+          <button class="pbtn" id="pFull" title="ເຕັມຈໍ">⛶</button>
+        </div>
+      </div>
+      <div class="pstage">
+        <button class="pnav prev" id="pPrev" aria-label="ກ່ອນໜ້າ">‹</button>
+        <div class="pphone" id="pPhone"></div>
+        <button class="pnav next" id="pNext" aria-label="ຕໍ່ໄປ">›</button>
+      </div>
+      <div class="pcap"><b id="pTitle"></b><span id="pCount"></span></div>
+      <div class="pstrip" id="pStrip"></div>
+    </div>`;
+  presIdx = Math.min(presIdx, presList().length - 1);
+  $$('#present .pg').forEach(b => b.onclick = () => { presGroup = b.dataset.pg; presIdx = 0; viewPresent(); });
+  $('#pPrev').onclick = () => presGo(-1);
+  $('#pNext').onclick = () => presGo(1);
+  $('#pPlay').onclick = presToggle;
+  $('#pFull').onclick = presFull;
+  paintPresent();
+}
+
+function presGo(d){
+  const n = presList().length;
+  presIdx = (presIdx + d + n) % n;
+  paintPresent();
+}
+function presToggle(){
+  const b = $('#pPlay'); if (!b) return;
+  if (presTimer){ clearInterval(presTimer); presTimer = null; b.textContent = '▶'; b.classList.remove('on'); }
+  else { presTimer = setInterval(() => presGo(1), 4200); b.textContent = '❚❚'; b.classList.add('on'); }
+}
+function presFull(){
+  const el = $('#present'); if (!el) return;
+  if (document.fullscreenElement) document.exitFullscreen();
+  else el.requestFullscreen && el.requestFullscreen();
+}
+function paintPresent(){
+  const list = presList(), s = list[presIdx];
+  if (!s) return;
+  navStop();
+  $('#pPhone').innerHTML = phone(RENDER[s.key]({ ...sampleState(s.key), live:true }));
+  mountMaps();
+  if (window.mountQR) mountQR();
+  $('#pTitle').textContent = s.lo;
+  $('#pCount').textContent = (presIdx + 1) + ' / ' + list.length;
+  $('#pStrip').innerHTML = list.map((x, i) =>
+    `<button class="pt ${i === presIdx ? 'on' : ''}" data-i="${i}" title="${x.lo}">${x.lo}</button>`).join('');
+  $$('#pStrip .pt').forEach(b => b.onclick = () => { presIdx = +b.dataset.i; paintPresent(); });
+  const cur = $('#pStrip .pt.on'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
+  /* ໜ້າຈໍນຳທາງ → ເປີດເສັ້ນທາງຈິງໃຫ້ເຫັນລົດເຄື່ອນ */
+  if (s.key === 'toPickup' || s.key === 'onTrip'){
+    const j = JOBS[0];
+    const from = s.key === 'toPickup' ? [17.9640, 102.5930] : [j.from.lat, j.from.lng];
+    const to   = s.key === 'toPickup' ? [j.from.lat, j.from.lng] : [j.to.lat, j.to.lng];
+    routeNav(from, to, R => { if ($('#pPhone')) navStart(R, () => {}, { speed:11.1 }); });
+  }
+}
+
+/* ============================================================
    VIEW 2 · ໜ້າຈໍ (gallery)
    ============================================================ */
 let galFilter = 'ທັງໝົດ';
@@ -6790,9 +6913,11 @@ function viewSpec(){
 }
 
 /* ---------------- router ---------------- */
-const VIEWS = { overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
+const VIEWS = { present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
 function switchTab(name){
   if (!VIEWS[name]) name = 'screens';
+  if (presTimer && name !== 'present'){ clearInterval(presTimer); presTimer = null; }
+  if (name !== 'present' && name !== 'demo') navStop();
   $$('.tab').forEach(t => t.classList.toggle('on', t.dataset.view === name));
   VIEWS[name]();
   window.scrollTo({ top:0, behavior:'smooth' });
@@ -6801,6 +6926,11 @@ function switchTab(name){
 $$('.tab').forEach(t => t.onclick = () => switchTab(t.dataset.view));
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target && e.target.id === 'chatInput'){ ACTIONS.sendMsg(); paintDemo(); return; }
+  if ($('#present') && $('#modal').hidden){
+    if (e.key === 'ArrowRight'){ presGo(1); return; }
+    if (e.key === 'ArrowLeft'){ presGo(-1); return; }
+    if (e.key === ' '){ e.preventDefault(); presToggle(); return; }
+  }
   if (e.key === 'Escape' && !$('#modal').hidden){ $('#modal').hidden = true; $('#modal').innerHTML = ''; } });
 const lg = document.querySelector('.logo'); if (lg) lg.innerHTML = logoMark();
 logEv('app.start');

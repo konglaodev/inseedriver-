@@ -108,15 +108,15 @@ const paxCard = (j, acts = true) => `
    ============================================================ */
 function scrSplash(s){
   return `<div class="sb">${statusBar('21:40')}</div>
-  <div class="sbody" style="background:linear-gradient(165deg,#1a1f26,#0c1015);color:#fff;align-items:center;text-align:center">
+  <div class="sbody" style="background:linear-gradient(168deg,#ffffff 0%,#fff5f5 55%,#fde8e9 100%);color:#0f151d;align-items:center;text-align:center">
     <div class="grow"></div>
     <div class="brandmark" style="box-shadow:none">${logoMark()}</div>
     <div style="font-size:24px;font-weight:800;letter-spacing:1.4px">INSEE <span style="font-weight:400">Drive</span></div>
     <div class="drvpill">${I('badge')} ແອັບພະນັກງານຂັບ</div>
     <div style="height:26px"></div>
-    <div class="loader" style="border-color:rgba(255,255,255,.28);border-top-color:var(--d-brand)"></div>
+    <div class="loader" style="border-color:rgba(225,37,43,.20);border-top-color:#e1252b"></div>
     <div class="grow"></div>
-    <div style="font-size:11px;opacity:.5;padding-bottom:16px">ຮຸ່ນ 0.1 · ສູນບໍລິການ ${CFG.hotline}</div>
+    <div style="font-size:11px;color:#98a3b1;padding-bottom:16px">ຮຸ່ນ 0.1 · ສູນບໍລິການ ${CFG.hotline}</div>
   </div>${gestureBar}`;
 }
 

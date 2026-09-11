@@ -90,6 +90,79 @@ function viewOverview(){
 }
 
 /* ============================================================
+   VIEW · ນຳສະເໜີ (present) — ສະແດງແຕ່ໜ້າຈໍແອັບ ບໍ່ມີຂໍ້ມູນນັກພັດທະນາ
+   ໜຶ່ງໜ້າຈໍຕໍ່ໜຶ່ງສະໄລ້ · ລູກສອນ ←/→ · ເຕັມຈໍ · ຫຼິ້ນອັດຕະໂນມັດ
+   ============================================================ */
+let presIdx = 0, presTimer = null, presGroup = 'ທັງໝົດ';
+const presList = () => SCREENS.filter(s => presGroup === 'ທັງໝົດ' || s.group === presGroup);
+
+function viewPresent(){
+  const groups = ['ທັງໝົດ', ...STEP_GROUPS.map(g => g.g)];
+  view.innerHTML = `
+    <div class="present" id="present">
+      <div class="pbar">
+        <div class="pgroups">${groups.map(g =>
+          `<button class="pg ${g === presGroup ? 'on' : ''}" data-pg="${g}">${g}</button>`).join('')}</div>
+        <div class="pctl">
+          <button class="pbtn" id="pPlay" title="ຫຼິ້ນອັດຕະໂນມັດ">▶</button>
+          <button class="pbtn" id="pFull" title="ເຕັມຈໍ">⛶</button>
+        </div>
+      </div>
+      <div class="pstage">
+        <button class="pnav prev" id="pPrev" aria-label="ກ່ອນໜ້າ">‹</button>
+        <div class="pphone" id="pPhone"></div>
+        <button class="pnav next" id="pNext" aria-label="ຕໍ່ໄປ">›</button>
+      </div>
+      <div class="pcap"><b id="pTitle"></b><span id="pCount"></span></div>
+      <div class="pstrip" id="pStrip"></div>
+    </div>`;
+  presIdx = Math.min(presIdx, presList().length - 1);
+  $$('#present .pg').forEach(b => b.onclick = () => { presGroup = b.dataset.pg; presIdx = 0; viewPresent(); });
+  $('#pPrev').onclick = () => presGo(-1);
+  $('#pNext').onclick = () => presGo(1);
+  $('#pPlay').onclick = presToggle;
+  $('#pFull').onclick = presFull;
+  paintPresent();
+}
+
+function presGo(d){
+  const n = presList().length;
+  presIdx = (presIdx + d + n) % n;
+  paintPresent();
+}
+function presToggle(){
+  const b = $('#pPlay'); if (!b) return;
+  if (presTimer){ clearInterval(presTimer); presTimer = null; b.textContent = '▶'; b.classList.remove('on'); }
+  else { presTimer = setInterval(() => presGo(1), 4200); b.textContent = '❚❚'; b.classList.add('on'); }
+}
+function presFull(){
+  const el = $('#present'); if (!el) return;
+  if (document.fullscreenElement) document.exitFullscreen();
+  else el.requestFullscreen && el.requestFullscreen();
+}
+function paintPresent(){
+  const list = presList(), s = list[presIdx];
+  if (!s) return;
+  navStop();
+  $('#pPhone').innerHTML = phone(RENDER[s.key]({ ...sampleState(s.key), live:true }));
+  mountMaps();
+  if (window.mountQR) mountQR();
+  $('#pTitle').textContent = s.lo;
+  $('#pCount').textContent = (presIdx + 1) + ' / ' + list.length;
+  $('#pStrip').innerHTML = list.map((x, i) =>
+    `<button class="pt ${i === presIdx ? 'on' : ''}" data-i="${i}" title="${x.lo}">${x.lo}</button>`).join('');
+  $$('#pStrip .pt').forEach(b => b.onclick = () => { presIdx = +b.dataset.i; paintPresent(); });
+  const cur = $('#pStrip .pt.on'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
+  /* ໜ້າຈໍນຳທາງ → ເປີດເສັ້ນທາງຈິງໃຫ້ເຫັນລົດເຄື່ອນ */
+  if (s.key === 'toPickup' || s.key === 'onTrip'){
+    const j = JOBS[0];
+    const from = s.key === 'toPickup' ? [17.9640, 102.5930] : [j.from.lat, j.from.lng];
+    const to   = s.key === 'toPickup' ? [j.from.lat, j.from.lng] : [j.to.lat, j.to.lng];
+    routeNav(from, to, R => { if ($('#pPhone')) navStart(R, () => {}, { speed:11.1 }); });
+  }
+}
+
+/* ============================================================
    VIEW 2 · ໜ້າຈໍ (gallery)
    ============================================================ */
 let galFilter = 'ທັງໝົດ';
@@ -884,9 +957,11 @@ function viewSpec(){
 }
 
 /* ---------------- router ---------------- */
-const VIEWS = { overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
+const VIEWS = { present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
 function switchTab(name){
   if (!VIEWS[name]) name = 'screens';
+  if (presTimer && name !== 'present'){ clearInterval(presTimer); presTimer = null; }
+  if (name !== 'present' && name !== 'demo') navStop();
   $$('.tab').forEach(t => t.classList.toggle('on', t.dataset.view === name));
   VIEWS[name]();
   window.scrollTo({ top:0, behavior:'smooth' });
@@ -895,6 +970,11 @@ function switchTab(name){
 $$('.tab').forEach(t => t.onclick = () => switchTab(t.dataset.view));
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target && e.target.id === 'chatInput'){ ACTIONS.sendMsg(); paintDemo(); return; }
+  if ($('#present') && $('#modal').hidden){
+    if (e.key === 'ArrowRight'){ presGo(1); return; }
+    if (e.key === 'ArrowLeft'){ presGo(-1); return; }
+    if (e.key === ' '){ e.preventDefault(); presToggle(); return; }
+  }
   if (e.key === 'Escape' && !$('#modal').hidden){ $('#modal').hidden = true; $('#modal').innerHTML = ''; } });
 const lg = document.querySelector('.logo'); if (lg) lg.innerHTML = logoMark();
 logEv('app.start');
