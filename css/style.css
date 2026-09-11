@@ -2405,3 +2405,76 @@ body{background:var(--bg);color:var(--txt);
   .pnav{ width:38px; height:38px; font-size:21px; }
   .pstage{ gap:6px; }
 }
+
+/* ============================================================
+   D43 · ບັນຊີຮັບເງິນ (QR) ຂອງຄົນຂັບເອງ
+   ============================================================ */
+.scr .qrmini .tx em.amt{display:block;font-style:normal;font-size:19px;font-weight:800;
+  color:var(--d-brand);font-family:var(--ui);letter-spacing:-.4px;margin-top:5px}
+
+.scr .card2.qrcard{margin:12px;padding:16px 14px;text-align:center;background:#fff;
+  border:1px solid var(--d-line);border-radius:18px;box-shadow:0 8px 22px rgba(225,37,43,.07)}
+.scr .qrcard.off{background:var(--d-surface2);box-shadow:none}
+
+.scr .qrtop{display:flex;align-items:center;gap:11px;text-align:left;padding-bottom:13px;
+  border-bottom:1px dashed var(--d-line)}
+.scr .qrtop>svg{width:26px;height:26px;flex:none;color:var(--d-brand)}
+.scr .qrtop>div{flex:1;min-width:0}
+.scr .qrtop b{display:block;font-size:13.5px;font-weight:700;color:var(--d-ink)}
+.scr .qrtop span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:2px}
+.scr .vtag{display:inline-flex;align-items:center;gap:4px;flex:none;font-style:normal;
+  font-size:10px;font-weight:700;padding:5px 9px;border-radius:999px}
+.scr .vtag svg{width:12px;height:12px}
+.scr .vtag.ok{background:var(--d-okbg);color:var(--d-ok)}
+.scr .vtag.wait{background:var(--d-warnbg);color:var(--d-warn)}
+
+.scr .qrbig{display:flex;justify-content:center;padding:16px 0 12px}
+.scr .qrbig .qrimg{border-radius:12px;overflow:hidden;padding:9px;background:#fff;
+  border:1px solid var(--d-line)}
+.scr .qrwho b{display:block;font-size:14px;font-weight:800;color:var(--d-ink);letter-spacing:.3px}
+.scr .qrwho span{display:block;font-size:12.5px;color:var(--d-ink2);font-family:var(--ui);
+  letter-spacing:1.2px;margin-top:3px}
+.scr .qracts{display:flex;gap:9px;margin-top:14px}
+.scr .qracts a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:12px;font-weight:700;padding:10px;border-radius:11px;cursor:pointer;
+  background:var(--d-surface2);color:var(--d-ink2);border:1px solid var(--d-line)}
+.scr .qracts a svg{width:15px;height:15px}
+.scr .qracts a:active{background:var(--d-brandbg);color:var(--d-brand);border-color:var(--d-brand)}
+
+.scr .qrempty{padding:22px 10px;display:flex;flex-direction:column;align-items:center;gap:7px}
+.scr .qrempty svg{width:38px;height:38px;color:#c2cbd5}
+.scr .qrempty b{font-size:13.5px;color:var(--d-ink2)}
+.scr .qrempty span{font-size:11.5px;color:var(--d-dim);line-height:1.55;max-width:230px}
+
+/* ຕາຕະລາງ “ເງິນໄປໃສ” */
+.scr .flowtbl{padding:4px 0}
+.scr .ft-row{display:flex;align-items:center;gap:11px;padding:11px 13px;
+  border-bottom:1px solid var(--d-line)}
+.scr .ft-row:last-child{border-bottom:0}
+.scr .ft-row .ic{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:10px}
+.scr .ft-row .ic svg{width:16px;height:16px}
+.scr .ft-row .ic.cash{background:var(--d-warnbg);color:var(--d-warn)}
+.scr .ft-row .ic.qr{background:var(--d-brandbg);color:var(--d-brand)}
+.scr .ft-row .ic.wal{background:var(--d-okbg);color:var(--d-ok)}
+.scr .ft-row .tx{flex:1;min-width:0}
+.scr .ft-row .tx b{display:block;font-size:12.5px;font-weight:700;color:var(--d-ink)}
+.scr .ft-row .tx span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .ft-row .tag{flex:none;font-style:normal;font-size:9.5px;font-weight:700;
+  padding:5px 8px;border-radius:7px;letter-spacing:.2px}
+.scr .ft-row .tag.out{background:var(--d-surface2);color:var(--d-dim)}
+.scr .ft-row .tag.in{background:var(--d-okbg);color:var(--d-ok)}
+
+.scr .statrow2{display:flex;padding:2px 0}
+.scr .statrow2>div{flex:1;text-align:center;padding:13px 6px}
+.scr .statrow2>div+div{border-left:1px solid var(--d-line)}
+.scr .statrow2 b{display:block;font-size:19px;font-weight:800;color:var(--d-ink);
+  font-family:var(--ui);letter-spacing:-.4px}
+.scr .statrow2 span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:3px}
+
+/* ແຖບບອກປາຍທາງຂອງເງິນ ໃນໜ້າຈົບຖ້ຽວ */
+.scr .card2.gonote{display:flex;align-items:center;gap:9px;margin-top:8px;padding:11px 13px;
+  background:var(--d-surface2);border:1px solid var(--d-line)}
+.scr .gonote svg{width:17px;height:17px;flex:none;color:var(--d-ink2)}
+.scr .gonote span{font-size:11.5px;color:var(--d-ink2)}
+.scr .gonote b{color:var(--d-ink);font-weight:700}

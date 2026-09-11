@@ -238,6 +238,8 @@ Object.assign(ICONS, {
   lock:     _s('<rect x="4.6" y="10.2" width="14.8" height="10.4" rx="2.4"/><path d="M8 10.2V7.4a4 4 0 018 0v2.8"/>'),
   mail:     _s('<rect x="3" y="5.4" width="18" height="13.2" rx="2.4"/><path d="M3.6 6.6L12 12.6l8.4-6"/>'),
   ccard:    _s('<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.6"/><path d="M2.6 9.8h18.8M6.4 14.8h3.4"/>'),
+  share:    _s('<circle cx="18" cy="5.4" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.6" r="2.6"/><path d="M8.3 10.8 15.7 6.8M8.3 13.2l7.4 4"/>'),
+  bank:     _s('<path d="M3.2 9.6 12 4.4l8.8 5.2"/><path d="M5.4 9.6v8.2M9.8 9.6v8.2M14.2 9.6v8.2M18.6 9.6v8.2"/><path d="M3 19.6h18"/>'),
   qr:       _s('<rect x="3.4" y="3.4" width="6.4" height="6.4" rx="1.4"/><rect x="14.2" y="3.4" width="6.4" height="6.4" rx="1.4"/><rect x="3.4" y="14.2" width="6.4" height="6.4" rx="1.4"/><path d="M14.2 14.2h3v3h-3zM20.6 14.2v3M17.6 20.6h3"/>'),
   moon:     _f('<path d="M20.4 14.6A8.6 8.6 0 019.4 3.6a8.8 8.8 0 102.9 17.1 8.8 8.8 0 008.1-6.1z"/>'),
   logout:   _s('<path d="M9.6 20.4H5.8a1.8 1.8 0 01-1.8-1.8V5.4a1.8 1.8 0 011.8-1.8h3.8"/><path d="M15.4 16.4l4.4-4.4-4.4-4.4M19.4 12H9.2"/>'),

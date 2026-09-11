@@ -20,6 +20,8 @@ const BASE = {
   wallet:{ balance:WALLET.balance, autoFee:WALLET.autoFee },
   walTx:WALLET_TX.map(t => ({ ...t })),
   walFilter:'all', topupAmt:200000, topupWay:'qr', wdAmt:null,
+  /* ບັນຊີຮັບເງິນ QR ຂອງຄົນຂັບເອງ */
+  payqr:{ ...PAYQR },
   trips:HISTORY.map(t => ({ ...t })),
   notifs:NOTIFS.map(n => ({ ...n })),
   today:{ ...TODAY },
@@ -96,6 +98,7 @@ const SAMPLE = {
   wallet:        { walFilter:'all' },
   topup:         { topupAmt:200000, topupWay:'qr' },
   withdraw:      { wdAmt:500000 },
+  payqr:         {},
 
   /* ຄະແນນ & ຜົນງານ */
   performance:   {},

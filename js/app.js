@@ -631,17 +631,56 @@ const ACTIONS = {
 
   /* ---- ຮັບເງິນ ---- */
   payMethod: d => { demo.payMethod = d.v; logEv('payment.method', d.v); },
+  /* ---------- ບັນຊີຮັບເງິນ QR ຂອງຄົນຂັບເອງ ---------- */
+  goPayQR: () => go('payqr'),
+  payqrToggle: () => {
+    const p = pq(demo);
+    demo.payqr = { ...p, on:!p.on };
+    if (!demo.payqr.on && demo.payMethod === 'qr') demo.payMethod = 'cash';
+    logEv('payqr.toggle', demo.payqr.on ? 'ເປີດຮັບ QR' : 'ປິດຮັບ QR');
+  },
+  payqrBank: d => {
+    const k = d && d.v;
+    if (!k || !BANKS.some(b => b.k === k)) return;
+    demo.payqr = { ...pq(demo), bankKey:k, verified:false };
+    logEv('payqr.bank', bankByKey(k).n + ' · ຕ້ອງຢືນຢັນຄືນ');
+    toast('ປ່ຽນເປັນ ' + bankByKey(k).n + ' — ກົດບັນທຶກເພື່ອຢືນຢັນ');
+  },
+  payqrEdit: d => {
+    const f = d && d.v, p = pq(demo);
+    if (f === 'acc')    demo.payqr = { ...p, acc:'0101 2288 741', verified:false };
+    if (f === 'holder') demo.payqr = { ...p, holder:'VILAYSAK PHOMMACHANH', verified:false };
+    else if (f !== 'acc') return;
+    logEv('payqr.edit', f === 'acc' ? 'ແກ້ເລກບັນຊີ' : 'ແກ້ຊື່ເຈົ້າຂອງບັນຊີ');
+  },
+  payqrSave: () => {
+    const p = pq(demo);
+    if (!p.acc || !p.holder){ toast('ໃສ່ເລກບັນຊີ ແລະ ຊື່ເຈົ້າຂອງບັນຊີກ່ອນ'); return; }
+    demo.payqr = { ...p, on:true, verified:true, updated:'ດຽວນີ້' };
+    logEv('payqr.save', bankByKey(p.bankKey).n + ' ' + p.acc);
+    toast('ບັນທຶກແລ້ວ — ລູກຄ້າສະແກນຈ່າຍເຂົ້າບັນຊີທ່ານໄດ້ເລີຍ');
+  },
+  payqrShare: () => { logEv('payqr.share', 'ແບ່ງປັນ QR'); toast('ແບ່ງປັນ QR ບັນຊີຮັບເງິນ'); },
+
   collectPay: () => {
     if (!demo.job || demo.collected) return;
     const j = demo.job, fare = jobFare(demo) + (demo.stops || 0) * 10000, tip = demo.tip || 0;
     demo.collected = true;
     const comm = feeOf(fare);
     const route = carByKey(j.car).name + ' · ' + j.from.name + ' → ' + j.to.name;
-    /* ຈ່າຍຜ່ານກະເປົາ/QR → ເງິນເຂົ້າກະເປົາ · ເງິນສົດ → ຢູ່ໃນມືຄົນຂັບ */
-    if (demo.payMethod !== 'cash'){
+    /* ເງິນເຂົ້າລະບົບມີທາງດຽວ: ລູກຄ້າຈ່າຍ “ຜ່ານກະເປົາ”
+       ເງິນສົດ → ມືຄົນຂັບ · QR → ບັນຊີທະນາຄານຄົນຂັບໂດຍກົງ (ທັງສອງບໍ່ຜ່ານລະບົບ) */
+    if (demo.payMethod === 'wallet'){
       demo.wallet = { ...demo.wallet, balance:walBal(demo) + fare + tip };
       demo.walTx = [{ id:'wi' + demo.walTx.length, kind:'in', t:'ຄ່າໂດຍສານ · ' + route,
-        s:demo.payMethod === 'qr' ? 'ລູກຄ້າສະແກນ QR' : 'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'ດຽວນີ້', amt:fare + tip }, ...demo.walTx];
+        s:'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'ດຽວນີ້', amt:fare + tip }, ...demo.walTx];
+      logEv('payment.wallet', money(fare + tip) + ' → ກະເປົາໃນແອັບ');
+    } else if (demo.payMethod === 'qr'){
+      const p = pq(demo);
+      demo.payqr = { ...p, scans30:(p.scans30 || 0) + 1, recv30:(p.recv30 || 0) + fare + tip };
+      logEv('payment.qr.direct', money(fare + tip) + ' → ' + bankByKey(p.bankKey).n + ' ' + p.acc + ' (ບໍ່ຜ່ານລະບົບ)');
+    } else {
+      logEv('payment.cash.direct', money(fare + tip) + ' → ມືຄົນຂັບ (ບໍ່ຜ່ານລະບົບ)');
     }
     /* ຄ່າທຳນຽມ: ຫັກຈາກກະເປົາຖ້າເປີດອັດຕະໂນມັດ ແລະ ຍອດພໍ · ບໍ່ດັ່ງນັ້ນເຂົ້າຍອດຄ້າງ */
     if (walAuto(demo) && walBal(demo) >= comm){
@@ -653,7 +692,7 @@ const ACTIONS = {
       demo.fees = [{ id:'f' + demo.fees.length + 1, job:j.id, tx:route, time:'ດຽວນີ້', fare, amt:comm }, ...demo.fees];
       logEv('fee.accrue', money(comm));
     }
-    logEv('payment.collect', money(fare + tip) + ' · ' + (demo.payMethod === 'cash' ? 'ເງິນສົດ' : demo.payMethod === 'qr' ? 'QR' : 'ກະເປົາເງິນ'));
+    logEv('payment.collect', money(fare + tip) + ' · ' + payName(demo.payMethod) + ' → ' + payDest(demo.payMethod));
     toast(demo.payMethod === 'cash'
       ? '💵 ຮັບເງິນສົດ ' + money(fare + tip) + ' — ຄ່າທຳນຽມ ' + money(comm) + (walAuto(demo) && walBal(demo) >= 0 ? ' ຫັກຈາກກະເປົາ' : ' ເຂົ້າຍອດຄ້າງ')
       : '✅ ເງິນ ' + money(fare + tip) + ' ເຂົ້າກະເປົາແລ້ວ — ຫັກຄ່າທຳນຽມ ' + money(comm));

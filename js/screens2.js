@@ -496,6 +496,8 @@ function scrProfile(s){
         t:zeroFee() ? 'ຄ່າທຳນຽມບໍລິການ' : 'ຄ່າທຳນຽມຄ້າງຈ່າຍ',
         s:zeroFee() ? 'ໂປຣໂມຊັນ 0% ຮອດ ' + CFG.zeroFeeUntil : 'ຕັດຍອດ' + CFG.feeCycle,
         r:'<b class="mini' + (zeroFee() ? ' ok' : '') + '">' + (zeroFee() ? '0%' : money(feeTotal(s))) + '</b>', act:'goPayFee' })}
+      ${rowItem({ ic:'qr', color:'#e1252b', t:'ບັນຊີຮັບເງິນ (QR)',
+        s:pq(s).on ? bankByKey(pq(s).bankKey).n + ' ' + pq(s).acc : 'ຍັງບໍ່ທັນຜູກ', act:'goPayQR' })}
       ${rowItem({ ic:'receipt', color:'#12a150', t:'ປະຫວັດການຈ່າຍຄ່າທຳນຽມ', act:'goFeeHistory' })}
     </div>
     <div class="grp">ລົດ ແລະ ເອກະສານ</div>
@@ -553,9 +555,14 @@ function scrWallet(s){
 
     <div class="grp">ບັນຊີຮັບເງິນ</div>
     <div class="card2">
-      ${rowItem({ ic:'ccard', color:'#5a9bf0', t:WALLET.bank.name + ' ···' + WALLET.bank.last,
+      ${rowItem({ ic:'qr', color:'#e1252b', t:'ບັນຊີຮັບເງິນ (QR) ຂອງຂ້ອຍ',
+        s:pq(s).on ? bankByKey(pq(s).bankKey).n + ' ' + pq(s).acc + ' · ເຂົ້າໂດຍກົງ' : 'ຍັງບໍ່ທັນຜູກ — ລູກຄ້າສະແກນຈ່າຍບໍ່ໄດ້',
+        r:'<b class="mini ' + (pq(s).on ? 'ok' : '') + '">' + (pq(s).on ? 'ເປີດ' : 'ປິດ') + '</b>', act:'goPayQR' })}
+      ${rowItem({ ic:'ccard', color:'#5a9bf0', t:'ບັນຊີຖອນເງິນ · ' + WALLET.bank.name + ' ···' + WALLET.bank.last,
         s:WALLET.bank.holder, r:'<b class="mini">ປ່ຽນ</b>', act:'soon' })}
     </div>
+    <div class="chnote">ເງິນເຂົ້າກະເປົາມີແຕ່ 3 ທາງ: ລູກຄ້າຈ່າຍ<b>ຜ່ານກະເປົາ</b> · ເຕີມເງິນເອງ · ໂບນັດ —
+      <b>ເງິນສົດ</b> ແລະ <b>QR ບັນຊີທ່ານ</b> ບໍ່ຜ່ານລະບົບ</div>
 
     <div class="grp">ລາຍການເຄື່ອນໄຫວ</div>
     <div class="segs">
@@ -951,8 +958,77 @@ function scrApplyStatus(s){
     <div class="btm"><div class="btn plain" data-act="goLogin">ກັບໄປໜ້າເຂົ້າສູ່ລະບົບ</div></div>` });
 }
 
-/* ---- ທະບຽນ renderer ທັງໝົດ (42 ໜ້າຈໍ) ---- */
+/* ---- ທະບຽນ renderer ທັງໝົດ (43 ໜ້າຈໍ) ---- */
+/* ============================================================
+   D43 · ບັນຊີຮັບເງິນ (QR) — ບັນຊີຂອງຄົນຂັບເອງ
+   ເງິນຈາກ QR ນີ້ເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ
+   ============================================================ */
+function scrPayQR(s){
+  const p = pq(s), bk = bankByKey(p.bankKey);
+  const ready = p.on && p.acc && p.holder;
+  return appScreen({ time:'21:52', title:'ບັນຊີຮັບເງິນ (QR)', state:s, body:`
+
+    ${ready ? `<div class="card2 qrcard">
+      <div class="qrtop">${I('bank')}<div><b>${bk.n}</b><span>${bk.s}</span></div>
+        ${p.verified ? `<i class="vtag ok">${I('ok')}ຢືນຢັນແລ້ວ</i>` : `<i class="vtag wait">${I('timer')}ລໍຢືນຢັນ</i>`}</div>
+      <div class="qrbig">${qrBox(payqrPayload(p, 0), 172)}</div>
+      <div class="qrwho"><b>${p.holder}</b><span>${p.acc}</span></div>
+      <div class="qracts">
+        <a data-act="payqrShare">${I('share')}ແບ່ງປັນ</a>
+        <a data-act="payqrSave">${I('download')}ບັນທຶກຮູບ</a>
+      </div>
+    </div>`
+    : `<div class="card2 qrcard off">
+        <div class="qrempty">${I('qr')}<b>ຍັງບໍ່ທັນຜູກບັນຊີ</b>
+          <span>ຜູກບັນຊີທະນາຄານຂອງທ່ານ ເພື່ອໃຫ້ລູກຄ້າສະແກນຈ່າຍໄດ້</span></div>
+      </div>`}
+
+    <div class="grp">ເງິນແຕ່ລະທາງໄປໃສ</div>
+    <div class="card2 flowtbl">
+      <div class="ft-row"><i class="ic cash">${I('cash')}</i>
+        <div class="tx"><b>ເງິນສົດ</b><span>ມືທ່ານໂດຍກົງ</span></div><em class="tag out">ບໍ່ຜ່ານລະບົບ</em></div>
+      <div class="ft-row"><i class="ic qr">${I('qr')}</i>
+        <div class="tx"><b>QR ບັນຊີຂ້ອຍ</b><span>${ready ? bk.n + ' ' + p.acc : 'ຍັງບໍ່ຜູກ'} · ເຂົ້າໂດຍກົງ</span></div><em class="tag out">ບໍ່ຜ່ານລະບົບ</em></div>
+      <div class="ft-row"><i class="ic wal">${I('wallet')}</i>
+        <div class="tx"><b>ກະເປົາເງິນໃນແອັບ</b><span>ຖອນເຂົ້າບັນຊີພາຍຫຼັງ</span></div><em class="tag in">ຜ່ານລະບົບ</em></div>
+    </div>
+    <div class="chnote">ບໍລິສັດ<b>ບໍ່ໄດ້ຈັບເງິນຄ່າໂດຍສານ</b>ຂອງທ່ານ — ເງິນທີ່ເຂົ້າລະບົບມີແຕ່ໃນ<b>ກະເປົາ</b>ເທົ່ານັ້ນ</div>
+
+    <div class="grp">ຮັບຈ່າຍຜ່ານ QR</div>
+    <div class="card2">
+      <div class="rowitem" data-act="payqrToggle"><div class="ic" style="background:var(--d-brandbg);color:var(--d-brand)">${I('qr')}</div>
+        <div class="tx"><b>ເປີດໃຫ້ລູກຄ້າສະແກນ QR</b><span>${p.on
+          ? 'ເປີດຢູ່ — ຈະສະແດງ QR ຕອນຈົບຖ້ຽວ' : 'ປິດຢູ່ — ຮັບແຕ່ເງິນສົດ ແລະ ກະເປົາ'}</span></div>${sw(p.on)}</div>
+    </div>
+
+    <div class="grp">ທະນາຄານ</div>
+    <div class="licrow">
+      ${BANKS.map(b => `<b class="${p.bankKey === b.k ? 'on' : ''}" data-act="payqrBank" data-v="${b.k}">${b.n}</b>`).join('')}
+    </div>
+
+    <div class="grp">ຂໍ້ມູນບັນຊີ</div>
+    <div class="card2" style="padding:12px 14px">
+      <div class="fld"><label>ເລກບັນຊີ</label>
+        <div class="inp ${p.acc ? '' : 'ph'}" data-act="payqrEdit" data-v="acc">${p.acc || '0000 0000 000'}</div></div>
+      <div class="fld"><label>ຊື່ເຈົ້າຂອງບັນຊີ (ຕົວອັກສອນອັງກິດ)</label>
+        <div class="inp ${p.holder ? '' : 'ph'}" data-act="payqrEdit" data-v="holder">${p.holder || 'NAME SURNAME'}</div></div>
+      <div class="fline"><span>ອັບເດດຫຼ້າສຸດ</span><span>${p.updated}</span></div>
+    </div>
+    ${p.verified ? '' : `<div class="warnrow">${I('timer')}<span>ບັນຊີກຳລັງລໍການຢືນຢັນ — ໃຊ້ຮັບເງິນໄດ້ ແຕ່ຊື່ຕ້ອງກົງກັບໃບຂັບຂີ່</span></div>`}
+
+    ${ready ? `<div class="grp">30 ວັນຜ່ານມາ</div>
+    <div class="card2 statrow2">
+      <div><b>${p.scans30}</b><span>ຄັ້ງທີ່ຖືກສະແກນ</span></div>
+      <div><b>${money(p.recv30)}</b><span>ຮັບເຂົ້າບັນຊີ</span></div>
+    </div>` : ''}
+
+    <div class="grow"></div>
+    <div class="btm"><div class="btn pri" data-act="payqrSave">ບັນທຶກບັນຊີຮັບເງິນ</div></div>` });
+}
+
 const RENDER = {
+  /* ບັນຊີຮັບເງິນ QR */
+  payqr:scrPayQR,
   /* ລົງທະບຽນ & ຢືນຢັນຕົວຕົນ */
   splash:scrSplash, apply:scrApply, applyPersonal:scrApplyPersonal, applyLicense:scrApplyLicense,
   applyDocs:scrApplyDocs, applyVerify:scrApplyVerify, applyReview:scrApplyReview, applyStatus:scrApplyStatus,

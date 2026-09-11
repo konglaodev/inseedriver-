@@ -2421,6 +2421,79 @@ body{background:var(--bg);color:var(--txt);
   .pstage{ gap:6px; }
 }
 
+/* ============================================================
+   D43 · ບັນຊີຮັບເງິນ (QR) ຂອງຄົນຂັບເອງ
+   ============================================================ */
+.scr .qrmini .tx em.amt{display:block;font-style:normal;font-size:19px;font-weight:800;
+  color:var(--d-brand);font-family:var(--ui);letter-spacing:-.4px;margin-top:5px}
+
+.scr .card2.qrcard{margin:12px;padding:16px 14px;text-align:center;background:#fff;
+  border:1px solid var(--d-line);border-radius:18px;box-shadow:0 8px 22px rgba(225,37,43,.07)}
+.scr .qrcard.off{background:var(--d-surface2);box-shadow:none}
+
+.scr .qrtop{display:flex;align-items:center;gap:11px;text-align:left;padding-bottom:13px;
+  border-bottom:1px dashed var(--d-line)}
+.scr .qrtop>svg{width:26px;height:26px;flex:none;color:var(--d-brand)}
+.scr .qrtop>div{flex:1;min-width:0}
+.scr .qrtop b{display:block;font-size:13.5px;font-weight:700;color:var(--d-ink)}
+.scr .qrtop span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:2px}
+.scr .vtag{display:inline-flex;align-items:center;gap:4px;flex:none;font-style:normal;
+  font-size:10px;font-weight:700;padding:5px 9px;border-radius:999px}
+.scr .vtag svg{width:12px;height:12px}
+.scr .vtag.ok{background:var(--d-okbg);color:var(--d-ok)}
+.scr .vtag.wait{background:var(--d-warnbg);color:var(--d-warn)}
+
+.scr .qrbig{display:flex;justify-content:center;padding:16px 0 12px}
+.scr .qrbig .qrimg{border-radius:12px;overflow:hidden;padding:9px;background:#fff;
+  border:1px solid var(--d-line)}
+.scr .qrwho b{display:block;font-size:14px;font-weight:800;color:var(--d-ink);letter-spacing:.3px}
+.scr .qrwho span{display:block;font-size:12.5px;color:var(--d-ink2);font-family:var(--ui);
+  letter-spacing:1.2px;margin-top:3px}
+.scr .qracts{display:flex;gap:9px;margin-top:14px}
+.scr .qracts a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:12px;font-weight:700;padding:10px;border-radius:11px;cursor:pointer;
+  background:var(--d-surface2);color:var(--d-ink2);border:1px solid var(--d-line)}
+.scr .qracts a svg{width:15px;height:15px}
+.scr .qracts a:active{background:var(--d-brandbg);color:var(--d-brand);border-color:var(--d-brand)}
+
+.scr .qrempty{padding:22px 10px;display:flex;flex-direction:column;align-items:center;gap:7px}
+.scr .qrempty svg{width:38px;height:38px;color:#c2cbd5}
+.scr .qrempty b{font-size:13.5px;color:var(--d-ink2)}
+.scr .qrempty span{font-size:11.5px;color:var(--d-dim);line-height:1.55;max-width:230px}
+
+/* ຕາຕະລາງ “ເງິນໄປໃສ” */
+.scr .flowtbl{padding:4px 0}
+.scr .ft-row{display:flex;align-items:center;gap:11px;padding:11px 13px;
+  border-bottom:1px solid var(--d-line)}
+.scr .ft-row:last-child{border-bottom:0}
+.scr .ft-row .ic{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:10px}
+.scr .ft-row .ic svg{width:16px;height:16px}
+.scr .ft-row .ic.cash{background:var(--d-warnbg);color:var(--d-warn)}
+.scr .ft-row .ic.qr{background:var(--d-brandbg);color:var(--d-brand)}
+.scr .ft-row .ic.wal{background:var(--d-okbg);color:var(--d-ok)}
+.scr .ft-row .tx{flex:1;min-width:0}
+.scr .ft-row .tx b{display:block;font-size:12.5px;font-weight:700;color:var(--d-ink)}
+.scr .ft-row .tx span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .ft-row .tag{flex:none;font-style:normal;font-size:9.5px;font-weight:700;
+  padding:5px 8px;border-radius:7px;letter-spacing:.2px}
+.scr .ft-row .tag.out{background:var(--d-surface2);color:var(--d-dim)}
+.scr .ft-row .tag.in{background:var(--d-okbg);color:var(--d-ok)}
+
+.scr .statrow2{display:flex;padding:2px 0}
+.scr .statrow2>div{flex:1;text-align:center;padding:13px 6px}
+.scr .statrow2>div+div{border-left:1px solid var(--d-line)}
+.scr .statrow2 b{display:block;font-size:19px;font-weight:800;color:var(--d-ink);
+  font-family:var(--ui);letter-spacing:-.4px}
+.scr .statrow2 span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:3px}
+
+/* ແຖບບອກປາຍທາງຂອງເງິນ ໃນໜ້າຈົບຖ້ຽວ */
+.scr .card2.gonote{display:flex;align-items:center;gap:9px;margin-top:8px;padding:11px 13px;
+  background:var(--d-surface2);border:1px solid var(--d-line)}
+.scr .gonote svg{width:17px;height:17px;flex:none;color:var(--d-ink2)}
+.scr .gonote span{font-size:11.5px;color:var(--d-ink2)}
+.scr .gonote b{color:var(--d-ink);font-weight:700}
+
 </style>
 </head>
 <body>
@@ -2682,8 +2755,35 @@ const FEE_PAID = [
   { id:'fp3', cycle:'19–25/08/2026', paid:'26/08/2026 · 10:05', trips:47, fare:2551000, amt:306100, via:'ຕົວແທນ', status:'paid' }
 ];
 
+/* ---------- ບັນຊີຮັບເງິນຂອງຄົນຂັບເອງ (QR ໃຫ້ລູກຄ້າສະແກນ) ----------
+   ກົດ: QR ທີ່ລູກຄ້າສະແກນ = ບັນຊີທະນາຄານ “ຂອງຄົນຂັບເອງ”
+        → ເງິນເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ ບໍ່ຕ້ອງຖອນ
+   ເງິນທີ່ “ເຂົ້າລະບົບ” ມີຊ່ອງທາງດຽວ: ກະເປົາເງິນໃນແອັບ
+------------------------------------------------- */
+const BANKS = [
+  { k:'bcel',   n:'BCEL One',   s:'ທະນາຄານການຄ້າຕ່າງປະເທດລາວ' },
+  { k:'ldb',    n:'LDB Trust',  s:'ທະນາຄານພັດທະນາລາວ' },
+  { k:'jdb',    n:'JDB Yes',    s:'ທະນາຄານຮ່ວມພັດທະນາ' },
+  { k:'apb',    n:'APB One',    s:'ທະນາຄານສົ່ງເສີມກະສິກຳ' },
+  { k:'lvb',    n:'LVB Mobile', s:'ທະນາຄານລາວ-ຫວຽດ' },
+  { k:'umoney', n:'U-Money',    s:'ກະເປົາເງິນ Unitel' }
+];
+const bankByKey = k => BANKS.find(b => b.k === k) || BANKS[0];
+
+const PAYQR = {
+  on:true, verified:true, bankKey:'bcel',
+  acc:'0101 2288 741', holder:'VILAYSAK PHOMMACHANH',
+  updated:'02/09/2026',
+  scans30:37, recv30:4820000        /* ສະຖິຕິ 30 ວັນຜ່ານມາ */
+};
+/* payload ມາດຕະຖານ LAOQR — ໃສ່ຈຳນວນເງິນໄດ້ ຖ້າບໍ່ໃສ່ ລູກຄ້າພິມເອງ */
+const payqrPayload = (p, amt) =>
+  'laoqr://' + p.bankKey + '/' + String(p.acc).replace(/\s/g, '')
+  + '?name=' + encodeURIComponent(p.holder) + '&cur=LAK' + (amt ? '&amt=' + amt : '');
+
 /* ---------- ກະເປົາເງິນຄົນຂັບ ----------
-   ເງິນເຂົ້າ : ຖ້ຽວທີ່ລູກຄ້າຈ່າຍຜ່ານກະເປົາ/QR · ເຕີມເງິນເອງ · ໂບນັດ
+   ເງິນເຂົ້າ : ຖ້ຽວທີ່ລູກຄ້າຈ່າຍ “ຜ່ານກະເປົາ” ເທົ່ານັ້ນ · ເຕີມເງິນເອງ · ໂບນັດ
+              (ເງິນສົດ ແລະ QR ບັນຊີຄົນຂັບ ບໍ່ຜ່ານລະບົບ → ບໍ່ເຂົ້າກະເປົາ)
    ເງິນອອກ : ຫັກຄ່າທຳນຽມອັດຕະໂນມັດ · ຖອນເຂົ້າບັນຊີທະນາຄານ
 ------------------------------------------------- */
 const WALLET = {
@@ -2704,7 +2804,7 @@ const TOPUP_WAYS = [
 const WALLET_TX = [
   { id:'w1', kind:'in',    t:'ຄ່າໂດຍສານ · ບ້ານ → ໂຮງໝໍມິດຕະພາບ', s:'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'10/09 · 17:22', amt: 52000 },
 
-  { id:'w3', kind:'in',    t:'ຄ່າໂດຍສານ · ຕະຫຼາດຈັນສະຫວ່າງ → ບ້ານ', s:'ລູກຄ້າສະແກນ QR',        date:'10/09 · 15:48', amt: 355000 },
+  { id:'w3', kind:'in',    t:'ຄ່າໂດຍສານ · ຕະຫຼາດຈັນສະຫວ່າງ → ບ້ານ', s:'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'10/09 · 15:48', amt: 355000 },
 
   { id:'w5', kind:'out',   t:'ຖອນເຂົ້າ BCEL One ···8841',       s:'ສຳເລັດ · ຄ່າທຳນຽມ 3,000',    date:'09/09 · 19:10', amt:-500000 },
   { id:'w6', kind:'bonus', t:'ໂບນັດທ້າຍອາທິດ',                  s:'ຂັບຄົບ 15 ຖ້ຽວ ວັນເສົາ',      date:'08/09 · 23:05', amt: 30000 },
@@ -2807,7 +2907,9 @@ const EMERGENCY = [
 
 const FAQ = [
   { q:'ລາຍໄດ້ຂອງຂ້ອຍຄິດແນວໃດ?', a:'🎉 <b>ຄ່າທຳນຽມ 0%</b> — ຄ່າໂດຍສານ ແລະ ທິບເປັນຂອງທ່ານ <b>100%</b>. ຖ້ຽວ 53,000 ກີບ → ທ່ານໄດ້ 53,000 ກີບເຕັມ. ໂປຣໂມຊັນນີ້ຮອດ 31/12/2026 ແລະ ຈະແຈ້ງລ່ວງໜ້າ 30 ວັນ ກ່ອນມີການປ່ຽນແປງ.' },
-  { q:'ເງິນສົດທີ່ຮັບຈາກລູກຄ້າຕ້ອງນຳສົ່ງບໍ?', a:'<b>ບໍ່ຕ້ອງ</b> — ເງິນສົດເປັນຂອງທ່ານທັນທີ ແລະ ດຽວນີ້<b>ບໍ່ມີຍອດຄ້າງຈ່າຍ</b>ອີກ ເພາະຄ່າທຳນຽມເປັນ 0%. ສ່ວນຖ້ຽວທີ່ລູກຄ້າຈ່າຍຜ່ານກະເປົາ/QR ເງິນຈະເຂົ້າກະເປົາໃນແອັບ ແລ້ວຖອນເຂົ້າບັນຊີທະນາຄານໄດ້.' },
+  { q:'ເງິນສົດທີ່ຮັບຈາກລູກຄ້າຕ້ອງນຳສົ່ງບໍ?', a:'<b>ບໍ່ຕ້ອງ</b> — ເງິນສົດເປັນຂອງທ່ານທັນທີ ແລະ ບໍ່ມີຍອດຄ້າງຈ່າຍ ເພາະຄ່າທຳນຽມເປັນ 0%.' },
+  { q:'QR ທີ່ໃຫ້ລູກຄ້າສະແກນ ເປັນບັນຊີໃຜ?', a:'<b>ບັນຊີທະນາຄານຂອງທ່ານເອງ</b> ທີ່ທ່ານຜູກໄວ້ໃນໜ້າ “ບັນຊີຮັບເງິນ (QR)”. ເງິນເຂົ້າບັນຊີທ່ານ<b>ໂດຍກົງ</b> ບໍ່ຜ່ານລະບົບ ແລະ <b>ບໍ່ຕ້ອງຖອນ</b>. ບໍລິສັດບໍ່ໄດ້ຈັບເງິນຄ່າໂດຍສານເລີຍ.' },
+  { q:'ແລ້ວເງິນທີ່ເຂົ້າກະເປົາໃນແອັບມາຈາກໃສ?', a:'ມີແຕ່ 3 ທາງ: (1) ຖ້ຽວທີ່ລູກຄ້າເລືອກຈ່າຍ<b>ຜ່ານກະເປົາ</b>ໃນແອັບ (2) ທ່ານ<b>ເຕີມເງິນ</b>ເອງ (3) <b>ໂບນັດ</b>ຈາກບໍລິສັດ. ເງິນສົດ ແລະ QR ບັນຊີທ່ານ <b>ບໍ່ເຂົ້າ</b>ກະເປົາ.' },
   { q:'ສະເໜີລາຄາເພີ່ມໄດ້ບໍ?', a:'ໄດ້ — ລູກຄ້າຕັ້ງລາຄາມາ ທ່ານຮັບຕາມນັ້ນ ຫຼື ບວກເພີ່ມເປັນຂັ້ນລະ 5,000 ກີບ ແລ້ວສົ່ງໃຫ້ພິຈາລະນາ. ລູກຄ້າເຫັນລາຄາຂອງທຸກຄົນຂັບພ້ອມຄະແນນດາວ ແລະ ເລືອກເອງພາຍໃນ 60 ວິນາທີ. ລາຄາຕ່ຳກວ່າ 50,000 ກີບ ສະເໜີບໍ່ໄດ້.' },
   { q:'ຄະແນນດາວມີຜົນຫຍັງແດ່?', a:'ຄະແນນສະສົມກຳນົດ<b>ລະດັບຄົນຂັບ</b>: ທອງແດງ → ເງິນ (4.5★ ເຫັນງານກ່ອນ 3 ວິ) → ຄຳ (4.8★ ບຸລິມະສິດຈັບຄູ່ · ຮັບງານເໝົາລົດ) → ແພລທິນຳ (4.9★ ງານ VIP ແລະ ອົງກອນ). ຕ່ຳກວ່າ 4.0★ ຕິດຕໍ່ກັນ 30 ວັນ ອາດຖືກລະງັບ.' },
   { q:'ຮັບງານແລ້ວແຕ່ໄປບໍ່ໄດ້ ຕ້ອງເຮັດແນວໃດ?', a:'ກົດ “ຍົກເລີກງານ” ແລ້ວເລືອກເຫດຜົນທັນທີ. ເຫດຜົນທີ່ບໍ່ແມ່ນຄວາມຜິດຂອງທ່ານ (ລູກຄ້າບໍ່ມາ, ຕິດຕໍ່ບໍ່ໄດ້, ທີ່ຢູ່ຜິດ) <b>ບໍ່ຖືກຫັກຄະແນນ ແລະ ບໍ່ເສຍຄ່າປັບ</b>. ນອກນັ້ນຫັກ 20,000 ກີບ ແລະ ມີຜົນຕໍ່ອັດຕາຮັບງານ.' },
@@ -3031,9 +3133,10 @@ const SCREENS = [
 
   { id:'D21', key:'collect', route:'/trip/:id/collect', group:'ໄປຮັບ & ເດີນທາງ', lo:'ຈົບການເດີນທາງ & ຮັບເງິນ', en:'Complete & Collect',
     desc:'ສະຫຼຸບຄ່າໂດຍສານ (ລວມຄ່າລໍ) ແລະ ຮັບເງິນ — ເງິນສົດເປັນຂອງທ່ານທັນທີ ລະບົບພຽງແຕ່ບວກຄ່າທຳນຽມເຂົ້າຍອດຄ້າງຈ່າຍ.',
-    comp:['ສະຫຼຸບຄ່າໂດຍສານ + ຄ່າລໍ + ທິບ','ວິທີຮັບເງິນ 3 ແບບ','QR ຮັບເງິນ','ລາຍໄດ້ສຸດທິ + ຄ່າທຳນຽມທີ່ຈະບວກ','ປຸ່ມຢືນຢັນ'],
-    states:['ລໍຮັບເງິນ','ຮັບເງິນສົດແລ້ວ','QR ຈ່າຍສຳເລັດ','ຫັກກະເປົາລູກຄ້າ','ຈ່າຍບໍ່ສຳເລັດ'],
-    events:['payment.collect','payment.qr','trip.settled'], api:['POST /api/v1/trips/{id}/payment','GET /api/v1/driver/qr'] },
+    comp:['ສະຫຼຸບຄ່າໂດຍສານ + ຄ່າລໍ + ທິບ','ວິທີຮັບເງິນ 3 ແບບ','QR ບັນຊີຄົນຂັບເອງ + ຊື່/ເລກບັນຊີ','ປ້າຍບອກວ່າເງິນເຂົ້າໃສ','ລາຍໄດ້ສຸດທິ','ປຸ່ມຢືນຢັນ'],
+    states:['ລໍຮັບເງິນ','ຮັບເງິນສົດແລ້ວ','QR ບັນຊີຄົນຂັບ — ຈ່າຍສຳເລັດ','ຫັກກະເປົາລູກຄ້າ','ຍັງບໍ່ຜູກບັນຊີ QR','ຈ່າຍບໍ່ສຳເລັດ'],
+    events:['payment.collect','payment.qr.direct','payment.wallet','trip.settled'],
+    api:['POST /api/v1/trips/{id}/payment','GET /api/v1/driver/payqr'] },
 
   /* ===== 6 · ໃຫ້ຄະແນນ ===== */
   { id:'D22', key:'ratePax', route:'/trip/:id/rate', group:'ໃຫ້ຄະແນນ', lo:'ໃຫ້ຄະແນນລູກຄ້າ', en:'Rate Passenger',
@@ -3085,7 +3188,7 @@ const SCREENS = [
 
   /* ===== ກະເປົາເງິນ ===== */
   { id:'D29', key:'wallet', route:'/wallet', group:'ກະເປົາເງິນ', lo:'ກະເປົາເງິນ', en:'Wallet',
-    desc:'ກະເປົາເງິນໃນແອັບ — ຖ້ຽວທີ່ລູກຄ້າຈ່າຍຜ່ານກະເປົາ/QR ເຂົ້າມາທີ່ນີ້, ຄ່າທຳນຽມຫັກອັດຕະໂນມັດໄດ້ ແລະ ຖອນເຂົ້າບັນຊີທະນາຄານໄດ້.',
+    desc:'ກະເປົາເງິນໃນແອັບ — ເປັນ “ເງິນທີ່ເຂົ້າລະບົບ” ບ່ອນດຽວ. ເຂົ້າໄດ້ 3 ທາງ: ຖ້ຽວທີ່ລູກຄ້າຈ່າຍຜ່ານກະເປົາ · ເຕີມເງິນເອງ · ໂບນັດ. ເງິນສົດ ແລະ QR ບັນຊີຄົນຂັບ ບໍ່ຜ່ານທີ່ນີ້.',
     comp:['ບັດຍອດເງິນ + ປຸ່ມ ເຕີມເງິນ / ຖອນເງິນ','ສະວິດຫັກຄ່າທຳນຽມອັດຕະໂນມັດ','ບັດເຕືອນເມື່ອຍອດບໍ່ພໍຫັກຄ່າທຳນຽມ','ບັນຊີທະນາຄານປາຍທາງ','ລາຍການເຄື່ອນໄຫວ + ຕົວກັ່ນຕອງ'],
     states:['ຍອດປົກກະຕິ','ຍອດບໍ່ພໍຫັກຄ່າທຳນຽມ (ເຕືອນ)','ຍັງບໍ່ຜູກບັນຊີທະນາຄານ','ບໍ່ມີລາຍການ'],
     events:['wallet.view','wallet.autofee','wallet.filter'],
@@ -3104,6 +3207,13 @@ const SCREENS = [
     states:['ຖອນໄດ້','ຕ່ຳກວ່າຂັ້ນຕ່ຳ 50,000','ເກີນຍອດທີ່ຖອນໄດ້','ຍັງບໍ່ຜູກບັນຊີ','ຖອນສຳເລັດ'],
     events:['withdraw.amount','withdraw.confirm'],
     api:['GET /api/v1/driver/wallet/withdrawable','POST /api/v1/driver/wallet/withdraw'] },
+
+  { id:'D43', key:'payqr', route:'/wallet/payqr', group:'ກະເປົາເງິນ', lo:'ບັນຊີຮັບເງິນ (QR)', en:'My Payment QR',
+    desc:'ບັນຊີທະນາຄານ “ຂອງຄົນຂັບເອງ” ທີ່ໃຊ້ສ້າງ QR ໃຫ້ລູກຄ້າສະແກນ — ເງິນເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ ແລະ ບໍ່ຕ້ອງຖອນ. ໜ້ານີ້ອະທິບາຍໃຫ້ຊັດວ່າເງິນແຕ່ລະທາງໄປໃສ.',
+    comp:['ບັດ QR ໃຫຍ່ + ຊື່ບັນຊີ/ເລກບັນຊີ','ສະຖານະຢືນຢັນບັນຊີ','ເລືອກທະນາຄານ 6 ແຫ່ງ','ຊ່ອງເລກບັນຊີ + ຊື່ເຈົ້າຂອງ','ຕາຕະລາງ “ເງິນໄປໃສ” 3 ແຖວ','ສະຖິຕິ 30 ວັນ','ປຸ່ມບັນທຶກ / ແບ່ງປັນ QR'],
+    states:['ຜູກແລ້ວ & ຢືນຢັນແລ້ວ','ຜູກແລ້ວ ລໍຢືນຢັນ','ຍັງບໍ່ຜູກບັນຊີ','ປິດຮັບ QR (ຮັບແຕ່ເງິນສົດ/ກະເປົາ)'],
+    events:['payqr.view','payqr.bank','payqr.save','payqr.toggle','payqr.share'],
+    api:['GET /api/v1/driver/payqr','PUT /api/v1/driver/payqr','POST /api/v1/driver/payqr/verify'] },
 
   /* ===== 10 · ຄະແນນ & ຜົນງານ ===== */
   { id:'D32', key:'performance', route:'/performance', group:'ຄະແນນ & ຜົນງານ', lo:'ຄະແນນ & ຜົນງານ', en:'Rating & Performance',
@@ -3213,6 +3323,8 @@ const BASE = {
   wallet:{ balance:WALLET.balance, autoFee:WALLET.autoFee },
   walTx:WALLET_TX.map(t => ({ ...t })),
   walFilter:'all', topupAmt:200000, topupWay:'qr', wdAmt:null,
+  /* ບັນຊີຮັບເງິນ QR ຂອງຄົນຂັບເອງ */
+  payqr:{ ...PAYQR },
   trips:HISTORY.map(t => ({ ...t })),
   notifs:NOTIFS.map(n => ({ ...n })),
   today:{ ...TODAY },
@@ -3289,6 +3401,7 @@ const SAMPLE = {
   wallet:        { walFilter:'all' },
   topup:         { topupAmt:200000, topupWay:'qr' },
   withdraw:      { wdAmt:500000 },
+  payqr:         {},
 
   /* ຄະແນນ & ຜົນງານ */
   performance:   {},
@@ -3554,6 +3667,8 @@ Object.assign(ICONS, {
   lock:     _s('<rect x="4.6" y="10.2" width="14.8" height="10.4" rx="2.4"/><path d="M8 10.2V7.4a4 4 0 018 0v2.8"/>'),
   mail:     _s('<rect x="3" y="5.4" width="18" height="13.2" rx="2.4"/><path d="M3.6 6.6L12 12.6l8.4-6"/>'),
   ccard:    _s('<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.6"/><path d="M2.6 9.8h18.8M6.4 14.8h3.4"/>'),
+  share:    _s('<circle cx="18" cy="5.4" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.6" r="2.6"/><path d="M8.3 10.8 15.7 6.8M8.3 13.2l7.4 4"/>'),
+  bank:     _s('<path d="M3.2 9.6 12 4.4l8.8 5.2"/><path d="M5.4 9.6v8.2M9.8 9.6v8.2M14.2 9.6v8.2M18.6 9.6v8.2"/><path d="M3 19.6h18"/>'),
   qr:       _s('<rect x="3.4" y="3.4" width="6.4" height="6.4" rx="1.4"/><rect x="14.2" y="3.4" width="6.4" height="6.4" rx="1.4"/><rect x="3.4" y="14.2" width="6.4" height="6.4" rx="1.4"/><path d="M14.2 14.2h3v3h-3zM20.6 14.2v3M17.6 20.6h3"/>'),
   moon:     _f('<path d="M20.4 14.6A8.6 8.6 0 019.4 3.6a8.8 8.8 0 102.9 17.1 8.8 8.8 0 008.1-6.1z"/>'),
   logout:   _s('<path d="M9.6 20.4H5.8a1.8 1.8 0 01-1.8-1.8V5.4a1.8 1.8 0 011.8-1.8h3.8"/><path d="M15.4 16.4l4.4-4.4-4.4-4.4M19.4 12H9.2"/>'),
@@ -4258,6 +4373,16 @@ const walShort = s => walAuto(s) && walBal(s) < feeTotal(s);
 const tierOf    = (r = ME.rating) => [...TIERS].reverse().find(t => r >= t.min) || TIERS[0];
 const feePctOf  = () => CFG.commissionPct;
 const zeroFee   = () => CFG.commissionPct === 0;
+
+/* ---------- ບັນຊີຮັບເງິນຂອງຄົນຂັບເອງ + ປາຍທາງຂອງເງິນ ----------
+   ເງິນສົດ → ມືຄົນຂັບ · QR → ບັນຊີຄົນຂັບໂດຍກົງ · ກະເປົາ → ລະບົບ
+---------------------------------------------------------------- */
+const pq = s => ({ ...PAYQR, ...((s && s.payqr) || {}) });
+const payName = m => m === 'cash' ? 'ເງິນສົດ' : m === 'qr' ? 'QR ບັນຊີຂ້ອຍ' : 'ກະເປົາເງິນ';
+const payDest = m => m === 'cash' ? 'ມືທ່ານໂດຍກົງ'
+                   : m === 'qr'   ? 'ບັນຊີທະນາຄານທ່ານໂດຍກົງ'
+                                  : 'ກະເປົາເງິນໃນແອັບ';
+const payThruSystem = m => m === 'wallet';
 const nextTier  = (r = ME.rating) => TIERS.find(t => t.min > r) || null;
 const curJob    = s => s.job || JOBS[0];
 const jobFare   = s => (s.bidPrice || curJob(s).offer) + waitFeeOf(s.waitSec || 0);
@@ -4810,20 +4935,28 @@ function scrCollect(s){
     </div>
     <div class="grp">ວິທີຮັບເງິນ</div>
     <div class="paygrid3">
-      ${[['cash','ເງິນສົດ','cash'],['qr','ໃຫ້ສະແກນ QR','qr'],['wallet','ຫັກກະເປົາລູກຄ້າ','wallet']]
+      ${[['cash','ເງິນສົດ','cash'],['qr','QR ບັນຊີຂ້ອຍ','qr'],['wallet','ຫັກກະເປົາລູກຄ້າ','wallet']]
         .map(([k, n, ic]) => `<b class="${m === k ? 'on' : ''}" data-act="payMethod" data-v="${k}">${I(ic)}${n}</b>`).join('')}
     </div>
-    ${m === 'qr' ? `<div class="card2 qrmini">${qrBox('insee-driver://' + ME.emp + '/' + (fare + tip), 132)}
-      <div class="tx"><b>ໃຫ້ລູກຄ້າສະແກນ</b><span>${money(fare + tip)} · ເຂົ້າບັນຊີບໍລິສັດໂດຍກົງ ບໍ່ຕ້ອງນຳສົ່ງ</span></div></div>` : ''}
+    ${m === 'qr' ? (pq(s).on ? `<div class="card2 qrmini">${qrBox(payqrPayload(pq(s), fare + tip), 132)}
+      <div class="tx"><b>ໃຫ້ລູກຄ້າສະແກນ</b>
+        <span>${bankByKey(pq(s).bankKey).n} · ${pq(s).acc}</span>
+        <span>${pq(s).holder}</span>
+        <em class="amt">${money(fare + tip)}</em></div></div>
+      <div class="safenote">🏦 ເປັນ <b>ບັນຊີຂອງທ່ານເອງ</b> — ເງິນເຂົ້າບັນຊີທະນາຄານທ່ານ<b>ໂດຍກົງ</b>
+        ບໍ່ຜ່ານລະບົບ ແລະ <b>ບໍ່ຕ້ອງຖອນ</b></div>`
+    : `<div class="warnrow bad">${I('alert')}<span>ທ່ານຍັງ<b>ບໍ່ທັນຜູກບັນຊີຮັບເງິນ</b> — ຜູກກ່ອນຈຶ່ງສ້າງ QR ໄດ້</span></div>
+       <div style="padding:0 12px"><div class="btn ored" data-act="goPayQR">ຜູກບັນຊີຮັບເງິນ (QR)</div></div>`) : ''}
     ${m === 'cash' ? (zeroFee()
       ? `<div class="safenote">💵 ເງິນສົດເປັນຂອງທ່ານ <b>ທັງໝົດ</b> — ບໍ່ຕ້ອງນຳສົ່ງ ແລະ ບໍ່ມີຄ່າທຳນຽມ</div>`
       : `<div class="safenote">💵 ເງິນສົດເປັນຂອງທ່ານທັນທີ — ລະບົບບວກຄ່າທຳນຽມ
           <b>${money(feeOf(fare))}</b> ເຂົ້າຍອດຄ້າງຈ່າຍ</div>`) : ''}
-    ${m === 'wallet' ? `<div class="safenote">👛 ຫັກຈາກກະເປົາເງິນຂອງລູກຄ້າອັດຕະໂນມັດ — ບໍ່ຕ້ອງຮັບເງິນສົດ</div>` : ''}
+    ${m === 'wallet' ? `<div class="safenote">👛 ຫັກຈາກກະເປົາເງິນຂອງລູກຄ້າອັດຕະໂນມັດ — ເງິນ<b>ເຂົ້າກະເປົາໃນແອັບ</b>ຂອງທ່ານ ແລ້ວຖອນເຂົ້າບັນຊີໄດ້</div>` : ''}
     <div class="grp">ລາຍໄດ້ຂອງທ່ານ</div>
     <div class="card2 earnrow"><div>${I('coins')}<b>${money(earnOf(fare) + tip)}</b></div>
       <span>${zeroFee() ? 'ຄ່າໂດຍສານ ' + money(fare) + ' (ຄ່າທຳນຽມ 0%)'
         : 'ຄ່າໂດຍສານ ' + money(fare) + ' − ຄ່າທຳນຽມ ' + money(feeOf(fare))}${tip ? ' + ທິບ ' + money(tip) : ''}</span></div>
+    <div class="card2 gonote">${I(m === 'wallet' ? 'wallet' : 'bank')}<span>ເງິນເຂົ້າ <b>${payDest(m)}</b></span></div>
     <div class="grow"></div>
     <div class="btm"><div class="btn pri" data-act="collectPay">${m === 'cash' ? 'ຮັບເງິນສົດແລ້ວ'
       : m === 'qr' ? 'ຢືນຢັນໄດ້ຮັບເງິນ' : 'ຢືນຢັນຫັກກະເປົາ'}</div></div>` });
@@ -4852,7 +4985,8 @@ function scrRatePax(s){
       <div class="fline"><span>ຄ່າໂດຍສານ</span><span>${money(fare)}</span></div>
       <div class="fline"><span>ຄ່າທຳນຽມ ${Math.round(feePctOf() * 100)}%</span>
         <span style="color:${zeroFee() ? 'var(--d-ok)' : 'var(--d-bad)'}">${zeroFee() ? '0' : '−' + money(feeOf(fare))}</span></div>
-      <div class="fline"><span>ວິທີຈ່າຍ</span><span>${s.payMethod === 'cash' ? 'ເງິນສົດ' : s.payMethod === 'qr' ? 'QR' : 'ກະເປົາເງິນ'}</span></div>
+      <div class="fline"><span>ວິທີຈ່າຍ</span><span>${payName(s.payMethod)}</span></div>
+      <div class="fline"><span>ເງິນເຂົ້າ</span><span>${payDest(s.payMethod)}</span></div>
       <div class="fline total"><span>ລາຍໄດ້ສຸດທິ + ທິບ</span><span style="color:var(--d-ok)">${money(earnOf(fare) + (s.tip || 0))}</span></div>
     </div>
     <div class="linkred" style="background:none" data-act="reportPax">ລາຍງານບັນຫາຮ້າຍແຮງ</div>
@@ -5472,6 +5606,8 @@ function scrProfile(s){
         t:zeroFee() ? 'ຄ່າທຳນຽມບໍລິການ' : 'ຄ່າທຳນຽມຄ້າງຈ່າຍ',
         s:zeroFee() ? 'ໂປຣໂມຊັນ 0% ຮອດ ' + CFG.zeroFeeUntil : 'ຕັດຍອດ' + CFG.feeCycle,
         r:'<b class="mini' + (zeroFee() ? ' ok' : '') + '">' + (zeroFee() ? '0%' : money(feeTotal(s))) + '</b>', act:'goPayFee' })}
+      ${rowItem({ ic:'qr', color:'#e1252b', t:'ບັນຊີຮັບເງິນ (QR)',
+        s:pq(s).on ? bankByKey(pq(s).bankKey).n + ' ' + pq(s).acc : 'ຍັງບໍ່ທັນຜູກ', act:'goPayQR' })}
       ${rowItem({ ic:'receipt', color:'#12a150', t:'ປະຫວັດການຈ່າຍຄ່າທຳນຽມ', act:'goFeeHistory' })}
     </div>
     <div class="grp">ລົດ ແລະ ເອກະສານ</div>
@@ -5529,9 +5665,14 @@ function scrWallet(s){
 
     <div class="grp">ບັນຊີຮັບເງິນ</div>
     <div class="card2">
-      ${rowItem({ ic:'ccard', color:'#5a9bf0', t:WALLET.bank.name + ' ···' + WALLET.bank.last,
+      ${rowItem({ ic:'qr', color:'#e1252b', t:'ບັນຊີຮັບເງິນ (QR) ຂອງຂ້ອຍ',
+        s:pq(s).on ? bankByKey(pq(s).bankKey).n + ' ' + pq(s).acc + ' · ເຂົ້າໂດຍກົງ' : 'ຍັງບໍ່ທັນຜູກ — ລູກຄ້າສະແກນຈ່າຍບໍ່ໄດ້',
+        r:'<b class="mini ' + (pq(s).on ? 'ok' : '') + '">' + (pq(s).on ? 'ເປີດ' : 'ປິດ') + '</b>', act:'goPayQR' })}
+      ${rowItem({ ic:'ccard', color:'#5a9bf0', t:'ບັນຊີຖອນເງິນ · ' + WALLET.bank.name + ' ···' + WALLET.bank.last,
         s:WALLET.bank.holder, r:'<b class="mini">ປ່ຽນ</b>', act:'soon' })}
     </div>
+    <div class="chnote">ເງິນເຂົ້າກະເປົາມີແຕ່ 3 ທາງ: ລູກຄ້າຈ່າຍ<b>ຜ່ານກະເປົາ</b> · ເຕີມເງິນເອງ · ໂບນັດ —
+      <b>ເງິນສົດ</b> ແລະ <b>QR ບັນຊີທ່ານ</b> ບໍ່ຜ່ານລະບົບ</div>
 
     <div class="grp">ລາຍການເຄື່ອນໄຫວ</div>
     <div class="segs">
@@ -5927,8 +6068,77 @@ function scrApplyStatus(s){
     <div class="btm"><div class="btn plain" data-act="goLogin">ກັບໄປໜ້າເຂົ້າສູ່ລະບົບ</div></div>` });
 }
 
-/* ---- ທະບຽນ renderer ທັງໝົດ (42 ໜ້າຈໍ) ---- */
+/* ---- ທະບຽນ renderer ທັງໝົດ (43 ໜ້າຈໍ) ---- */
+/* ============================================================
+   D43 · ບັນຊີຮັບເງິນ (QR) — ບັນຊີຂອງຄົນຂັບເອງ
+   ເງິນຈາກ QR ນີ້ເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ
+   ============================================================ */
+function scrPayQR(s){
+  const p = pq(s), bk = bankByKey(p.bankKey);
+  const ready = p.on && p.acc && p.holder;
+  return appScreen({ time:'21:52', title:'ບັນຊີຮັບເງິນ (QR)', state:s, body:`
+
+    ${ready ? `<div class="card2 qrcard">
+      <div class="qrtop">${I('bank')}<div><b>${bk.n}</b><span>${bk.s}</span></div>
+        ${p.verified ? `<i class="vtag ok">${I('ok')}ຢືນຢັນແລ້ວ</i>` : `<i class="vtag wait">${I('timer')}ລໍຢືນຢັນ</i>`}</div>
+      <div class="qrbig">${qrBox(payqrPayload(p, 0), 172)}</div>
+      <div class="qrwho"><b>${p.holder}</b><span>${p.acc}</span></div>
+      <div class="qracts">
+        <a data-act="payqrShare">${I('share')}ແບ່ງປັນ</a>
+        <a data-act="payqrSave">${I('download')}ບັນທຶກຮູບ</a>
+      </div>
+    </div>`
+    : `<div class="card2 qrcard off">
+        <div class="qrempty">${I('qr')}<b>ຍັງບໍ່ທັນຜູກບັນຊີ</b>
+          <span>ຜູກບັນຊີທະນາຄານຂອງທ່ານ ເພື່ອໃຫ້ລູກຄ້າສະແກນຈ່າຍໄດ້</span></div>
+      </div>`}
+
+    <div class="grp">ເງິນແຕ່ລະທາງໄປໃສ</div>
+    <div class="card2 flowtbl">
+      <div class="ft-row"><i class="ic cash">${I('cash')}</i>
+        <div class="tx"><b>ເງິນສົດ</b><span>ມືທ່ານໂດຍກົງ</span></div><em class="tag out">ບໍ່ຜ່ານລະບົບ</em></div>
+      <div class="ft-row"><i class="ic qr">${I('qr')}</i>
+        <div class="tx"><b>QR ບັນຊີຂ້ອຍ</b><span>${ready ? bk.n + ' ' + p.acc : 'ຍັງບໍ່ຜູກ'} · ເຂົ້າໂດຍກົງ</span></div><em class="tag out">ບໍ່ຜ່ານລະບົບ</em></div>
+      <div class="ft-row"><i class="ic wal">${I('wallet')}</i>
+        <div class="tx"><b>ກະເປົາເງິນໃນແອັບ</b><span>ຖອນເຂົ້າບັນຊີພາຍຫຼັງ</span></div><em class="tag in">ຜ່ານລະບົບ</em></div>
+    </div>
+    <div class="chnote">ບໍລິສັດ<b>ບໍ່ໄດ້ຈັບເງິນຄ່າໂດຍສານ</b>ຂອງທ່ານ — ເງິນທີ່ເຂົ້າລະບົບມີແຕ່ໃນ<b>ກະເປົາ</b>ເທົ່ານັ້ນ</div>
+
+    <div class="grp">ຮັບຈ່າຍຜ່ານ QR</div>
+    <div class="card2">
+      <div class="rowitem" data-act="payqrToggle"><div class="ic" style="background:var(--d-brandbg);color:var(--d-brand)">${I('qr')}</div>
+        <div class="tx"><b>ເປີດໃຫ້ລູກຄ້າສະແກນ QR</b><span>${p.on
+          ? 'ເປີດຢູ່ — ຈະສະແດງ QR ຕອນຈົບຖ້ຽວ' : 'ປິດຢູ່ — ຮັບແຕ່ເງິນສົດ ແລະ ກະເປົາ'}</span></div>${sw(p.on)}</div>
+    </div>
+
+    <div class="grp">ທະນາຄານ</div>
+    <div class="licrow">
+      ${BANKS.map(b => `<b class="${p.bankKey === b.k ? 'on' : ''}" data-act="payqrBank" data-v="${b.k}">${b.n}</b>`).join('')}
+    </div>
+
+    <div class="grp">ຂໍ້ມູນບັນຊີ</div>
+    <div class="card2" style="padding:12px 14px">
+      <div class="fld"><label>ເລກບັນຊີ</label>
+        <div class="inp ${p.acc ? '' : 'ph'}" data-act="payqrEdit" data-v="acc">${p.acc || '0000 0000 000'}</div></div>
+      <div class="fld"><label>ຊື່ເຈົ້າຂອງບັນຊີ (ຕົວອັກສອນອັງກິດ)</label>
+        <div class="inp ${p.holder ? '' : 'ph'}" data-act="payqrEdit" data-v="holder">${p.holder || 'NAME SURNAME'}</div></div>
+      <div class="fline"><span>ອັບເດດຫຼ້າສຸດ</span><span>${p.updated}</span></div>
+    </div>
+    ${p.verified ? '' : `<div class="warnrow">${I('timer')}<span>ບັນຊີກຳລັງລໍການຢືນຢັນ — ໃຊ້ຮັບເງິນໄດ້ ແຕ່ຊື່ຕ້ອງກົງກັບໃບຂັບຂີ່</span></div>`}
+
+    ${ready ? `<div class="grp">30 ວັນຜ່ານມາ</div>
+    <div class="card2 statrow2">
+      <div><b>${p.scans30}</b><span>ຄັ້ງທີ່ຖືກສະແກນ</span></div>
+      <div><b>${money(p.recv30)}</b><span>ຮັບເຂົ້າບັນຊີ</span></div>
+    </div>` : ''}
+
+    <div class="grow"></div>
+    <div class="btm"><div class="btn pri" data-act="payqrSave">ບັນທຶກບັນຊີຮັບເງິນ</div></div>` });
+}
+
 const RENDER = {
+  /* ບັນຊີຮັບເງິນ QR */
+  payqr:scrPayQR,
   /* ລົງທະບຽນ & ຢືນຢັນຕົວຕົນ */
   splash:scrSplash, apply:scrApply, applyPersonal:scrApplyPersonal, applyLicense:scrApplyLicense,
   applyDocs:scrApplyDocs, applyVerify:scrApplyVerify, applyReview:scrApplyReview, applyStatus:scrApplyStatus,
@@ -6587,17 +6797,56 @@ const ACTIONS = {
 
   /* ---- ຮັບເງິນ ---- */
   payMethod: d => { demo.payMethod = d.v; logEv('payment.method', d.v); },
+  /* ---------- ບັນຊີຮັບເງິນ QR ຂອງຄົນຂັບເອງ ---------- */
+  goPayQR: () => go('payqr'),
+  payqrToggle: () => {
+    const p = pq(demo);
+    demo.payqr = { ...p, on:!p.on };
+    if (!demo.payqr.on && demo.payMethod === 'qr') demo.payMethod = 'cash';
+    logEv('payqr.toggle', demo.payqr.on ? 'ເປີດຮັບ QR' : 'ປິດຮັບ QR');
+  },
+  payqrBank: d => {
+    const k = d && d.v;
+    if (!k || !BANKS.some(b => b.k === k)) return;
+    demo.payqr = { ...pq(demo), bankKey:k, verified:false };
+    logEv('payqr.bank', bankByKey(k).n + ' · ຕ້ອງຢືນຢັນຄືນ');
+    toast('ປ່ຽນເປັນ ' + bankByKey(k).n + ' — ກົດບັນທຶກເພື່ອຢືນຢັນ');
+  },
+  payqrEdit: d => {
+    const f = d && d.v, p = pq(demo);
+    if (f === 'acc')    demo.payqr = { ...p, acc:'0101 2288 741', verified:false };
+    if (f === 'holder') demo.payqr = { ...p, holder:'VILAYSAK PHOMMACHANH', verified:false };
+    else if (f !== 'acc') return;
+    logEv('payqr.edit', f === 'acc' ? 'ແກ້ເລກບັນຊີ' : 'ແກ້ຊື່ເຈົ້າຂອງບັນຊີ');
+  },
+  payqrSave: () => {
+    const p = pq(demo);
+    if (!p.acc || !p.holder){ toast('ໃສ່ເລກບັນຊີ ແລະ ຊື່ເຈົ້າຂອງບັນຊີກ່ອນ'); return; }
+    demo.payqr = { ...p, on:true, verified:true, updated:'ດຽວນີ້' };
+    logEv('payqr.save', bankByKey(p.bankKey).n + ' ' + p.acc);
+    toast('ບັນທຶກແລ້ວ — ລູກຄ້າສະແກນຈ່າຍເຂົ້າບັນຊີທ່ານໄດ້ເລີຍ');
+  },
+  payqrShare: () => { logEv('payqr.share', 'ແບ່ງປັນ QR'); toast('ແບ່ງປັນ QR ບັນຊີຮັບເງິນ'); },
+
   collectPay: () => {
     if (!demo.job || demo.collected) return;
     const j = demo.job, fare = jobFare(demo) + (demo.stops || 0) * 10000, tip = demo.tip || 0;
     demo.collected = true;
     const comm = feeOf(fare);
     const route = carByKey(j.car).name + ' · ' + j.from.name + ' → ' + j.to.name;
-    /* ຈ່າຍຜ່ານກະເປົາ/QR → ເງິນເຂົ້າກະເປົາ · ເງິນສົດ → ຢູ່ໃນມືຄົນຂັບ */
-    if (demo.payMethod !== 'cash'){
+    /* ເງິນເຂົ້າລະບົບມີທາງດຽວ: ລູກຄ້າຈ່າຍ “ຜ່ານກະເປົາ”
+       ເງິນສົດ → ມືຄົນຂັບ · QR → ບັນຊີທະນາຄານຄົນຂັບໂດຍກົງ (ທັງສອງບໍ່ຜ່ານລະບົບ) */
+    if (demo.payMethod === 'wallet'){
       demo.wallet = { ...demo.wallet, balance:walBal(demo) + fare + tip };
       demo.walTx = [{ id:'wi' + demo.walTx.length, kind:'in', t:'ຄ່າໂດຍສານ · ' + route,
-        s:demo.payMethod === 'qr' ? 'ລູກຄ້າສະແກນ QR' : 'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'ດຽວນີ້', amt:fare + tip }, ...demo.walTx];
+        s:'ລູກຄ້າຈ່າຍຜ່ານກະເປົາເງິນ', date:'ດຽວນີ້', amt:fare + tip }, ...demo.walTx];
+      logEv('payment.wallet', money(fare + tip) + ' → ກະເປົາໃນແອັບ');
+    } else if (demo.payMethod === 'qr'){
+      const p = pq(demo);
+      demo.payqr = { ...p, scans30:(p.scans30 || 0) + 1, recv30:(p.recv30 || 0) + fare + tip };
+      logEv('payment.qr.direct', money(fare + tip) + ' → ' + bankByKey(p.bankKey).n + ' ' + p.acc + ' (ບໍ່ຜ່ານລະບົບ)');
+    } else {
+      logEv('payment.cash.direct', money(fare + tip) + ' → ມືຄົນຂັບ (ບໍ່ຜ່ານລະບົບ)');
     }
     /* ຄ່າທຳນຽມ: ຫັກຈາກກະເປົາຖ້າເປີດອັດຕະໂນມັດ ແລະ ຍອດພໍ · ບໍ່ດັ່ງນັ້ນເຂົ້າຍອດຄ້າງ */
     if (walAuto(demo) && walBal(demo) >= comm){
@@ -6609,7 +6858,7 @@ const ACTIONS = {
       demo.fees = [{ id:'f' + demo.fees.length + 1, job:j.id, tx:route, time:'ດຽວນີ້', fare, amt:comm }, ...demo.fees];
       logEv('fee.accrue', money(comm));
     }
-    logEv('payment.collect', money(fare + tip) + ' · ' + (demo.payMethod === 'cash' ? 'ເງິນສົດ' : demo.payMethod === 'qr' ? 'QR' : 'ກະເປົາເງິນ'));
+    logEv('payment.collect', money(fare + tip) + ' · ' + payName(demo.payMethod) + ' → ' + payDest(demo.payMethod));
     toast(demo.payMethod === 'cash'
       ? '💵 ຮັບເງິນສົດ ' + money(fare + tip) + ' — ຄ່າທຳນຽມ ' + money(comm) + (walAuto(demo) && walBal(demo) >= 0 ? ' ຫັກຈາກກະເປົາ' : ' ເຂົ້າຍອດຄ້າງ')
       : '✅ ເງິນ ' + money(fare + tip) + ' ເຂົ້າກະເປົາແລ້ວ — ຫັກຄ່າທຳນຽມ ' + money(comm));

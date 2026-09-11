@@ -28,6 +28,16 @@ const walShort = s => walAuto(s) && walBal(s) < feeTotal(s);
 const tierOf    = (r = ME.rating) => [...TIERS].reverse().find(t => r >= t.min) || TIERS[0];
 const feePctOf  = () => CFG.commissionPct;
 const zeroFee   = () => CFG.commissionPct === 0;
+
+/* ---------- ບັນຊີຮັບເງິນຂອງຄົນຂັບເອງ + ປາຍທາງຂອງເງິນ ----------
+   ເງິນສົດ → ມືຄົນຂັບ · QR → ບັນຊີຄົນຂັບໂດຍກົງ · ກະເປົາ → ລະບົບ
+---------------------------------------------------------------- */
+const pq = s => ({ ...PAYQR, ...((s && s.payqr) || {}) });
+const payName = m => m === 'cash' ? 'ເງິນສົດ' : m === 'qr' ? 'QR ບັນຊີຂ້ອຍ' : 'ກະເປົາເງິນ';
+const payDest = m => m === 'cash' ? 'ມືທ່ານໂດຍກົງ'
+                   : m === 'qr'   ? 'ບັນຊີທະນາຄານທ່ານໂດຍກົງ'
+                                  : 'ກະເປົາເງິນໃນແອັບ';
+const payThruSystem = m => m === 'wallet';
 const nextTier  = (r = ME.rating) => TIERS.find(t => t.min > r) || null;
 const curJob    = s => s.job || JOBS[0];
 const jobFare   = s => (s.bidPrice || curJob(s).offer) + waitFeeOf(s.waitSec || 0);
@@ -580,20 +590,28 @@ function scrCollect(s){
     </div>
     <div class="grp">ວິທີຮັບເງິນ</div>
     <div class="paygrid3">
-      ${[['cash','ເງິນສົດ','cash'],['qr','ໃຫ້ສະແກນ QR','qr'],['wallet','ຫັກກະເປົາລູກຄ້າ','wallet']]
+      ${[['cash','ເງິນສົດ','cash'],['qr','QR ບັນຊີຂ້ອຍ','qr'],['wallet','ຫັກກະເປົາລູກຄ້າ','wallet']]
         .map(([k, n, ic]) => `<b class="${m === k ? 'on' : ''}" data-act="payMethod" data-v="${k}">${I(ic)}${n}</b>`).join('')}
     </div>
-    ${m === 'qr' ? `<div class="card2 qrmini">${qrBox('insee-driver://' + ME.emp + '/' + (fare + tip), 132)}
-      <div class="tx"><b>ໃຫ້ລູກຄ້າສະແກນ</b><span>${money(fare + tip)} · ເຂົ້າບັນຊີບໍລິສັດໂດຍກົງ ບໍ່ຕ້ອງນຳສົ່ງ</span></div></div>` : ''}
+    ${m === 'qr' ? (pq(s).on ? `<div class="card2 qrmini">${qrBox(payqrPayload(pq(s), fare + tip), 132)}
+      <div class="tx"><b>ໃຫ້ລູກຄ້າສະແກນ</b>
+        <span>${bankByKey(pq(s).bankKey).n} · ${pq(s).acc}</span>
+        <span>${pq(s).holder}</span>
+        <em class="amt">${money(fare + tip)}</em></div></div>
+      <div class="safenote">🏦 ເປັນ <b>ບັນຊີຂອງທ່ານເອງ</b> — ເງິນເຂົ້າບັນຊີທະນາຄານທ່ານ<b>ໂດຍກົງ</b>
+        ບໍ່ຜ່ານລະບົບ ແລະ <b>ບໍ່ຕ້ອງຖອນ</b></div>`
+    : `<div class="warnrow bad">${I('alert')}<span>ທ່ານຍັງ<b>ບໍ່ທັນຜູກບັນຊີຮັບເງິນ</b> — ຜູກກ່ອນຈຶ່ງສ້າງ QR ໄດ້</span></div>
+       <div style="padding:0 12px"><div class="btn ored" data-act="goPayQR">ຜູກບັນຊີຮັບເງິນ (QR)</div></div>`) : ''}
     ${m === 'cash' ? (zeroFee()
       ? `<div class="safenote">💵 ເງິນສົດເປັນຂອງທ່ານ <b>ທັງໝົດ</b> — ບໍ່ຕ້ອງນຳສົ່ງ ແລະ ບໍ່ມີຄ່າທຳນຽມ</div>`
       : `<div class="safenote">💵 ເງິນສົດເປັນຂອງທ່ານທັນທີ — ລະບົບບວກຄ່າທຳນຽມ
           <b>${money(feeOf(fare))}</b> ເຂົ້າຍອດຄ້າງຈ່າຍ</div>`) : ''}
-    ${m === 'wallet' ? `<div class="safenote">👛 ຫັກຈາກກະເປົາເງິນຂອງລູກຄ້າອັດຕະໂນມັດ — ບໍ່ຕ້ອງຮັບເງິນສົດ</div>` : ''}
+    ${m === 'wallet' ? `<div class="safenote">👛 ຫັກຈາກກະເປົາເງິນຂອງລູກຄ້າອັດຕະໂນມັດ — ເງິນ<b>ເຂົ້າກະເປົາໃນແອັບ</b>ຂອງທ່ານ ແລ້ວຖອນເຂົ້າບັນຊີໄດ້</div>` : ''}
     <div class="grp">ລາຍໄດ້ຂອງທ່ານ</div>
     <div class="card2 earnrow"><div>${I('coins')}<b>${money(earnOf(fare) + tip)}</b></div>
       <span>${zeroFee() ? 'ຄ່າໂດຍສານ ' + money(fare) + ' (ຄ່າທຳນຽມ 0%)'
         : 'ຄ່າໂດຍສານ ' + money(fare) + ' − ຄ່າທຳນຽມ ' + money(feeOf(fare))}${tip ? ' + ທິບ ' + money(tip) : ''}</span></div>
+    <div class="card2 gonote">${I(m === 'wallet' ? 'wallet' : 'bank')}<span>ເງິນເຂົ້າ <b>${payDest(m)}</b></span></div>
     <div class="grow"></div>
     <div class="btm"><div class="btn pri" data-act="collectPay">${m === 'cash' ? 'ຮັບເງິນສົດແລ້ວ'
       : m === 'qr' ? 'ຢືນຢັນໄດ້ຮັບເງິນ' : 'ຢືນຢັນຫັກກະເປົາ'}</div></div>` });
@@ -622,7 +640,8 @@ function scrRatePax(s){
       <div class="fline"><span>ຄ່າໂດຍສານ</span><span>${money(fare)}</span></div>
       <div class="fline"><span>ຄ່າທຳນຽມ ${Math.round(feePctOf() * 100)}%</span>
         <span style="color:${zeroFee() ? 'var(--d-ok)' : 'var(--d-bad)'}">${zeroFee() ? '0' : '−' + money(feeOf(fare))}</span></div>
-      <div class="fline"><span>ວິທີຈ່າຍ</span><span>${s.payMethod === 'cash' ? 'ເງິນສົດ' : s.payMethod === 'qr' ? 'QR' : 'ກະເປົາເງິນ'}</span></div>
+      <div class="fline"><span>ວິທີຈ່າຍ</span><span>${payName(s.payMethod)}</span></div>
+      <div class="fline"><span>ເງິນເຂົ້າ</span><span>${payDest(s.payMethod)}</span></div>
       <div class="fline total"><span>ລາຍໄດ້ສຸດທິ + ທິບ</span><span style="color:var(--d-ok)">${money(earnOf(fare) + (s.tip || 0))}</span></div>
     </div>
     <div class="linkred" style="background:none" data-act="reportPax">ລາຍງານບັນຫາຮ້າຍແຮງ</div>
