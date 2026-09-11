@@ -2575,3 +2575,62 @@ body{background:var(--bg);color:var(--txt);
 .scr .kbbar a{flex:1;display:grid;place-items:center;height:42px;border-radius:11px;cursor:pointer;
   font-size:13px;font-weight:700;background:var(--d-surface2);color:var(--d-ink2);border:1px solid var(--d-line)}
 .scr .kbbar a.ok{flex:1.6;background:var(--d-brand);border-color:var(--d-brand);color:#fff}
+
+/* ============================================================
+   ແທັບ “ວິທີໃຊ້ແອພ” — ເລົ່າການນຳໃຊ້ເປັນຂັ້ນຕອນ
+   ============================================================ */
+.ubar{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 22px}
+.ustep{display:flex;align-items:center;gap:8px;padding:8px 13px 8px 9px;border-radius:999px;cursor:pointer;
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);font-family:var(--lao);
+  font-size:12.5px;transition:.15s}
+.ustep>b{width:21px;height:21px;flex:none;display:grid;place-items:center;border-radius:50%;
+  background:var(--panel2);color:var(--muted);font:700 11px/1 var(--ui)}
+.ustep:hover{color:var(--txt);border-color:var(--brand)}
+.ustep.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 4px 12px rgba(225,37,43,.24)}
+.ustep.on>b{background:rgba(255,255,255,.24);color:#fff}
+.ustep[data-u="-1"]{padding:8px 15px;font-weight:600}
+
+.usteps{display:flex;flex-direction:column;gap:20px}
+.ucard{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:var(--shadow)}
+.uhead{display:flex;align-items:center;gap:14px;padding:16px 20px;
+  background:linear-gradient(90deg,rgba(225,37,43,.07),transparent 62%);
+  border-bottom:1px solid var(--line)}
+.uhead>i{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:12px;
+  background:var(--brand);color:#fff;font:800 18px/1 var(--ui);font-style:normal;
+  box-shadow:0 5px 14px rgba(225,37,43,.28)}
+.uhead b{display:block;font-size:16.5px;font-weight:700;color:var(--ink);font-family:var(--lao)}
+.uhead span{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;font-family:var(--lao)}
+
+.ubody{display:grid;grid-template-columns:minmax(0,auto) minmax(280px,1fr);gap:26px;padding:20px}
+.ushots{display:flex;gap:14px;flex-wrap:wrap}
+.ushots figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.ushots figcaption{font-size:11.5px;color:var(--muted);font-family:var(--lao);text-align:center;
+  max-width:166px;line-height:1.4}
+.ucard .thumb{width:var(--tw,166px);height:var(--th,372px);flex:none;cursor:pointer;
+  border-radius:14px;background:var(--panel2);transition:.18s}
+.ucard .thumb:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(16,23,32,.12)}
+
+.unotes{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ulist h4{display:flex;align-items:center;gap:7px;margin:0 0 9px;font-size:12px;font-weight:700;
+  letter-spacing:.4px;text-transform:uppercase;font-family:var(--ui)}
+.ulist h4 svg{width:15px;height:15px;flex:none}
+.ulist.do h4{color:var(--brand)}
+.ulist.sys h4{color:var(--green)}
+.ulist ol,.ulist ul{margin:0;padding-left:19px;display:flex;flex-direction:column;gap:6px}
+.ulist li{font-size:13.5px;color:var(--txt);font-family:var(--lao);line-height:1.6}
+.ulist.do li::marker{color:var(--brand);font-weight:700}
+.ulist.sys li::marker{color:var(--green)}
+.utip{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:12px;
+  background:var(--brand-lt);border:1px solid var(--brand-bd)}
+.utip svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--brand)}
+.utip span{font-size:12.5px;color:var(--txt);font-family:var(--lao);line-height:1.6}
+.utip b{color:var(--brand2)}
+
+@media (max-width:1000px){
+  .ubody{grid-template-columns:1fr;gap:18px}
+  .ushots{justify-content:center}
+}
+
+/* ກັນບັກ SVG ບໍ່ມີຂະໜາດ → ຂະຫຍາຍເຕັມຈໍ (ເຄີຍເກີດກັບປຸ່ມອອກຈາກລະບົບ) */
+h4>svg,.uhead svg,.ustep svg{width:15px;height:15px;flex:none}

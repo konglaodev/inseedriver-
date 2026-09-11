@@ -90,6 +90,49 @@ function viewOverview(){
 }
 
 /* ============================================================
+   VIEW · ວິທີໃຊ້ແອພ (usage) — ເລົ່າການນຳໃຊ້ເປັນຂັ້ນຕອນ
+   ໃຊ້ນຳສະເໜີໃຫ້ຄົນທີ່ບໍ່ເຄີຍເຫັນແອັບມາກ່ອນ
+   ============================================================ */
+let usageIdx = -1;   /* -1 = ສະແດງທຸກຂັ້ນ (ເລື່ອນອ່ານ) */
+
+function viewUsage(){
+  const n = USAGE.length;
+  view.innerHTML = `
+    <h1 class="h1">ວິທີໃຊ້ແອພ · ${n} ຂັ້ນຕອນ</h1>
+    <p class="sub">ຕັ້ງແຕ່ລົງທະບຽນຈົນຮັບເງິນ — ແຕ່ລະຂັ້ນບອກວ່າ <b>ຄົນຂັບເຮັດຫຍັງ</b> ແລະ <b>ລະບົບເຮັດຫຍັງ</b> ພ້ອມໜ້າຈໍຈິງ.
+      ກົດຕົວເລກເພື່ອເບິ່ງເທື່ອລະຂັ້ນ ຫຼື ກົດ “ທັງໝົດ” ເພື່ອເລື່ອນອ່ານ.</p>
+    <div class="ubar">
+      <button class="ustep ${usageIdx < 0 ? 'on' : ''}" data-u="-1">ທັງໝົດ</button>
+      ${USAGE.map((u, i) => `<button class="ustep ${usageIdx === i ? 'on' : ''}" data-u="${i}"
+        title="${u.t}"><b>${u.n}</b><span>${u.t}</span></button>`).join('')}
+    </div>
+    <div class="usteps">${(usageIdx < 0 ? USAGE : [USAGE[usageIdx]]).map(uCard).join('')}</div>`;
+  $$('.ustep').forEach(b => b.onclick = () => { usageIdx = +b.dataset.u; viewUsage(); window.scrollTo({ top:0, behavior:'smooth' }); });
+  $$('.ucard .thumb').forEach(t => t.onclick = () => openModal(t.dataset.key));
+  applyUZoom();
+}
+
+function uCard(u){
+  const keys = (u.keys || []).filter(k => typeof RENDER[k] === 'function');
+  return `<section class="ucard">
+    <div class="uhead"><i>${u.n}</i><div><b>${u.t}</b><span>${u.s}</span></div></div>
+    <div class="ubody">
+      <div class="ushots">${keys.map(k => { const s = screenByKey(k);
+        return `<figure><div class="thumb" data-key="${k}">${phone(renderScreen(k))}</div>
+          <figcaption>${s ? s.lo : k}</figcaption></figure>`; }).join('')}</div>
+      <div class="unotes">
+        <div class="ulist do"><h4>${I('userc')} ຄົນຂັບເຮັດ</h4><ol>${u.do.map(x => `<li>${x}</li>`).join('')}</ol></div>
+        <div class="ulist sys"><h4>${I('bolt')} ລະບົບເຮັດ</h4><ul>${u.sys.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        ${u.tip ? `<div class="utip">${I('info')}<span>${u.tip}</span></div>` : ''}
+      </div>
+    </div>
+  </section>`;
+}
+function applyUZoom(){
+  $$('.ucard .thumb').forEach(t => { t.style.setProperty('--ts', .46); t.style.setProperty('--tw', '166px'); t.style.setProperty('--th', '372px'); });
+}
+
+/* ============================================================
    VIEW · ນຳສະເໜີ (present) — ສະແດງແຕ່ໜ້າຈໍແອັບ ບໍ່ມີຂໍ້ມູນນັກພັດທະນາ
    ໜຶ່ງໜ້າຈໍຕໍ່ໜຶ່ງສະໄລ້ · ລູກສອນ ←/→ · ເຕັມຈໍ · ຫຼິ້ນອັດຕະໂນມັດ
    ============================================================ */
@@ -1097,7 +1140,7 @@ function viewSpec(){
 }
 
 /* ---------------- router ---------------- */
-const VIEWS = { present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
+const VIEWS = { usage:viewUsage, present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
 function switchTab(name){
   if (!VIEWS[name]) name = 'screens';
   if (presTimer && name !== 'present'){ clearInterval(presTimer); presTimer = null; }
