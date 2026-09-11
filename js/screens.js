@@ -32,7 +32,15 @@ const zeroFee   = () => CFG.commissionPct === 0;
 /* ---------- ບັນຊີຮັບເງິນຂອງຄົນຂັບເອງ + ປາຍທາງຂອງເງິນ ----------
    ເງິນສົດ → ມືຄົນຂັບ · QR → ບັນຊີຄົນຂັບໂດຍກົງ · ກະເປົາ → ລະບົບ
 ---------------------------------------------------------------- */
-const pq = s => ({ ...PAYQR, ...((s && s.payqr) || {}) });
+const pqOn   = s => (((s && s.payqr) || PAYQR).on !== false);
+const pqList = s => (s && Array.isArray(s.payqrs)) ? s.payqrs : PAYQRS;
+const pqMain = s => pqList(s).find(q => q.primary) || pqList(s)[0] || null;
+const pqById = (s, id) => pqList(s).find(q => q.id === id) || null;
+const pq = s => { const m = pqMain(s);
+  return { ...(m || { bankKey:'bcel', acc:'', holder:'', nick:'', verified:false, updated:'—', scans30:0, recv30:0 }),
+           on: pqOn(s) && !!m }; };
+const accOk = a => String(a || '').replace(/\D/g, '').length >= 8;
+const fmtAcc = v => String(v || '').replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
 const payName = m => m === 'cash' ? 'ເງິນສົດ' : m === 'qr' ? 'QR ບັນຊີຂ້ອຍ' : 'ກະເປົາເງິນ';
 const payDest = m => m === 'cash' ? 'ມືທ່ານໂດຍກົງ'
                    : m === 'qr'   ? 'ບັນຊີທະນາຄານທ່ານໂດຍກົງ'
@@ -112,6 +120,44 @@ const paxCard = (j, acts = true) => `
     <div class="tx"><b>${j.pax}</b><span>${stars(Math.round(j.paxRating))} ${j.paxRating} · ${j.paxTrips} ຖ້ຽວ</span></div>
     ${acts ? `<div class="acts"><i data-act="callPax">${I('phone')}</i><i class="hasbadge" data-act="goChat">${I('chat')}<em class="chatbadge"></em></i></div>` : ''}
   </div>`;
+
+/* ============================================================
+   ແປ້ນພິມໃນແອັບ — ໃຫ້ຄົນຂັບພິມເລກບັນຊີ / ຊື່ ໄດ້ຈິງ
+   s.kb = { field, val, lao }  ·  ປິດ = s.kb ວ່າງ
+   ============================================================ */
+const KB_LABEL = { acc:'ເລກບັນຊີ', holder:'ຊື່ເຈົ້າຂອງບັນຊີ (ອັງກິດ)', nick:'ຊື່ຫຍໍ້ຂອງບັນຊີ' };
+
+function kbSheet(s){
+  const k = s && s.kb;
+  if (!k || !k.field) return '';
+  const num  = k.field === 'acc';
+  const keys = num ? KB_NUM : (k.lao ? KB_LAO : KB_ABC);
+  const max  = KB_MAX[k.field] || 24;
+  const val  = k.val || '';
+  const shown = num ? (fmtAcc(val) || '0000 0000 000') : (val || '—');
+  return `
+  <div class="kbwrap">
+    <div class="kbmask" data-act="kbClose"></div>
+    <div class="kbsheet ${num ? 'num' : 'abc'}">
+      <div class="kbhead"><b>${KB_LABEL[k.field] || ''}</b>
+        <span>${num ? String(val).replace(/\D/g, '').length : String(val).length}/${max}</span>
+        <i data-act="kbClose">${I('close')}</i></div>
+      <div class="kbval ${val ? '' : 'ph'}">${shown}<em class="car"></em></div>
+      <div class="kbkeys">
+        ${keys.map(c => c === '' ? '<b class="gap"></b>'
+          : c === 'del' ? `<b class="fn" data-act="kbDel">${I('bksp')}</b>`
+          : `<b data-act="kbKey" data-v="${c}">${c}</b>`).join('')}
+        ${num ? '' : `<b class="fn wide" data-act="kbKey" data-v=" ">ຍະຫວ່າງ</b>
+                      <b class="fn" data-act="kbLang">${k.lao ? 'ABC' : 'ລາວ'}</b>
+                      <b class="fn" data-act="kbDel">${I('bksp')}</b>`}
+      </div>
+      <div class="kbbar">
+        <a data-act="kbClear">ລ້າງທັງໝົດ</a>
+        <a class="ok" data-act="kbDone">ແລ້ວ</a>
+      </div>
+    </div>
+  </div>`;
+}
 
 /* ============================================================
    D01 · ໜ້າເປີດແອັບ

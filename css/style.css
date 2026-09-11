@@ -2478,3 +2478,100 @@ body{background:var(--bg);color:var(--txt);
 .scr .gonote svg{width:17px;height:17px;flex:none;color:var(--d-ink2)}
 .scr .gonote span{font-size:11.5px;color:var(--d-ink2)}
 .scr .gonote b{color:var(--d-ink);font-weight:700}
+
+/* ============================================================
+   D43/D44 · ລາຍການບັນຊີ QR + ຟອມແກ້ໄຂ + ແປ້ນພິມໃນແອັບ
+   ============================================================ */
+.scr .qrow{display:flex;align-items:center;gap:11px;padding:12px 13px;border-bottom:1px solid var(--d-line)}
+.scr .qrow:last-child{border-bottom:0}
+.scr .qrow.main{background:var(--d-brandbg)}
+.scr .qrow .lg{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:11px;
+  background:var(--d-surface2);color:var(--d-ink2)}
+.scr .qrow.main .lg{background:#fff;color:var(--d-brand)}
+.scr .qrow .lg svg{width:17px;height:17px}
+.scr .qrow .tx{flex:1;min-width:0;cursor:pointer}
+.scr .qrow .tx>b{display:block;font-size:12.5px;font-weight:700;color:var(--d-ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .qrow .tx>span{display:block;font-size:10.5px;color:var(--d-dim);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .qrow .tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.scr .qrow .tags em{font-style:normal;font-size:9px;font-weight:700;padding:3px 7px;border-radius:6px;
+  background:var(--d-surface2);color:var(--d-dim)}
+.scr .qrow .tags em.on{background:var(--d-brand);color:#fff}
+.scr .qrow .tags em.ok{background:var(--d-okbg);color:var(--d-ok)}
+.scr .qrow .tags em.wait{background:var(--d-warnbg);color:var(--d-warn)}
+.scr .qacts{display:flex;gap:4px;flex:none}
+.scr .qacts a{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;cursor:pointer;
+  background:var(--d-surface2);color:var(--d-ink2)}
+.scr .qrow.main .qacts a{background:#fff}
+.scr .qacts a svg{width:15px;height:15px}
+.scr .qacts a:active{background:var(--d-brand);color:#fff}
+.scr .qacts a.del:active{background:var(--d-bad);color:#fff}
+
+/* ຟອມ D44 */
+.scr .card2.qrprev{display:flex;align-items:center;gap:13px;margin:12px;padding:13px}
+.scr .qrprev.dim{background:var(--d-surface2)}
+.scr .qrprev .qrimg{border-radius:10px;overflow:hidden;padding:7px;background:#fff;border:1px solid var(--d-line)}
+.scr .qrprev .phbox{width:132px;height:132px;flex:none;display:grid;place-items:center;border-radius:10px;
+  border:2px dashed var(--d-line);color:#c2cbd5}
+.scr .qrprev .phbox svg{width:38px;height:38px}
+.scr .qrprev .tx{flex:1;min-width:0}
+.scr .qrprev .tx b{display:block;font-size:13px;font-weight:700;color:var(--d-ink)}
+.scr .qrprev .tx span{display:block;font-size:11px;color:var(--d-dim);margin-top:4px;line-height:1.55}
+
+.scr .card2.updrop{margin:0 12px;padding:24px 16px;text-align:center;cursor:pointer;
+  border:2px dashed var(--d-line);background:var(--d-surface2)}
+.scr .updrop svg{width:34px;height:34px;color:var(--d-brand)}
+.scr .updrop b{display:block;font-size:13px;color:var(--d-ink);margin-top:9px}
+.scr .updrop span{display:block;font-size:11px;color:var(--d-dim);margin-top:5px;line-height:1.6}
+.scr .updrop:active{border-color:var(--d-brand);background:var(--d-brandbg)}
+.scr .card2.upok{display:flex;align-items:center;gap:10px;margin:0 12px;padding:13px;
+  background:var(--d-okbg);border:1px solid rgba(18,161,80,.28)}
+.scr .upok>svg{width:19px;height:19px;flex:none;color:var(--d-ok)}
+.scr .upok>div{flex:1;min-width:0}
+.scr .upok b{display:block;font-size:12.5px;color:var(--d-ok)}
+.scr .upok span{display:block;font-size:10.5px;color:var(--d-ink2);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .upok a{flex:none;font-size:11px;font-weight:700;color:var(--d-brand);cursor:pointer}
+
+.scr .fld .inp.tap{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer}
+.scr .fld .inp.tap svg{width:15px;height:15px;flex:none;color:var(--d-dim)}
+.scr .fld .inp.bad{border-color:var(--d-bad)}
+.scr .fld label em.err{font-style:normal;color:var(--d-bad);font-weight:600}
+
+/* ---------- ແປ້ນພິມໃນແອັບ ---------- */
+.scr .kbwrap{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;justify-content:flex-end}
+.scr .kbmask{flex:1;background:rgba(16,23,32,.34)}
+.scr .kbsheet{background:#fff;border-top:1px solid var(--d-line);border-radius:18px 18px 0 0;
+  padding:12px 10px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 28px rgba(16,23,32,.14)}
+.scr .kbhead{display:flex;align-items:center;gap:9px;padding:0 4px 9px}
+.scr .kbhead b{flex:1;font-size:12.5px;font-weight:700;color:var(--d-ink)}
+.scr .kbhead span{font-size:10.5px;color:var(--d-dim);font-family:var(--ui)}
+.scr .kbhead i{width:26px;height:26px;display:grid;place-items:center;border-radius:8px;cursor:pointer;
+  background:var(--d-surface2);color:var(--d-ink2)}
+.scr .kbhead i svg{width:14px;height:14px}
+.scr .kbval{margin:0 2px 11px;padding:11px 13px;border-radius:11px;background:var(--d-surface2);
+  border:1.5px solid var(--d-brand);font-size:16px;font-weight:700;color:var(--d-ink);
+  font-family:var(--ui);letter-spacing:1.1px;min-height:44px;display:flex;align-items:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scr .kbval.ph{color:var(--d-dim);font-weight:500}
+.scr .kbval .car{display:inline-block;width:2px;height:19px;margin-left:2px;background:var(--d-brand);
+  animation:kbblink 1s steps(1) infinite}
+@keyframes kbblink{50%{opacity:0}}
+.scr .kbkeys{display:grid;gap:6px}
+.scr .kbsheet.num .kbkeys{grid-template-columns:repeat(3,1fr)}
+.scr .kbsheet.abc .kbkeys{grid-template-columns:repeat(10,1fr)}
+.scr .kbkeys b{display:grid;place-items:center;height:44px;border-radius:9px;cursor:pointer;
+  background:var(--d-surface2);border:1px solid var(--d-line);color:var(--d-ink);
+  font-size:17px;font-weight:600;font-family:var(--ui);user-select:none}
+.scr .kbsheet.abc .kbkeys b{height:38px;font-size:14px}
+.scr .kbkeys b:active{background:var(--d-brand);border-color:var(--d-brand);color:#fff}
+.scr .kbkeys b.gap{background:none;border:0;cursor:default;pointer-events:none}
+.scr .kbkeys b.fn{background:#e9edf2;font-size:11.5px;font-weight:700;color:var(--d-ink2);font-family:var(--lao)}
+.scr .kbkeys b.fn svg{width:19px;height:19px}
+.scr .kbsheet.abc .kbkeys b.wide{grid-column:span 6}
+.scr .kbsheet.abc .kbkeys b.fn:not(.wide){grid-column:span 2}
+.scr .kbbar{display:flex;gap:8px;margin-top:10px;padding:0 2px}
+.scr .kbbar a{flex:1;display:grid;place-items:center;height:42px;border-radius:11px;cursor:pointer;
+  font-size:13px;font-weight:700;background:var(--d-surface2);color:var(--d-ink2);border:1px solid var(--d-line)}
+.scr .kbbar a.ok{flex:1.6;background:var(--d-brand);border-color:var(--d-brand);color:#fff}

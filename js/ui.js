@@ -28,6 +28,8 @@ const ICONS = {
   more:    _f('<circle cx="12" cy="5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="19" r="1.9"/>'),
   star:    _f('<path d="M12 2.4l3 6 6.6 1-4.8 4.7 1.1 6.6-5.9-3.1-5.9 3.1 1.1-6.6L2.4 9.4l6.6-1z"/>'),
   camera:  _s('<path d="M3 8.5h3.5L8 6h8l1.5 2.5H21v11H3z"/><circle cx="12" cy="13.5" r="3.6"/>'),
+  close:   _s('<path d="M6 6l12 12M18 6 6 18"/>', 'stroke-width="2.2"'),
+  bksp:    _s('<path d="M9.4 5.4h9.2a2 2 0 0 1 2 2v9.2a2 2 0 0 1-2 2H9.4L3 12z"/><path d="M11.6 9.6 16 14M16 9.6 11.6 14"/>'),
   back:    _s('<path d="M15 4.5l-7 7.5 7 7.5"/>', 'stroke-width="2.3"'),
   info:    _s('<circle cx="12" cy="12" r="9.2"/><path d="M12 11.2v5.4M12 7.6v.1"/>'),
   leaf:    '<svg viewBox="0 0 24 24" fill="#34c759"><path d="M20.5 3.2S8.4 3 5.9 10.4C4.2 15.4 7.6 19 7.6 19s-.6-6 3.4-9.6c0 0-2.7 4-2.5 9.7 0 0 7.3.4 10-5.4 2.2-4.9 2-10.5 2-10.5z"/></svg>',

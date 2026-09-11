@@ -235,12 +235,38 @@ const BANKS = [
 ];
 const bankByKey = k => BANKS.find(b => b.k === k) || BANKS[0];
 
-const PAYQR = {
-  on:true, verified:true, bankKey:'bcel',
-  acc:'0101 2288 741', holder:'VILAYSAK PHOMMACHANH',
-  updated:'02/09/2026',
-  scans30:37, recv30:4820000        /* ສະຖິຕິ 30 ວັນຜ່ານມາ */
-};
+/* ບັນຊີຮັບເງິນ — ຄົນຂັບເພີ່ມ/ແກ້/ລຶບ ເອງໄດ້ ແລະ ມີໄດ້ຫຼາຍບັນຊີ
+   primary = ບັນຊີທີ່ເອົາມາສ້າງ QR ຕອນຈົບຖ້ຽວ
+   src: manual = ພິມເລກບັນຊີເອງ · image = ອັບໂຫຼດຮູບ QR ຈາກແອັບທະນາຄານ */
+const PAYQRS = [
+  { id:'q1', bankKey:'bcel', acc:'0101 2288 741', holder:'VILAYSAK PHOMMACHANH',
+    nick:'ບັນຊີຫຼັກ', verified:true, primary:true, src:'manual',
+    updated:'02/09/2026', scans30:37, recv30:4820000 },
+  { id:'q2', bankKey:'umoney', acc:'020 5566 7788', holder:'VILAYSAK P.',
+    nick:'U-Money', verified:true, primary:false, src:'image',
+    updated:'18/08/2026', scans30:12, recv30:640000 }
+];
+const PAYQR = { on:true };          /* ສະວິດລວມ: ເປີດ/ປິດການຮັບຜ່ານ QR */
+const newQrId = list => 'q' + (list.reduce((m, x) => Math.max(m, +String(x.id).slice(1) || 0), 0) + 1);
+
+/* ຮູບ QR ທີ່ຄົນຂັບອັບໂຫຼດໄດ້ (ຈຳລອງການອ່ານຄ່າອອກຈາກຮູບ) */
+const QR_UPLOADS = [
+  { bankKey:'bcel', acc:'0101 9930 552', holder:'VILAYSAK PHOMMACHANH' },
+  { bankKey:'ldb',  acc:'5520 1188 304', holder:'VILAYSAK PHOMMACHANH' },
+  { bankKey:'jdb',  acc:'7701 4455 219', holder:'VILAYSAK PHOMMACHANH' },
+  { bankKey:'apb',  acc:'3390 6677 108', holder:'VILAYSAK PHOMMACHANH' }
+];
+
+/* ແປ້ນພິມໃນແອັບ — ໃຫ້ຄົນຂັບພິມເລກບັນຊີ ແລະ ຊື່ໄດ້ຈິງ */
+const KB_NUM = ['1','2','3','4','5','6','7','8','9','','0','del'];
+const KB_ABC = ['Q','W','E','R','T','Y','U','I','O','P',
+                'A','S','D','F','G','H','J','K','L',
+                'Z','X','C','V','B','N','M'];
+const KB_LAO = ['ຂ','ຄ','ງ','ຈ','ສ','ຊ','ຍ','ດ','ຕ','ຖ',
+                'ທ','ນ','ບ','ປ','ຜ','ຝ','ພ','ຟ','ມ','ຢ',
+                'ຣ','ລ','ວ','ຫ','ອ','ຮ','ກ','ະ','າ','ິ',
+                'ີ','ຸ','ູ','ເ','ແ','ໂ','ໃ','ໄ','່','້'];
+const KB_MAX = { acc:20, holder:28, nick:16 };   /* acc = ຈຳນວນຕົວເລກ */
 /* payload ມາດຕະຖານ LAOQR — ໃສ່ຈຳນວນເງິນໄດ້ ຖ້າບໍ່ໃສ່ ລູກຄ້າພິມເອງ */
 const payqrPayload = (p, amt) =>
   'laoqr://' + p.bankKey + '/' + String(p.acc).replace(/\s/g, '')
@@ -674,11 +700,18 @@ const SCREENS = [
     api:['GET /api/v1/driver/wallet/withdrawable','POST /api/v1/driver/wallet/withdraw'] },
 
   { id:'D43', key:'payqr', route:'/wallet/payqr', group:'ກະເປົາເງິນ', lo:'ບັນຊີຮັບເງິນ (QR)', en:'My Payment QR',
-    desc:'ບັນຊີທະນາຄານ “ຂອງຄົນຂັບເອງ” ທີ່ໃຊ້ສ້າງ QR ໃຫ້ລູກຄ້າສະແກນ — ເງິນເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ ແລະ ບໍ່ຕ້ອງຖອນ. ໜ້ານີ້ອະທິບາຍໃຫ້ຊັດວ່າເງິນແຕ່ລະທາງໄປໃສ.',
-    comp:['ບັດ QR ໃຫຍ່ + ຊື່ບັນຊີ/ເລກບັນຊີ','ສະຖານະຢືນຢັນບັນຊີ','ເລືອກທະນາຄານ 6 ແຫ່ງ','ຊ່ອງເລກບັນຊີ + ຊື່ເຈົ້າຂອງ','ຕາຕະລາງ “ເງິນໄປໃສ” 3 ແຖວ','ສະຖິຕິ 30 ວັນ','ປຸ່ມບັນທຶກ / ແບ່ງປັນ QR'],
-    states:['ຜູກແລ້ວ & ຢືນຢັນແລ້ວ','ຜູກແລ້ວ ລໍຢືນຢັນ','ຍັງບໍ່ຜູກບັນຊີ','ປິດຮັບ QR (ຮັບແຕ່ເງິນສົດ/ກະເປົາ)'],
-    events:['payqr.view','payqr.bank','payqr.save','payqr.toggle','payqr.share'],
+    desc:'ລາຍການບັນຊີຮັບເງິນ “ຂອງຄົນຂັບເອງ” — ມີໄດ້ຫຼາຍບັນຊີ, ເລືອກອັນໃດເປັນບັນຊີຫຼັກທີ່ເອົາມາສ້າງ QR ຕອນຈົບຖ້ຽວ. ເງິນເຂົ້າບັນຊີຄົນຂັບໂດຍກົງ ບໍ່ຜ່ານລະບົບ ແລະ ບໍ່ຕ້ອງຖອນ.',
+    comp:['ບັດ QR ໃຫຍ່ຂອງບັນຊີຫຼັກ','ລາຍການບັນຊີທັງໝົດ + ປ້າຍ ຫຼັກ/ຢືນຢັນ','ປຸ່ມ ເພີ່ມບັນຊີ','ຕັ້ງເປັນຫຼັກ · ແກ້ໄຂ · ລຶບ','ສະວິດເປີດ-ປິດຮັບ QR','ຕາຕະລາງ “ເງິນໄປໃສ” 3 ແຖວ','ສະຖິຕິ 30 ວັນ'],
+    states:['ມີຫຼາຍບັນຊີ','ມີບັນຊີດຽວ','ຍັງບໍ່ມີບັນຊີ','ບັນຊີລໍຢືນຢັນ','ປິດຮັບ QR (ຮັບແຕ່ເງິນສົດ/ກະເປົາ)'],
+    events:['payqr.view','payqr.primary','payqr.add','payqr.delete','payqr.toggle','payqr.share'],
     api:['GET /api/v1/driver/payqr','PUT /api/v1/driver/payqr','POST /api/v1/driver/payqr/verify'] },
+
+  { id:'D44', key:'payqrEdit', route:'/wallet/payqr/edit', group:'ກະເປົາເງິນ', lo:'ເພີ່ມ / ແກ້ໄຂບັນຊີ QR', en:'Add / Edit QR Account',
+    desc:'ຄົນຂັບເພີ່ມ ຫຼື ແກ້ໄຂບັນຊີຮັບເງິນດ້ວຍຕົວເອງ — ພິມເລກບັນຊີ ແລະ ຊື່ຜ່ານແປ້ນພິມໃນແອັບ ຫຼື ອັບໂຫຼດຮູບ QR ຈາກແອັບທະນາຄານແລ້ວລະບົບອ່ານຄ່າອອກໃຫ້. ມີຕົວຢ່າງ QR ສົດຂະນະພິມ.',
+    comp:['ສະຫຼັບ 2 ວິທີ: ພິມເອງ / ອັບໂຫຼດຮູບ QR','ຕົວຢ່າງ QR ສົດ','ເລືອກທະນາຄານ 6 ແຫ່ງ','ຊ່ອງເລກບັນຊີ + ຊື່ + ຊື່ຫຍໍ້','ແປ້ນຕົວເລກ / ແປ້ນອັກສອນໃນແອັບ','ຕັ້ງເປັນບັນຊີຫຼັກ','ປຸ່ມບັນທຶກ / ລຶບ'],
+    states:['ເພີ່ມໃໝ່ (ຫວ່າງ)','ກຳລັງພິມ (ແປ້ນເປີດ)','ຂໍ້ມູນຄົບ ບັນທຶກໄດ້','ອັບໂຫຼດຮູບ QR ແລ້ວ','ແກ້ໄຂບັນຊີເກົ່າ','ເລກບັນຊີສັ້ນເກີນ (ຜິດພາດ)'],
+    events:['payqr.add','payqr.edit','payqr.input','payqr.upload','payqr.primary','payqr.delete','payqr.save'],
+    api:['POST /api/v1/driver/payqr','PUT /api/v1/driver/payqr/{id}','DELETE /api/v1/driver/payqr/{id}','POST /api/v1/driver/payqr/decode'] },
 
   /* ===== 10 · ຄະແນນ & ຜົນງານ ===== */
   { id:'D32', key:'performance', route:'/performance', group:'ຄະແນນ & ຜົນງານ', lo:'ຄະແນນ & ຜົນງານ', en:'Rating & Performance',
