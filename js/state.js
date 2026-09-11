@@ -81,8 +81,9 @@ const SAMPLE = {
   chat:          { online:true, job:JOBS[0], status:'assigned', messages:[
                      { who:'them', tx:'ຂ້ອຍລໍຢູ່ປະຕູບ້ານສີແດງເດີ້ 🙏', t:'21:50' },
                      { who:'me',   tx:'ຮັບຊາບ ຮອດໃນ 2 ນາທີ', t:'21:50' },
-                     { who:'me',   tx:'ຕຳແໜ່ງປັດຈຸບັນຂອງຂ້ອຍ 📍', t:'21:51' },
-                     { who:'them', tx:'ເຫັນແລ້ວ ຂອບໃຈ', t:'21:51' }] },
+                     { who:'them', tx:'ບໍ່ເຫັນລົດເລີຍ ສົ່ງຮູບບ່ອນຈອດໃຫ້ແດ່', t:'21:51' },
+                     { who:'me',   type:'photo', shot:'gate', t:'21:51' },
+                     { who:'them', tx:'ເຫັນຮູບແລ້ວ ກຳລັງຍ່າງໄປ', t:'21:52' }] },
   collect:       { online:true, job:JOBS[0], status:'collect', bidPrice:JOBS[0].offer, waitSec:412, tip:5000, payMethod:'cash' },
 
   /* ໃຫ້ຄະແນນ · ຍົກເລີກ · ງານພິເສດ */

@@ -139,47 +139,183 @@ const LANGS = {
   en:{ n:'ອັງກິດ',    en:'English',    f:'🇬🇧' },
   th:{ n:'ໄທ',        en:'Thai',       f:'🇹🇭' },
   zh:{ n:'ຈີນ',       en:'Chinese',    f:'🇨🇳' },
-  vi:{ n:'ຫວຽດນາມ',  en:'Vietnamese', f:'🇻🇳' }
+  vi:{ n:'ຫວຽດນາມ',  en:'Vietnamese', f:'🇻🇳' },
+  ko:{ n:'ເກົາຫຼີ',    en:'Korean',     f:'🇰🇷' },
+  ja:{ n:'ຍີ່ປຸ່ນ',     en:'Japanese',   f:'🇯🇵' },
+  fr:{ n:'ຝຣັ່ງ',      en:'French',     f:'🇫🇷' }
 };
+const LANG_KEYS = Object.keys(LANGS);
 const langOf = k => LANGS[k] || LANGS.lo;
 
 /* ຕາຕະລາງປະໂຫຍກທີ່ໃຊ້ເລື້ອຍໃນການແຊັດ (ລາວ ↔ ອັງກິດ / ໄທ / ຈີນ) */
 const PHRASES = [
   /* — ຄົນຂັບສົ່ງ — */
-  { lo:'ຂ້ອຍຮອດແລ້ວ ລໍຢູ່ໜ້າປະຕູ', en:"I've arrived, waiting at the gate", th:'ผมถึงแล้ว รออยู่หน้าประตู', zh:'我到了，在门口等您' },
-  { lo:'ອອກມາຮອດໃນ 3 ນາທີ',        en:"I'll be there in 3 minutes",       th:'อีก 3 นาทีถึง',            zh:'还有 3 分钟到' },
-  { lo:'ລົດຕິດໜ້ອຍໜຶ່ງ ຂໍໂທດເດີ້',  en:'Sorry, traffic is a bit heavy',   th:'รถติดนิดหน่อย ขอโทษครับ',  zh:'有点堵车，抱歉' },
-  { lo:'ຈອດບ່ອນນີ້ບໍ່ໄດ້ ຂໍຍ້າຍໜ້າໜ້ອຍ', en:"I can't stop here, moving up a bit", th:'จอดตรงนี้ไม่ได้ ขอขยับหน้านิดนึง', zh:'这里不能停，往前挪一点' },
-  { lo:'ຂອບໃຈຫຼາຍ 🙏',             en:'Thank you very much 🙏',          th:'ขอบคุณมากครับ 🙏',         zh:'非常感谢 🙏' },
-  { lo:'ຮັບຊາບ ຮອດໃນ 2 ນາທີ',      en:'Got it, 2 minutes away',          th:'รับทราบ อีก 2 นาทีถึง',    zh:'收到，2 分钟后到' },
-  { lo:'ຂ້ອຍໃສ່ລົດສີເງິນ ກມ 2278',  en:'I drive a silver car, plate ກມ 2278', th:'ผมขับรถสีเงิน ทะเบียน ກມ 2278', zh:'我开银色车，车牌 ກມ 2278' },
+  { lo:'ຂ້ອຍຮອດແລ້ວ ລໍຢູ່ໜ້າປະຕູ', en:"I've arrived, waiting at the gate", th:'ผมถึงแล้ว รออยู่หน้าประตู', zh:'我到了，在门口等您',
+    vi:'Tôi đã đến, đang đợi ở cổng', ko:'도착했습니다. 정문에서 기다릴게요', ja:'到着しました。門の前で待っています', fr:"Je suis arrivé, j'attends au portail" },
+  { lo:'ອອກມາຮອດໃນ 3 ນາທີ', en:"I'll be there in 3 minutes", th:'อีก 3 นาทีถึง', zh:'还有 3 分钟到',
+    vi:'3 phút nữa tôi tới', ko:'3분 뒤에 도착합니다', ja:'あと3分で着きます', fr:"J'arrive dans 3 minutes" },
+  { lo:'ລົດຕິດໜ້ອຍໜຶ່ງ ຂໍໂທດເດີ້', en:'Sorry, traffic is a bit heavy', th:'รถติดนิดหน่อย ขอโทษครับ', zh:'有点堵车，抱歉',
+    vi:'Xin lỗi, đường hơi kẹt xe', ko:'죄송해요, 길이 조금 막혀요', ja:'すみません、少し渋滞しています', fr:'Désolé, il y a un peu de circulation' },
+  { lo:'ຈອດບ່ອນນີ້ບໍ່ໄດ້ ຂໍຍ້າຍໜ້າໜ້ອຍ', en:"I can't stop here, moving up a bit", th:'จอดตรงนี้ไม่ได้ ขอขยับหน้านิดนึง', zh:'这里不能停，往前挪一点',
+    vi:'Không đỗ được ở đây, tôi nhích lên chút', ko:'여기 정차 불가라 조금 앞으로 갈게요', ja:'ここは停められないので少し前に進みます', fr:'Je ne peux pas stationner ici, j\'avance un peu' },
+  { lo:'ຂອບໃຈຫຼາຍ 🙏', en:'Thank you very much 🙏', th:'ขอบคุณมากครับ 🙏', zh:'非常感谢 🙏',
+    vi:'Cảm ơn rất nhiều 🙏', ko:'정말 감사합니다 🙏', ja:'本当にありがとうございます 🙏', fr:'Merci beaucoup 🙏' },
+  { lo:'ຮັບຊາບ ຮອດໃນ 2 ນາທີ', en:'Got it, 2 minutes away', th:'รับทราบ อีก 2 นาทีถึง', zh:'收到，2 分钟后到',
+    vi:'Đã rõ, 2 phút nữa tới', ko:'알겠습니다, 2분 거리예요', ja:'了解です、あと2分です', fr:'Compris, dans 2 minutes' },
+  { lo:'ຂ້ອຍໃສ່ລົດສີເງິນ ກມ 2278', en:'I drive a silver car, plate ກມ 2278', th:'ผมขับรถสีเงิน ทะเบียน ກມ 2278', zh:'我开银色车，车牌 ກມ 2278',
+    vi:'Xe tôi màu bạc, biển số ກມ 2278', ko:'은색 차량이고 번호판은 ກມ 2278입니다', ja:'シルバーの車、ナンバーは ກມ 2278 です', fr:'Je conduis une voiture grise, plaque ກມ 2278' },
+  { lo:'ຂ້ອຍຈອດລົດໄວ້ບ່ອນນີ້ ເບິ່ງຮູບໄດ້ເລີຍ', en:'I parked here — see the photo', th:'ผมจอดรถตรงนี้ ดูรูปได้เลยครับ', zh:'我停在这里，请看照片',
+    vi:'Tôi đỗ ở đây — xem ảnh nhé', ko:'여기에 주차했어요 — 사진 보세요', ja:'ここに駐車しました。写真をご覧ください', fr:'Je suis garé ici — voir la photo' },
+  { lo:'ຍ່າງມາທາງນີ້ ຂ້ອຍລໍຢູ່', en:'Walk this way, I am waiting here', th:'เดินมาทางนี้ ผมรออยู่', zh:'请往这边走，我在这里等',
+    vi:'Đi lối này nhé, tôi đợi ở đây', ko:'이쪽으로 오세요, 여기서 기다립니다', ja:'こちらへどうぞ、ここで待っています', fr:'Venez par ici, je vous attends' },
   /* — ລູກຄ້າສົ່ງ — */
-  { lo:'ຂ້ອຍລໍຢູ່ປະຕູບ້ານສີແດງເດີ້ 🙏', en:"I'm waiting at the red gate 🙏", th:'ผมรออยู่หน้าประตูสีแดงครับ 🙏', zh:'我在红色大门口等 🙏' },
-  { lo:'ຮອດແລ້ວບໍ?',                en:'Are you here yet?',               th:'ถึงหรือยังครับ',           zh:'到了吗？' },
-  { lo:'ຂໍເວລາ 2 ນາທີ',             en:'Give me 2 minutes please',        th:'ขอเวลา 2 นาที',            zh:'请等我 2 分钟' },
-  { lo:'ໂອເຄ ລໍໄດ້',                en:'OK, I can wait',                  th:'โอเค รอได้',               zh:'好的，我可以等' },
-  { lo:'ອອກມາດຽວນີ້ 🙏',            en:"Coming out now 🙏",               th:'ออกมาเดี๋ยวนี้ครับ 🙏',    zh:'我马上出来 🙏' },
-  { lo:'ບໍ່ເປັນຫຍັງ ຂັບປອດໄພເດີ້',   en:'No problem, drive safely',        th:'ไม่เป็นไร ขับปลอดภัยนะ',   zh:'没关系，注意安全' },
-  { lo:'ໄດ້ ຂ້ອຍຍ່າງມາຫາ',          en:"OK, I'll walk over to you",       th:'ได้ครับ ผมเดินไปหา',       zh:'好的，我走过去' },
-  { lo:'ຂອບໃຈເຊັ່ນກັນ 🙏',          en:'Thank you too 🙏',                th:'ขอบคุณเช่นกัน 🙏',         zh:'也谢谢您 🙏' },
-  { lo:'ຂ້ອຍໃສ່ເສື້ອສີຟ້າ',          en:"I'm wearing a blue shirt",        th:'ผมใส่เสื้อสีฟ้า',          zh:'我穿蓝色衬衫' },
-  { lo:'ມີກະເປົາ 2 ໜ່ວຍ ໃສ່ທ້າຍໄດ້ບໍ?', en:'I have 2 bags, can they fit in the boot?', th:'มีกระเป๋า 2 ใบ ใส่ท้ายรถได้ไหม', zh:'我有两个行李箱，后备箱放得下吗？' },
-  { lo:'ຂໍໄປສົ່ງທີ່ປະຕູ 3 ເດີ້',     en:'Please drop me at Gate 3',        th:'ขอส่งที่ประตู 3 ครับ',     zh:'请送我到 3 号门' }
+  { lo:'ຂ້ອຍລໍຢູ່ປະຕູບ້ານສີແດງເດີ້ 🙏', en:"I'm waiting at the red gate 🙏", th:'ผมรออยู่หน้าประตูสีแดงครับ 🙏', zh:'我在红色大门口等 🙏',
+    vi:'Tôi đợi ở cổng màu đỏ 🙏', ko:'빨간 대문 앞에서 기다려요 🙏', ja:'赤い門の前で待っています 🙏', fr:"J'attends au portail rouge 🙏" },
+  { lo:'ຮອດແລ້ວບໍ?', en:'Are you here yet?', th:'ถึงหรือยังครับ', zh:'到了吗？',
+    vi:'Bạn tới chưa?', ko:'도착하셨나요?', ja:'もう着きましたか？', fr:'Êtes-vous arrivé ?' },
+  { lo:'ຂໍເວລາ 2 ນາທີ', en:'Give me 2 minutes please', th:'ขอเวลา 2 นาที', zh:'请等我 2 分钟',
+    vi:'Cho tôi 2 phút nhé', ko:'2분만 기다려 주세요', ja:'2分だけお待ちください', fr:'Donnez-moi 2 minutes' },
+  { lo:'ໂອເຄ ລໍໄດ້', en:'OK, I can wait', th:'โอเค รอได้', zh:'好的，我可以等',
+    vi:'Được, tôi đợi được', ko:'네, 기다릴 수 있어요', ja:'はい、待てます', fr:"D'accord, je peux attendre" },
+  { lo:'ອອກມາດຽວນີ້ 🙏', en:'Coming out now 🙏', th:'ออกมาเดี๋ยวนี้ครับ 🙏', zh:'我马上出来 🙏',
+    vi:'Tôi ra ngay đây 🙏', ko:'지금 나갈게요 🙏', ja:'今すぐ出ます 🙏', fr:'Je sors tout de suite 🙏' },
+  { lo:'ບໍ່ເປັນຫຍັງ ຂັບປອດໄພເດີ້', en:'No problem, drive safely', th:'ไม่เป็นไร ขับปลอดภัยนะ', zh:'没关系，注意安全',
+    vi:'Không sao, lái xe an toàn nhé', ko:'괜찮아요, 안전 운전하세요', ja:'大丈夫です、安全運転で', fr:'Pas de souci, conduisez prudemment' },
+  { lo:'ໄດ້ ຂ້ອຍຍ່າງມາຫາ', en:"OK, I'll walk over to you", th:'ได้ครับ ผมเดินไปหา', zh:'好的，我走过去',
+    vi:'Được, tôi đi bộ ra chỗ bạn', ko:'네, 제가 걸어갈게요', ja:'はい、そちらまで歩きます', fr:'OK, je marche vers vous' },
+  { lo:'ຂອບໃຈເຊັ່ນກັນ 🙏', en:'Thank you too 🙏', th:'ขอบคุณเช่นกัน 🙏', zh:'也谢谢您 🙏',
+    vi:'Cảm ơn bạn nữa 🙏', ko:'저도 감사합니다 🙏', ja:'こちらこそありがとうございます 🙏', fr:'Merci à vous aussi 🙏' },
+  { lo:'ຂ້ອຍໃສ່ເສື້ອສີຟ້າ', en:"I'm wearing a blue shirt", th:'ผมใส่เสื้อสีฟ้า', zh:'我穿蓝色衬衫',
+    vi:'Tôi mặc áo xanh dương', ko:'파란색 셔츠를 입고 있어요', ja:'青いシャツを着ています', fr:'Je porte une chemise bleue' },
+  { lo:'ມີກະເປົາ 2 ໜ່ວຍ ໃສ່ທ້າຍໄດ້ບໍ?', en:'I have 2 bags, can they fit in the boot?', th:'มีกระเป๋า 2 ใบ ใส่ท้ายรถได้ไหม', zh:'我有两个行李箱，后备箱放得下吗？',
+    vi:'Tôi có 2 vali, cốp xe để vừa không?', ko:'가방 2개가 있는데 트렁크에 들어갈까요?', ja:'荷物が2つありますがトランクに入りますか？', fr:"J'ai 2 valises, entrent-elles dans le coffre ?" },
+  { lo:'ຂໍໄປສົ່ງທີ່ປະຕູ 3 ເດີ້', en:'Please drop me at Gate 3', th:'ขอส่งที่ประตู 3 ครับ', zh:'请送我到 3 号门',
+    vi:'Cho tôi xuống ở cổng 3 nhé', ko:'3번 게이트에서 내려 주세요', ja:'3番ゲートで降ろしてください', fr:'Déposez-moi à la porte 3' },
+  /* — ຄຳບັນຍາຍຮູບບ່ອນຈອດ — */
+  { lo:'ຂ້ອຍຈອດຢູ່ໜ້າປະຕູສີແດງ', en:'I parked in front of the red gate', th:'ผมจอดหน้าประตูสีแดง', zh:'我停在红色大门前',
+    vi:'Tôi đỗ trước cổng màu đỏ', ko:'빨간 대문 앞에 주차했어요', ja:'赤い門の前に駐車しました', fr:'Je suis garé devant le portail rouge' },
+  { lo:'ຂ້ອຍຈອດຢູ່ໃຕ້ຕົ້ນໄມ້ໃຫຍ່', en:'I parked under the big tree', th:'ผมจอดใต้ต้นไม้ใหญ่', zh:'我停在大树下',
+    vi:'Tôi đỗ dưới gốc cây lớn', ko:'큰 나무 아래에 주차했어요', ja:'大きな木の下に駐車しました', fr:'Je suis garé sous le grand arbre' },
+  { lo:'ຂ້ອຍຈອດຢູ່ຂ້າງຮ້ານກາເຟ', en:'I parked next to the coffee shop', th:'ผมจอดข้างร้านกาแฟ', zh:'我停在咖啡店旁边',
+    vi:'Tôi đỗ cạnh quán cà phê', ko:'카페 옆에 주차했어요', ja:'カフェの隣に駐車しました', fr:'Je suis garé à côté du café' },
+  { lo:'ຂ້ອຍຈອດຢູ່ບ່ອນຈອດລົດຫ້າງ ຊັ້ນ 1', en:'I parked in the mall car park, level 1', th:'ผมจอดที่ลานจอดห้าง ชั้น 1', zh:'我停在商场停车场一楼',
+    vi:'Tôi đỗ ở bãi xe trung tâm thương mại, tầng 1', ko:'쇼핑몰 주차장 1층에 주차했어요', ja:'モールの駐車場1階に駐車しました', fr:'Je suis garé au parking du centre commercial, niveau 1' },
+  { lo:'ຂ້ອຍຈອດແຄມທາງ ຫຼັງລົດສີຂາວ', en:'I parked on the roadside, behind the white car', th:'ผมจอดริมถนน หลังรถสีขาว', zh:'我停在路边，白色车后面',
+    vi:'Tôi đỗ lề đường, phía sau xe màu trắng', ko:'길가에 흰색 차 뒤에 주차했어요', ja:'路肩の白い車の後ろに駐車しました', fr:'Je suis garé au bord de la route, derrière la voiture blanche' },
+  { lo:'ຂ້ອຍລໍຢູ່ປະຕູ 3', en:"I'm waiting at Gate 3", th:'ผมรออยู่ที่ประตู 3', zh:'我在 3 号门等',
+    vi:'Tôi đợi ở cổng 3', ko:'3번 게이트에서 기다려요', ja:'3番ゲートで待っています', fr:"J'attends à la porte 3" },
+  { lo:'ເຫັນຮູບແລ້ວ ກຳລັງຍ່າງໄປ', en:'Got the photo, walking over now', th:'เห็นรูปแล้ว กำลังเดินไป', zh:'看到照片了，正在走过去',
+    vi:'Đã thấy ảnh, tôi đang đi tới', ko:'사진 봤어요, 지금 가고 있어요', ja:'写真を見ました。今向かっています', fr:"J'ai vu la photo, j'arrive à pied" },
+  { lo:'ບໍ່ເຫັນລົດເລີຍ ສົ່ງຮູບບ່ອນຈອດໃຫ້ແດ່', en:"I can't see the car, please send a photo of where you parked", th:'มองไม่เห็นรถเลย ส่งรูปที่จอดให้หน่อยครับ', zh:'我看不到车，请发一张停车位置的照片',
+    vi:'Tôi không thấy xe, gửi ảnh chỗ đỗ giúp tôi', ko:'차가 안 보여요. 주차한 곳 사진 보내 주세요', ja:'車が見つかりません。駐車場所の写真を送ってください', fr:"Je ne vois pas la voiture, envoyez une photo de l'endroit" }
 ];
+
+/* ---------- ຮູບບອກບ່ອນຈອດ (ຄົນຂັບສົ່ງໃຫ້ລູກຄ້າ) ----------
+   prototype ວາດເປັນ SVG · ຕອນໃຊ້ຈິງແມ່ນຮູບຈາກກ້ອງ
+   POST /api/v1/trips/{id}/chat/photo  (multipart)
+------------------------------------------------- */
+const PARK_SHOTS = [
+  { k:'gate',  n:'ໜ້າປະຕູສີແດງ',   cap:'ຂ້ອຍຈອດຢູ່ໜ້າປະຕູສີແດງ' },
+  { k:'tree',  n:'ໃຕ້ຕົ້ນໄມ້',      cap:'ຂ້ອຍຈອດຢູ່ໃຕ້ຕົ້ນໄມ້ໃຫຍ່' },
+  { k:'cafe',  n:'ຂ້າງຮ້ານກາເຟ',   cap:'ຂ້ອຍຈອດຢູ່ຂ້າງຮ້ານກາເຟ' },
+  { k:'mall',  n:'ບ່ອນຈອດຫ້າງ',    cap:'ຂ້ອຍຈອດຢູ່ບ່ອນຈອດລົດຫ້າງ ຊັ້ນ 1' },
+  { k:'road',  n:'ແຄມທາງ',        cap:'ຂ້ອຍຈອດແຄມທາງ ຫຼັງລົດສີຂາວ' },
+  { k:'gate3', n:'ປະຕູ 3',        cap:'ຂ້ອຍລໍຢູ່ປະຕູ 3' }
+];
+const parkShot = k => PARK_SHOTS.find(p => p.k === k) || PARK_SHOTS[0];
+
+/* ຄັງຄຳ — ໃຊ້ເປັນທາງສຳຮອງເມື່ອບໍ່ພົບປະໂຫຍກເຕັມ (ແປລະດັບຄຳ) */
+const WORDS = [
+  { lo:'ສະບາຍດີ', en:'hello', th:'สวัสดี', zh:'你好', vi:'xin chào', ko:'안녕하세요', ja:'こんにちは', fr:'bonjour' },
+  { lo:'ຂອບໃຈ', en:'thank you', th:'ขอบคุณ', zh:'谢谢', vi:'cảm ơn', ko:'감사합니다', ja:'ありがとう', fr:'merci' },
+  { lo:'ຂໍໂທດ', en:'sorry', th:'ขอโทษ', zh:'抱歉', vi:'xin lỗi', ko:'죄송합니다', ja:'すみません', fr:'désolé' },
+  { lo:'ຮອດແລ້ວ', en:'arrived', th:'ถึงแล้ว', zh:'到了', vi:'đã đến', ko:'도착', ja:'到着', fr:'arrivé' },
+  { lo:'ລໍ', en:'wait', th:'รอ', zh:'等', vi:'đợi', ko:'기다려요', ja:'待つ', fr:'attendre' },
+  { lo:'ນາທີ', en:'minutes', th:'นาที', zh:'分钟', vi:'phút', ko:'분', ja:'分', fr:'minutes' },
+  { lo:'ລົດ', en:'car', th:'รถ', zh:'车', vi:'xe', ko:'차', ja:'車', fr:'voiture' },
+  { lo:'ຈອດ', en:'park', th:'จอด', zh:'停车', vi:'đỗ', ko:'주차', ja:'駐車', fr:'garer' },
+  { lo:'ປະຕູ', en:'gate', th:'ประตู', zh:'门', vi:'cổng', ko:'게이트', ja:'ゲート', fr:'portail' },
+  { lo:'ຮູບ', en:'photo', th:'รูป', zh:'照片', vi:'ảnh', ko:'사진', ja:'写真', fr:'photo' },
+  { lo:'ຂ້າງ', en:'next to', th:'ข้าง', zh:'旁边', vi:'bên cạnh', ko:'옆', ja:'隣', fr:'à côté de' },
+  { lo:'ໜ້າ', en:'in front of', th:'หน้า', zh:'前面', vi:'trước', ko:'앞', ja:'前', fr:'devant' },
+  { lo:'ຫຼັງ', en:'behind', th:'หลัง', zh:'后面', vi:'phía sau', ko:'뒤', ja:'後ろ', fr:'derrière' },
+  { lo:'ຊ້າຍ', en:'left', th:'ซ้าย', zh:'左', vi:'trái', ko:'왼쪽', ja:'左', fr:'gauche' },
+  { lo:'ຂວາ', en:'right', th:'ขวา', zh:'右', vi:'phải', ko:'오른쪽', ja:'右', fr:'droite' },
+  { lo:'ສີແດງ', en:'red', th:'สีแดง', zh:'红色', vi:'màu đỏ', ko:'빨간', ja:'赤', fr:'rouge' },
+  { lo:'ສີຂາວ', en:'white', th:'สีขาว', zh:'白色', vi:'màu trắng', ko:'흰', ja:'白', fr:'blanc' },
+  { lo:'ສີເງິນ', en:'silver', th:'สีเงิน', zh:'银色', vi:'màu bạc', ko:'은색', ja:'シルバー', fr:'gris argent' },
+  { lo:'ຮ້ານກາເຟ', en:'coffee shop', th:'ร้านกาแฟ', zh:'咖啡店', vi:'quán cà phê', ko:'카페', ja:'カフェ', fr:'café' },
+  { lo:'ຫ້າງ', en:'mall', th:'ห้าง', zh:'商场', vi:'trung tâm thương mại', ko:'쇼핑몰', ja:'モール', fr:'centre commercial' },
+  { lo:'ຕົ້ນໄມ້', en:'tree', th:'ต้นไม้', zh:'树', vi:'cây', ko:'나무', ja:'木', fr:'arbre' },
+  { lo:'ແຄມທາງ', en:'roadside', th:'ริมถนน', zh:'路边', vi:'lề đường', ko:'길가', ja:'路肩', fr:'bord de route' },
+  { lo:'ຖ້າ', en:'wait for', th:'รอ', zh:'等待', vi:'chờ', ko:'대기', ja:'待機', fr:'attendre' },
+  { lo:'ບ່ອນນີ້', en:'here', th:'ตรงนี้', zh:'这里', vi:'ở đây', ko:'여기', ja:'ここ', fr:'ici' },
+  { lo:'ໄວໆ', en:'quickly', th:'เร็วๆ', zh:'快点', vi:'nhanh lên', ko:'빨리', ja:'早く', fr:'vite' }
+];
+
 
 /* ແປຂໍ້ຄວາມ — ຄົ້ນຕາຕະລາງກ່ອນ · ບໍ່ພົບຈຶ່ງຄືນຂໍ້ຄວາມເດີມພ້ອມປ້າຍບອກ
    ຕອນໃຊ້ຈິງ: POST /api/v1/translate { text, from, to } */
-function translate(text, to, from = 'lo'){
-  if (!text || to === from) return { text, hit:true };
-  const row = PHRASES.find(p => p[from] === text || p.lo === text || p.en === text);
-  if (row && row[to]) return { text:row[to], hit:true };
-  return { text, hit:false };          /* hit:false = ຕ້ອງເອີ້ນ API ຈິງ */
+const trNorm = s => String(s || '').trim().toLowerCase()
+  .replace(/[\s\u00a0]+/g, ' ')
+  .replace(/[.,!?;:·…"'\u2018\u2019\u201c\u201d()\[\]]/g, '')
+  .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\uFE0F]/gu, '').trim();
+
+/* ແປຂໍ້ຄວາມ — 3 ຊັ້ນ:
+   1. ປະໂຫຍກເຕັມ (ຖືກຕ້ອງທີ່ສຸດ)
+   2. ແຍກເປັນທ່ອນຕາມເຄື່ອງໝາຍ ແລ້ວແປແຕ່ລະທ່ອນ
+   3. ແທນທີ່ລະດັບຄຳຈາກຄັງຄຳ (ໄດ້ຄວາມໝາຍຫຍາບໆ)
+   ຄືນ { text, hit, via } — via ບອກວ່າໃຊ້ຊັ້ນໃດ
+   ຕອນໃຊ້ຈິງ: POST /api/v1/translate { text, from, to } */
+function trPhrase(text, to, from){
+  const n = trNorm(text);
+  if (!n) return null;
+  const row = PHRASES.find(p => trNorm(p[from]) === n)
+           || PHRASES.find(p => LANG_KEYS.some(k => trNorm(p[k]) === n));
+  return (row && row[to]) ? row[to] : null;
 }
+function translate(text, to, from = 'lo'){
+  if (!text || !LANGS[to] || to === from) return { text, hit:true, via:'same' };
+
+  const full = trPhrase(text, to, from);
+  if (full) return { text:full, hit:true, via:'phrase' };
+
+  /* ຊັ້ນ 2 — ແຍກທ່ອນ */
+  const parts = String(text).split(/([,·\u2022\n]|\s{2,})/).filter(x => x !== undefined);
+  if (parts.length > 1){
+    let any = false;
+    const out = parts.map(p => {
+      if (!p.trim()) return p;
+      const t = trPhrase(p, to, from);
+      if (t){ any = true; return t; }
+      return p;
+    }).join('');
+    if (any) return { text:out, hit:true, via:'segment' };
+  }
+
+  /* ຊັ້ນ 3 — ລະດັບຄຳ (ຍາວກ່ອນ ເພື່ອບໍ່ໃຫ້ຄຳສັ້ນຕັດຄຳຍາວ) */
+  let out = String(text), n = 0;
+  [...WORDS].sort((a, b) => String(b[from] || '').length - String(a[from] || '').length)
+    .forEach(w => {
+      const src = w[from], dst = w[to];
+      if (!src || !dst || src.length < 2) return;
+      if (out.includes(src)){ out = out.split(src).join(' ' + dst + ' '); n++; }
+    });
+  if (n) return { text:out.replace(/\s{2,}/g, ' ').trim(), hit:true, via:'word', partial:true };
+
+  return { text, hit:false, via:'none' };   /* ຕ້ອງເອີ້ນ API ຈິງ */
+}
+
 /* ເດົາພາສາຈາກຕົວອັກສອນ (ພຽງພໍສຳລັບ prototype) */
 function detectLang(t){
-  if (/[\u0E80-\u0EFF]/.test(t)) return 'lo';
-  if (/[\u0E00-\u0E7F]/.test(t)) return 'th';
-  if (/[\u4E00-\u9FFF]/.test(t)) return 'zh';
+  const s = String(t || '');
+  if (/[\u0E80-\u0EFF]/.test(s)) return 'lo';
+  if (/[\u0E00-\u0E7F]/.test(s)) return 'th';
+  if (/[\uAC00-\uD7AF\u1100-\u11FF]/.test(s)) return 'ko';
+  if (/[\u3040-\u30FF]/.test(s)) return 'ja';          /* ຄານະ = ຍີ່ປຸ່ນແນ່ນອນ */
+  if (/[\u4E00-\u9FFF]/.test(s)) return 'zh';          /* ຮັນລ້ວນ ບໍ່ມີຄານະ = ຈີນ */
+  if (/[ăâđêôơưàảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵ]/i.test(s)) return 'vi';
+  if (/[àâçéèêëîïôùûüœ]/i.test(s)) return 'fr';
   return 'en';
 }
 

@@ -738,7 +738,65 @@ function navPaintUI(st){
    - ແປສອງທາງ: ລູກຄ້າເຫັນພາສາລູກຄ້າ · ຄົນຂັບເຫັນພາສາລາວ
    - ອັບເດດ DOM ໂດຍກົງ ບໍ່ render ໜ້າຈໍຄືນ (ຮັກສາຕຳແໜ່ງ scroll)
    ============================================================ */
-const CHAT = { open:false, job:null, msgs:[], unread:0, typing:false, autoTr:true, timers:[], seq:0, onChange:null };
+/* ============================================================
+   ຮູບບ່ອນຈອດ — ວາດເປັນ SVG (prototype ບໍ່ມີກ້ອງຈິງ)
+   ============================================================ */
+function parkArt(kind){
+  const car = (x, c1, c2) => `
+    <g transform="translate(${x},108)">
+      <path d="M6 26h100l-9-19a9 9 0 0 0-8-5H30a9 9 0 0 0-8 5L6 26z" fill="${c1}"/>
+      <rect x="0" y="25" width="112" height="18" rx="7" fill="${c2}"/>
+      <path d="M32 24l9-14h30l9 14z" fill="#cfe3f2" opacity=".9"/>
+      <circle cx="26" cy="43" r="8" fill="#161b22"/><circle cx="26" cy="43" r="3.4" fill="#8b97a6"/>
+      <circle cx="88" cy="43" r="8" fill="#161b22"/><circle cx="88" cy="43" r="3.4" fill="#8b97a6"/>
+      <rect x="2" y="30" width="7" height="5" rx="2" fill="#ffd97a"/>
+      <rect x="103" y="30" width="7" height="5" rx="2" fill="#ff8b8b"/>
+    </g>`;
+  const scenes = {
+    gate: `<rect x="16" y="34" width="86" height="74" rx="4" fill="#c9302c"/>
+      <path d="M16 34h86M30 34v74M44 34v74M58 34v74M72 34v74M86 34v74" stroke="#8f1f1c" stroke-width="3"/>
+      <rect x="10" y="26" width="98" height="10" rx="4" fill="#7d1b18"/>
+      <rect x="150" y="52" width="66" height="56" rx="4" fill="#e6e0d4"/>
+      <rect x="164" y="66" width="16" height="16" fill="#b9c9d6"/><rect x="188" y="66" width="16" height="16" fill="#b9c9d6"/>`,
+    tree: `<rect x="96" y="72" width="13" height="40" fill="#7a5a3a"/>
+      <circle cx="102" cy="52" r="34" fill="#3f8f52"/><circle cx="74" cy="64" r="24" fill="#4aa25e"/>
+      <circle cx="130" cy="63" r="22" fill="#357c46"/>
+      <rect x="176" y="60" width="52" height="48" rx="4" fill="#dfe6ea"/>`,
+    cafe: `<rect x="18" y="36" width="120" height="72" rx="5" fill="#f2e6d2"/>
+      <rect x="18" y="36" width="120" height="15" fill="#7b4a26"/>
+      <rect x="30" y="60" width="34" height="34" rx="3" fill="#b9d4e2"/>
+      <rect x="76" y="60" width="34" height="48" rx="3" fill="#8a5a33"/>
+      <circle cx="150" cy="86" r="9" fill="#e9d8bd"/><rect x="146" y="95" width="9" height="13" fill="#c4ae8d"/>
+      <text x="42" y="48" font-size="9" fill="#fff" font-family="sans-serif">CAFE</text>`,
+    mall: `<rect x="0" y="20" width="240" height="88" fill="#dde3e8"/>
+      <path d="M0 44h240M0 68h240M0 92h240" stroke="#c3ccd4" stroke-width="2"/>
+      <rect x="24" y="24" width="54" height="16" rx="3" fill="#9fb0bd"/>
+      <text x="30" y="36" font-size="10" fill="#fff" font-family="sans-serif">P1</text>
+      <path d="M20 100h56M92 100h56M164 100h56" stroke="#fff" stroke-width="3"/>`,
+    road: `<rect x="0" y="88" width="240" height="6" fill="#c9ccd1"/>
+      <rect x="150" y="96" width="96" height="30" rx="8" fill="#f2f4f6"/>
+      <circle cx="172" cy="126" r="7" fill="#161b22"/><circle cx="226" cy="126" r="7" fill="#161b22"/>
+      <rect x="14" y="46" width="8" height="46" fill="#9aa5b1"/>
+      <circle cx="18" cy="40" r="9" fill="#2f9e57"/>`,
+    gate3: `<rect x="60" y="30" width="120" height="78" rx="5" fill="#e8ecef"/>
+      <rect x="60" y="30" width="120" height="18" fill="#2b6cb0"/>
+      <text x="96" y="44" font-size="12" fill="#fff" font-family="sans-serif">GATE 3</text>
+      <rect x="88" y="60" width="30" height="48" rx="3" fill="#9fb6c9"/>
+      <rect x="128" y="60" width="30" height="48" rx="3" fill="#9fb6c9"/>`
+  };
+  return `<svg class="parkart" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="pk${kind}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfe4f5"/><stop offset="1" stop-color="#eef3f7"/></linearGradient></defs>
+    <rect width="240" height="160" fill="url(#pk${kind})"/>
+    ${scenes[kind] || scenes.gate}
+    <rect y="118" width="240" height="42" fill="#6d7681"/>
+    <rect y="118" width="240" height="3" fill="#565f69"/>
+    ${car(64, '#cfd6dd', '#aab4bf')}
+  </svg>`;
+}
+
+const CHAT = { open:false, job:null, msgs:[], unread:0, typing:false, autoTr:true,
+               timers:[], seq:0, onChange:null, sheet:false, view:null };
 const chatClock = () => { const d = new Date();
   return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
 const chatLang = () => (CHAT.job && CHAT.job.paxLang) || 'lo';
@@ -762,12 +820,20 @@ function chatOpen(job, seed, onChange){
   CHAT.job = job || CHAT.job;
   CHAT.onChange = onChange || CHAT.onChange;
   if (fresh){ CHAT.msgs = []; CHAT.seq = 0;
-    (seed || []).forEach(m => m.who === 'me' ? chatSend(m.tx, true) : chatRecv(m.tx, true)); }
+    (seed || []).forEach(m => {
+      if (m.type === 'photo' || m.kind === 'photo'){
+        const k = m.shot || 'gate';
+        return m.who === 'me' ? chatSendPhoto(k, true) : chatRecvPhoto(k, m.tx, true);
+      }
+      const tx = m.tx !== undefined ? m.tx : m.text;
+      return m.who === 'me' ? chatSend(tx, true) : chatRecv(tx, true);
+    }); }
   CHAT.open = true; CHAT.unread = 0;
   chatPaint(); chatIdleTimer();
 }
 function chatLeave(){ CHAT.open = false; chatClearTimers(); chatPaint(); }
-function chatStop(){ chatClearTimers(); CHAT.open = false; CHAT.job = null; CHAT.msgs = []; CHAT.unread = 0; CHAT.typing = false; }
+function chatStop(){ chatClearTimers(); CHAT.open = false; CHAT.job = null; CHAT.msgs = [];
+  CHAT.unread = 0; CHAT.typing = false; CHAT.sheet = false; CHAT.view = null; }
 
 /* ---- ຄົນຂັບສົ່ງ (ພິມເປັນລາວ → ແປໄປພາສາລູກຄ້າ) ---- */
 function chatSend(loText, quiet){
@@ -784,6 +850,53 @@ function chatSend(loText, quiet){
   chatAutoReply(loText);
   chatIdleTimer();
 }
+/* ---- ຄົນຂັບສົ່ງຮູບບ່ອນຈອດ (ຄຳບັນຍາຍຖືກແປໄປພາສາລູກຄ້າ) ---- */
+function chatSendPhoto(kind, quiet){
+  const p = parkShot(kind);
+  const to = chatLang();
+  const out = to === 'lo' ? null : translate(p.cap, to).text;
+  const m = { id:++CHAT.seq, who:'me', kind:'photo', shot:p.k, text:p.cap, tr:out,
+              lang:'lo', t:chatClock(), status:'sent' };
+  CHAT.msgs.push(m);
+  CHAT.sheet = false;
+  chatPaint();
+  if (quiet){ m.status = 'read'; return m; }
+  _cT(() => { m.status = 'deliv'; chatPaint(); }, 800);
+  _cT(() => { m.status = 'read';  chatPaint(); }, 2000);
+  _cT(() => { CHAT.typing = true; chatPaint(); }, 2400);
+  _cT(() => chatRecv('ເຫັນຮູບແລ້ວ ກຳລັງຍ່າງໄປ'), 3900);
+  chatIdleTimer();
+  return m;
+}
+/* ລູກຄ້າສົ່ງຮູບມາ (ໃຊ້ໃນ seed) */
+function chatRecvPhoto(kind, capLo, quiet){
+  const p = parkShot(kind), from = chatLang();
+  const cap = capLo || p.cap;
+  const shown = from === 'lo' ? cap : translate(cap, from).text;
+  const m = { id:++CHAT.seq, who:'them', kind:'photo', shot:p.k,
+              text:shown, tr:from === 'lo' ? null : cap, lang:from, t:chatClock() };
+  CHAT.msgs.push(m);
+  CHAT.typing = false;
+  if (!CHAT.open && !quiet) CHAT.unread++;
+  chatPaint();
+  if (CHAT.onChange) CHAT.onChange(m);
+  return m;
+}
+function chatSheet(on){ CHAT.sheet = on === undefined ? !CHAT.sheet : !!on; chatPaint(); }
+function chatViewPhoto(kind){ CHAT.view = kind || null; chatPaint(); }
+/* ປ່ຽນພາສາລູກຄ້າດ້ວຍມື (ເມື່ອລະບົບເດົາຜິດ) */
+function chatSetLang(k){
+  if (!LANGS[k] || !CHAT.job) return;
+  CHAT.job.paxLang = k;
+  CHAT.msgs.forEach(m => {
+    if (m.who === 'me') m.tr = k === 'lo' ? null : translate(m.text, k).text;
+    else { const lo = m.tr || m.text; m.tr = k === 'lo' ? null : lo;
+           m.text = k === 'lo' ? lo : translate(lo, k).text; m.lang = k; }
+  });
+  CHAT.sheet = false;
+  chatPaint();
+}
+
 /* ---- ລູກຄ້າສົ່ງ (ພາສາລູກຄ້າ → ແປເປັນລາວໃຫ້ຄົນຂັບ) ---- */
 function chatRecv(loSeed, quiet){
   const from = chatLang();
@@ -824,16 +937,45 @@ const TICK = { sent:'✓', deliv:'✓✓', read:'✓✓' };
 function chatBubble(m, lang, autoTr){
   lang = lang || chatLang();
   const tr = (autoTr === undefined ? CHAT.autoTr : autoTr) && lang !== 'lo';
+  const pic = m.kind === 'photo'
+    ? `<div class="photo" data-act="viewPhoto" data-v="${m.shot}">${parkArt(m.shot)}
+         <i class="zoom">${I('search')}</i><b class="tagp">${I('camera')}ບ່ອນຈອດ</b></div>` : '';
   if (m.who === 'me'){
-    return `<div class="msg me">${esc(m.text)}
+    return `<div class="msg me${m.kind === 'photo' ? ' haspic' : ''}">${pic}${esc(m.text)}
       ${tr && m.tr ? `<span class="tr">${langOf(lang).f} ${esc(m.tr)}</span>` : ''}
       <i class="meta">${m.t}<b class="tick ${m.status}">${TICK[m.status] || '✓'}</b></i></div>`;
   }
   const main = tr && m.tr ? m.tr : m.text;
   const orig = tr && m.tr ? m.text : null;
-  return `<div class="msg them">${esc(main)}
+  return `<div class="msg them${m.kind === 'photo' ? ' haspic' : ''}">${pic}${esc(main)}
     ${orig ? `<span class="tr">${langOf(m.lang).f} ${esc(orig)}</span>` : ''}
     <i class="meta">${m.t}</i></div>`;
+}
+/* ແຜ່ນເລືອກຮູບ + ຕົວເບິ່ງຮູບເຕັມ — ວາງທັບໜ້າແຊັດ */
+function chatOverlay(){
+  let out = '';
+  if (CHAT.sheet){
+    out += `<div class="csheet">
+      <div class="cmask" data-act="chatSheet" data-v="0"></div>
+      <div class="cbox">
+        <div class="chd"><b>ສົ່ງຮູບບອກບ່ອນຈອດ</b><i data-act="chatSheet" data-v="0">${I('close')}</i></div>
+        <div class="cgrid">${PARK_SHOTS.map(p =>
+          `<button data-act="sendPhoto" data-v="${p.k}">${parkArt(p.k)}<span>${p.n}</span></button>`).join('')}</div>
+        <div class="crow">
+          <a data-act="shareLoc">${I('locate')}ສົ່ງຕຳແໜ່ງແຜນທີ່</a>
+        </div>
+        <div class="chd2">ພາສາຂອງລູກຄ້າ</div>
+        <div class="clangs">${Object.keys(LANGS).map(k =>
+          `<b class="${chatLang() === k ? 'on' : ''}" data-act="chatLang" data-v="${k}">${LANGS[k].f} ${LANGS[k].n}</b>`).join('')}</div>
+      </div></div>`;
+  }
+  if (CHAT.view){
+    const p = parkShot(CHAT.view);
+    out += `<div class="cview" data-act="viewPhoto" data-v="">
+      <div class="cvbox">${parkArt(p.k)}<span>${p.n}</span></div>
+      <i class="cvx">${I('close')}</i></div>`;
+  }
+  return out;
 }
 function chatPaint(){
   const list = document.getElementById('chatList');
@@ -843,6 +985,8 @@ function chatPaint(){
       + (CHAT.typing ? `<div class="msg them typing"><i></i><i></i><i></i></div>` : '');
     list.scrollTop = list.scrollHeight;
   }
+  const ov = document.getElementById('chatOv');
+  if (ov) ov.innerHTML = chatOverlay();
   const sub = document.getElementById('chatSub');
   if (sub) sub.textContent = CHAT.typing ? 'ກຳລັງພິມ…'
     : chatLang() === 'lo' ? 'ອອນລາຍ' : 'ເວົ້າ' + langOf(chatLang()).n + ' · ແປອັດຕະໂນມັດ' + (CHAT.autoTr ? 'ເປີດ' : 'ປິດ');

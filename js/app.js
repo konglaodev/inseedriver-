@@ -471,6 +471,7 @@ function startDemoAt(key){
   if (key === 'bidWait')  runBidWait();
   if (key === 'arrived')  runWait();
   if (key === 'toPickup' || key === 'onTrip') navFor(key);
+  if (key === 'chat') chatOpen(demo.job, demo.messages, () => paintState());
   logEv('nav.goto', key);
   if ($('#demoPhone')) paintDemo(); else switchTab('demo');
 }
@@ -739,6 +740,28 @@ const ACTIONS = {
     chatOpen(demo.job, demo.messages, () => paintState());
     go('chat'); logEv('chat.open', demo.job.pax + ' · ' + langOf(demo.job.paxLang || 'lo').n); },
   leaveChat:() => { chatLeave(); demo.screen = demo.back.pop() || 'onTrip'; },
+  /* ---------- ຮູບບ່ອນຈອດ + ພາສາ ---------- */
+  chatSheet: d => { chatSheet(!!(d && d.v && d.v !== '0')); },
+  sendPhoto: d => {
+    const k = d && d.v;
+    if (!demo.job || !k || !PARK_SHOTS.some(p => p.k === k)) return;
+    if (!CHAT.job) chatOpen(demo.job, demo.messages, () => paintState());
+    chatSendPhoto(k);
+    const p = parkShot(k);
+    demo.messages = [...(demo.messages || []), { who:'me', type:'photo', shot:k, t:'ດຽວນີ້' }];
+    logEv('chat.photo', 'ສົ່ງຮູບ · ' + p.n);
+    toast('📷 ສົ່ງຮູບບ່ອນຈອດ — ' + p.n);
+  },
+  viewPhoto: d => { chatViewPhoto((d && d.v) || null); },
+  chatLang: d => {
+    const k = d && d.v;
+    if (!LANGS[k] || !demo.job) return;
+    demo.job = { ...demo.job, paxLang:k };
+    if (CHAT.job) CHAT.job = demo.job;
+    chatSetLang(k);
+    logEv('chat.lang', langOf(k).n + ' ' + langOf(k).f);
+    toast(langOf(k).f + ' ແປເປັນພາສາ' + langOf(k).n + 'ແລ້ວ');
+  },
   chatTr:   () => { const on = chatToggleTr(); logEv('chat.translate', on ? 'ເປີດ' : 'ປິດ');
     toast(on ? '🌐 ເປີດການແປອັດຕະໂນມັດ' : 'ປິດການແປ — ສະແດງຕົ້ນສະບັບ'); },
   openNav:  () => { logEv('trip.navigate', demo.settings.nav);

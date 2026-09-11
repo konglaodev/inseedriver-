@@ -577,10 +577,12 @@ function scrOnTrip(s){
    ============================================================ */
 /* ແປງຂໍ້ຄວາມຕົວຢ່າງເປັນຮູບແບບຂອງ engine (ໃຊ້ຕອນ render ໃນ gallery) */
 const chatSeed = (s, lang) => (s.messages || []).map(m => {
-  const tx = m.tx || (m.type === 'loc' ? 'ຕຳແໜ່ງປັດຈຸບັນຂອງຂ້ອຍ 📍' : '');
+  const isPic = m.type === 'photo';
+  const tx = m.tx || (isPic ? parkShot(m.shot).cap : m.type === 'loc' ? 'ຕຳແໜ່ງປັດຈຸບັນຂອງຂ້ອຍ 📍' : '');
+  const base = isPic ? { kind:'photo', shot:parkShot(m.shot).k } : {};
   return m.who === 'me'
-    ? { who:'me', text:tx, tr:lang === 'lo' ? null : translate(tx, lang).text, lang:'lo', t:m.t, status:'read' }
-    : { who:'them', text:lang === 'lo' ? tx : translate(tx, lang).text,
+    ? { ...base, who:'me', text:tx, tr:lang === 'lo' ? null : translate(tx, lang).text, lang:'lo', t:m.t, status:'read' }
+    : { ...base, who:'them', text:lang === 'lo' ? tx : translate(tx, lang).text,
         tr:lang === 'lo' ? null : tx, lang, t:m.t };
 });
 
@@ -597,18 +599,20 @@ function scrChat(s){
     ${lang === 'lo' ? '' : `<i id="chatTr" class="trbtn on" data-act="chatTr" title="ເປີດ/ປິດ ການແປ">${I('globe')}</i>`}
     <i class="cal" data-act="callPax">${I('phone')}</i>
   </div>
-  ${lang === 'lo' ? '' : `<div class="trbar">${I('globe')}<span>ລູກຄ້າເວົ້າ<b>${langOf(lang).n}</b> ${langOf(lang).f} —
-    ຂໍ້ຄວາມຖືກແປອັດຕະໂນມັດທັງສອງທາງ</span></div>`}
+  ${lang === 'lo' ? '' : `<div class="trbar" data-act="chatSheet" data-v="1">${I('globe')}<span>ລູກຄ້າເວົ້າ<b>${langOf(lang).n}</b> ${langOf(lang).f} —
+    ຂໍ້ຄວາມຖືກແປອັດຕະໂນມັດທັງສອງທາງ</span><em>ປ່ຽນ</em></div>`}
   <div class="sbody chat" id="chatList">
     <div class="dp">ມື້ນີ້</div>
     ${seeded.map(m => chatBubble(m, lang, true)).join('')}
   </div>
   <div class="quick">${QUICK.map(q => `<b data-act="quickMsg" data-v="${q}">${q}</b>`).join('')}</div>
   <div class="cinput">
+    <i data-act="chatSheet" data-v="1" title="ສົ່ງຮູບບ່ອນຈອດ">${I('camera')}</i>
     <i data-act="shareLoc" title="ສົ່ງຕຳແໜ່ງ">${I('locate')}</i>
     <input id="chatInput" class="box" placeholder="ພິມເປັນພາສາລາວ — ລະບົບແປໃຫ້ເອງ" autocomplete="off">
     <i class="send" data-act="sendMsg">${I('send')}</i>
-  </div>${gestureBar}`;
+  </div>
+  <div id="chatOv"></div>${gestureBar}`;
 }
 
 /* ============================================================
