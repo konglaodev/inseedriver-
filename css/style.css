@@ -2634,3 +2634,52 @@ body{background:var(--bg);color:var(--txt);
 
 /* ກັນບັກ SVG ບໍ່ມີຂະໜາດ → ຂະຫຍາຍເຕັມຈໍ (ເຄີຍເກີດກັບປຸ່ມອອກຈາກລະບົບ) */
 h4>svg,.uhead svg,.ustep svg{width:15px;height:15px;flex:none}
+
+/* ============================================================
+   ແທັບ “ເດໂມເຕັມຈໍ” — ແອັບຈິງ ກົດໄດ້ ບໍ່ມີແຜງນັກພັດທະນາ
+   ============================================================ */
+.kiosk{display:flex;flex-direction:column;gap:12px;height:calc(100vh - 148px);min-height:560px}
+.kiosk:fullscreen{height:100vh;padding:16px 20px;background:var(--bg);gap:10px}
+
+.ktop{display:flex;align-items:center;gap:16px;flex:none;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 14px;
+  box-shadow:var(--shadow)}
+.kwho{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.klogo{width:34px;height:34px;flex:none;border-radius:10px;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(145deg,#f2545a,#d81c22);box-shadow:0 5px 13px rgba(216,28,34,.28)}
+.klogo svg{width:100%;height:100%}
+.kwho b{display:block;font-size:14px;font-weight:700;color:var(--ink);font-family:var(--lao)}
+.kwho span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;font-family:var(--lao)}
+
+.kctl{display:flex;gap:6px;flex:none}
+.kbtn{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;cursor:pointer;
+  background:var(--panel2);border:1px solid var(--line);color:var(--muted);transition:.15s}
+.kbtn svg{width:17px;height:17px}
+.kbtn:hover{color:var(--txt);border-color:var(--brand)}
+.kbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.kbtn.wide{width:auto;padding:0 14px;font:600 12.5px/1 var(--lao);gap:6px}
+
+.kstage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;
+  border-radius:18px;position:relative;overflow:hidden;
+  background:radial-gradient(closest-side,rgba(225,37,43,.10),transparent 72%),var(--panel2)}
+.kstage #demoPhone{transform:scale(var(--ks,1));transform-origin:center}
+
+.khint{display:flex;align-items:center;gap:9px;flex:none;padding:11px 14px;border-radius:12px;
+  background:var(--brand-lt);border:1px solid var(--brand-bd)}
+.khint[hidden]{display:none}
+.khint svg{width:17px;height:17px;flex:none;color:var(--brand)}
+.khint span{font-size:13px;color:var(--txt);font-family:var(--lao);line-height:1.5}
+
+.kjumps{display:flex;gap:6px;flex:none;overflow-x:auto;padding:2px 0 4px;scrollbar-width:thin}
+.kjumps::-webkit-scrollbar{height:5px}
+.kjumps::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
+.kj{flex:none;padding:8px 14px;border-radius:999px;cursor:pointer;font:600 12.5px/1 var(--lao);
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);transition:.15s}
+.kj:hover{color:var(--txt);border-color:var(--brand)}
+.kj.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 4px 12px rgba(225,37,43,.24)}
+
+@media (max-width:820px){
+  .kiosk{height:auto}
+  .ktop{flex-wrap:wrap}
+  .kstage{min-height:640px}
+}

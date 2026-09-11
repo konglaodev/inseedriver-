@@ -90,6 +90,95 @@ function viewOverview(){
 }
 
 /* ============================================================
+   VIEW · ເດໂມເຕັມຈໍ (kiosk) — ແອັບຈິງ ກົດໄດ້ ເຕັມຈໍ ບໍ່ມີແຜງນັກພັດທະນາ
+   ໃຊ້ paintDemo() ອັນດຽວກັບແທັບເດໂມ (ຜູກຜ່ານ #demoPhone)
+   ============================================================ */
+const KIOSK_JUMPS = [
+  ['splash','ເປີດແອັບ'], ['apply','ລົງທະບຽນ'], ['applyVerify','ຢືນຢັນຕົວຕົນ'],
+  ['login','ເຂົ້າສູ່ລະບົບ'], ['offline','ໜ້າຫຼັກ'], ['jobOffer','ງານເຂົ້າ'],
+  ['bid','ປະມູນລາຄາ'], ['toPickup','ໄປຮັບ'], ['chat','ແຊັດ'],
+  ['onTrip','ເດີນທາງ'], ['collect','ຮັບເງິນ'], ['ratePax','ໃຫ້ຄະແນນ'],
+  ['payqr','ບັນຊີ QR'], ['wallet','ກະເປົາເງິນ'], ['earnings','ລາຍໄດ້']
+];
+/* ຄຳໃບ້ວ່າ “ກົດຫຍັງຕໍ່” — ຊ່ວຍຄົນນຳສະເໜີ */
+const KIOSK_HINT = {
+  splash:'ກົດ “ສະໝັກເປັນຄົນຂັບ” ຫຼື ລໍໜ້າເປີດແອັບ',
+  apply:'ກົດ “ເລີ່ມສະໝັກ” ເພື່ອເຂົ້າຂັ້ນທີ 1',
+  offline:'ກົດປຸ່ມສີຂຽວກາງໜ້າຈໍ ເພື່ອເປີດຮັບງານ',
+  online:'ລໍງານເຂົ້າ ຫຼື ກົດແຖບ “ງານ” ຂ້າງລຸ່ມ',
+  jobOffer:'ກົດ “ຮັບເລີຍ” ຫຼື “ສະເໜີລາຄາ” ພາຍໃນ 20 ວິນາທີ',
+  bid:'ປັບລາຄາດ້ວຍ + / − ແລ້ວກົດສົ່ງລາຄາ',
+  bidWait:'ລໍລູກຄ້າເລືອກ — ກົດ ⏩ ຂ້າມການລໍໄດ້',
+  toPickup:'ລົດເຄື່ອນເອງຕາມເສັ້ນທາງຈິງ · ກົດໄອຄອນແຊັດເພື່ອລອງແປພາສາ',
+  chat:'ພິມຂໍ້ຄວາມ — ລະບົບແປໃຫ້ອັດຕະໂນມັດ',
+  arrived:'ເລື່ອນປຸ່ມລຸ່ມສຸດເພື່ອເລີ່ມຖ້ຽວ',
+  onTrip:'ນຳທາງໄປປາຍທາງ · ກົດ ⏩ ເພື່ອຂ້າມໄປຮອດ',
+  collect:'ເລືອກວິທີຮັບເງິນ 3 ແບບ — ລອງ “QR ບັນຊີຂ້ອຍ”',
+  ratePax:'ໃຫ້ດາວ ແລະ ເລືອກປ້າຍຄຳ',
+  payqr:'ກົດ “+ ເພີ່ມບັນຊີຮັບເງິນ” ເພື່ອລອງພິມເອງ',
+  payqrEdit:'ກົດຊ່ອງເລກບັນຊີ — ແປ້ນພິມຈະເດັ້ງຂຶ້ນ',
+  wallet:'ລອງ ເຕີມເງິນ ຫຼື ຖອນເງິນ'
+};
+let kioskHint = true;
+
+function viewKiosk(){
+  view.innerHTML = `
+    <div class="kiosk" id="kiosk">
+      <div class="ktop">
+        <div class="kwho"><i class="klogo">${logoMark()}</i>
+          <div><b>${CFG.appName}</b><span id="kScreen">—</span></div></div>
+        <div class="kctl">
+          <button class="kbtn ${kioskHint ? 'on' : ''}" id="kHint" title="ຄຳໃບ້">${I('info')}</button>
+          <button class="kbtn" id="kSkip" title="ຂ້າມການລໍຖ້າ">${I('bolt')}</button>
+          <button class="kbtn" id="kBack" title="ກັບຄືນ">${I('back')}</button>
+          <button class="kbtn" id="kReset" title="ເລີ່ມໃໝ່">${I('refresh')}</button>
+          <button class="kbtn wide" id="kFull" title="ເຕັມຈໍ">⛶ ເຕັມຈໍ</button>
+        </div>
+      </div>
+      <div class="kstage"><div id="demoPhone"></div></div>
+      <div class="khint" id="kHintBox"></div>
+      <div class="kjumps">${KIOSK_JUMPS.filter(([k]) => typeof RENDER[k] === 'function')
+        .map(([k, n]) => `<button class="kj" data-k="${k}">${n}</button>`).join('')}</div>
+    </div>`;
+  $('#kHint').onclick  = () => { kioskHint = !kioskHint; $('#kHint').classList.toggle('on', kioskHint); paintKiosk(); };
+  $('#kSkip').onclick  = () => { clearTimers(); skipWait(); };
+  $('#kBack').onclick  = () => { ACTIONS.goBack(); paintDemo(); };
+  $('#kReset').onclick = () => { clearTimers(); navStop(); chatStop();
+    const lg = demo.log; demo = { ...structuredClone(BASE), screen:'splash', log:lg };
+    logEv('app.reset'); paintDemo(); };
+  $('#kFull').onclick  = kioskFull;
+  $$('.kj').forEach(b => b.onclick = () => startDemoAt(b.dataset.k));
+  kioskFit();
+  paintDemo();
+}
+
+function kioskFull(){
+  const el = $('#kiosk'); if (!el) return;
+  if (document.fullscreenElement) document.exitFullscreen();
+  else if (el.requestFullscreen) el.requestFullscreen();
+}
+/* ຂະຫຍາຍໂທລະສັບໃຫ້ໃຫຍ່ສຸດເທົ່າທີ່ຈໍຮັບໄດ້ */
+function kioskFit(){
+  const st = $('.kstage'); if (!st) return;
+  const h = st.clientHeight || (window.innerHeight - 220);
+  const s = Math.max(.72, Math.min(2.1, (h - 18) / 800));
+  st.style.setProperty('--ks', s.toFixed(3));
+}
+function paintKiosk(){
+  const lbl = $('#kScreen'); if (!lbl) return;
+  const s = screenByKey(demo.screen);
+  lbl.textContent = s ? s.id + ' · ' + s.lo : demo.screen;
+  $$('.kj').forEach(b => b.classList.toggle('on', b.dataset.k === demo.screen));
+  const box = $('#kHintBox');
+  const tip = KIOSK_HINT[demo.screen] || (s && s.desc) || '';
+  box.hidden = !kioskHint || !tip;
+  box.innerHTML = kioskHint && tip ? `${I('info')}<span>${tip}</span>` : '';
+  kioskFit();   /* ແຖບຄຳໃບ້ເຊື່ອງ/ສະແດງ → ພື້ນທີ່ປ່ຽນ ຕ້ອງຄິດຂະໜາດຄືນ */
+}
+window.addEventListener('resize', () => { if ($('.kstage')) kioskFit(); });
+document.addEventListener('fullscreenchange', () => { if ($('.kstage')) setTimeout(kioskFit, 60); });
+
+/* ============================================================
    VIEW · ວິທີໃຊ້ແອພ (usage) — ເລົ່າການນຳໃຊ້ເປັນຂັ້ນຕອນ
    ໃຊ້ນຳສະເໜີໃຫ້ຄົນທີ່ບໍ່ເຄີຍເຫັນແອັບມາກ່ອນ
    ============================================================ */
@@ -320,10 +409,13 @@ function paintDemo(){
   /* ໜ້າຈໍຖືກສ້າງຄືນ → ຜູກແຜນທີ່ ແລະ ຂໍ້ຄວາມນຳທາງກັບຄືນ */
   if (NAV.on && NAV.R){ navBindMaps(); const st = navState(); navPaintMap(st); navPaintUI(st); }
   if (CHAT.job) chatPaint();
-  $('#steps').innerHTML = STEP_GROUPS.map(gr => `<li class="gh">${gr.g}</li>` + gr.items.map(x =>
-      `<li class="${x.key === demo.screen ? 'on' : (demo.seen[x.key] ? 'done' : '')}" data-k="${x.key}">
-        <i>${demo.seen[x.key] ? '✓' : ''}</i>${x.lo}</li>`).join('')).join('');
-  $$('#steps li').forEach(li => li.onclick = () => startDemoAt(li.dataset.k));
+  if ($('#steps')){
+    $('#steps').innerHTML = STEP_GROUPS.map(gr => `<li class="gh">${gr.g}</li>` + gr.items.map(x =>
+        `<li class="${x.key === demo.screen ? 'on' : (demo.seen[x.key] ? 'done' : '')}" data-k="${x.key}">
+          <i>${demo.seen[x.key] ? '✓' : ''}</i>${x.lo}</li>`).join('')).join('');
+    $$('#steps li').forEach(li => li.onclick = () => startDemoAt(li.dataset.k));
+  }
+  paintKiosk();
   paintState();
 }
 
@@ -1140,7 +1232,7 @@ function viewSpec(){
 }
 
 /* ---------------- router ---------------- */
-const VIEWS = { usage:viewUsage, present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
+const VIEWS = { kiosk:viewKiosk, usage:viewUsage, present:viewPresent, overview:viewOverview, screens:viewScreens, demo:viewDemo, flow:viewFlow, spec:viewSpec };
 function switchTab(name){
   if (!VIEWS[name]) name = 'screens';
   if (presTimer && name !== 'present'){ clearInterval(presTimer); presTimer = null; }
